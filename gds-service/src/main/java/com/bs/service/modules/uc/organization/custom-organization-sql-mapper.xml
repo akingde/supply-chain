@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bs.service.modules.uc.organization.IOrganizationDao">
+	<!--
+		<include refid="organization_select"/>
+		<include refid="organization_select_count"/>
+		<include refid="organization_select_distinct"/>
+		<include refid="organization_select_fields"/>
+		<include refid="organization_form"/>
+		<include refid="organization_where"/>
+		<include refid="organization_inner_all"/>
+		<include refid="organization_left_all"/>
+		<include refid="organization_left_user"/>
+		<include refid="organization_where"/>
+		<include refid="organization_where_id"/>
+		<include refid="organization_where_reference_id"/>
+		<include refid="organization_order"/>
+		<include refid="organization_group"/>
+		<include refid="organization_limit"/>
+		<include refid="organization_update"/>
+		<include refid="organization_update_set"/>
+		<include refid="organization_update_set_null"/>
+		<include refid="organization_insert"/>
+		<include refid="organization_delete"/>
+		###########################################
+		### **where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and _organization.id=#{id,jdbcType=BIGINT}</if>
+		<if test="parentId != null and parentId != ''">and _organization.parent_id=#{parentId,jdbcType=BIGINT}</if>
+		<if test="parentName != null and parentName != ''">and _organization.parent_name=#{parentName,jdbcType=VARCHAR}</if>
+		<if test="orgType != null and orgType != ''">and _organization.org_type=#{orgType,jdbcType=TINYINT}</if>
+		<if test="code != null and code != ''">and _organization.code=#{code,jdbcType=VARCHAR}</if>
+		<if test="name != null and name != ''">and _organization.name=#{name,jdbcType=VARCHAR}</if>
+		<if test="shortName != null and shortName != ''">and _organization.short_name=#{shortName,jdbcType=VARCHAR}</if>
+		<if test="registerName != null and registerName != ''">and _organization.register_name=#{registerName,jdbcType=VARCHAR}</if>
+		<if test="officePhone != null and officePhone != ''">and _organization.office_phone=#{officePhone,jdbcType=VARCHAR}</if>
+		<if test="fax != null and fax != ''">and _organization.fax=#{fax,jdbcType=VARCHAR}</if>
+		<if test="postCode != null and postCode != ''">and _organization.post_code=#{postCode,jdbcType=VARCHAR}</if>
+		<if test="address != null and address != ''">and _organization.address=#{address,jdbcType=VARCHAR}</if>
+		<if test="treeLevel != null and treeLevel != ''">and _organization.tree_level=#{treeLevel,jdbcType=SMALLINT}</if>
+		<if test="treePath != null and treePath != ''">and _organization.tree_path=#{treePath,jdbcType=VARCHAR}</if>
+		<if test="isChildNode != null and isChildNode != ''">and _organization.is_child_node=#{isChildNode,jdbcType=SMALLINT}</if>
+		<if test="isDelete != null and isDelete != ''">and _organization.is_delete=#{isDelete,jdbcType=SMALLINT}</if>
+		<if test="version != null and version != ''">and _organization.version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and _organization.create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and _organization.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and _organization.comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **update where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and id=#{id,jdbcType=BIGINT}</if>
+		<if test="parentId != null and parentId != ''">and parent_id=#{parentId,jdbcType=BIGINT}</if>
+		<if test="parentName != null and parentName != ''">and parent_name=#{parentName,jdbcType=VARCHAR}</if>
+		<if test="orgType != null and orgType != ''">and org_type=#{orgType,jdbcType=TINYINT}</if>
+		<if test="code != null and code != ''">and code=#{code,jdbcType=VARCHAR}</if>
+		<if test="name != null and name != ''">and name=#{name,jdbcType=VARCHAR}</if>
+		<if test="shortName != null and shortName != ''">and short_name=#{shortName,jdbcType=VARCHAR}</if>
+		<if test="registerName != null and registerName != ''">and register_name=#{registerName,jdbcType=VARCHAR}</if>
+		<if test="officePhone != null and officePhone != ''">and office_phone=#{officePhone,jdbcType=VARCHAR}</if>
+		<if test="fax != null and fax != ''">and fax=#{fax,jdbcType=VARCHAR}</if>
+		<if test="postCode != null and postCode != ''">and post_code=#{postCode,jdbcType=VARCHAR}</if>
+		<if test="address != null and address != ''">and address=#{address,jdbcType=VARCHAR}</if>
+		<if test="treeLevel != null and treeLevel != ''">and tree_level=#{treeLevel,jdbcType=SMALLINT}</if>
+		<if test="treePath != null and treePath != ''">and tree_path=#{treePath,jdbcType=VARCHAR}</if>
+		<if test="isChildNode != null and isChildNode != ''">and is_child_node=#{isChildNode,jdbcType=SMALLINT}</if>
+		<if test="isDelete != null and isDelete != ''">and is_delete=#{isDelete,jdbcType=SMALLINT}</if>
+		<if test="version != null and version != ''">and version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **set fields example**
+		###########################################
+		<if test="id != null and id != ''">,id=#{id,jdbcType=BIGINT}</if>
+		<if test="parentId != null and parentId != ''">,parent_id=#{parentId,jdbcType=BIGINT}</if>
+		<if test="parentName != null and parentName != ''">,parent_name=#{parentName,jdbcType=VARCHAR}</if>
+		<if test="orgType != null and orgType != ''">,org_type=#{orgType,jdbcType=TINYINT}</if>
+		<if test="code != null and code != ''">,code=#{code,jdbcType=VARCHAR}</if>
+		<if test="name != null and name != ''">,name=#{name,jdbcType=VARCHAR}</if>
+		<if test="shortName != null and shortName != ''">,short_name=#{shortName,jdbcType=VARCHAR}</if>
+		<if test="registerName != null and registerName != ''">,register_name=#{registerName,jdbcType=VARCHAR}</if>
+		<if test="officePhone != null and officePhone != ''">,office_phone=#{officePhone,jdbcType=VARCHAR}</if>
+		<if test="fax != null and fax != ''">,fax=#{fax,jdbcType=VARCHAR}</if>
+		<if test="postCode != null and postCode != ''">,post_code=#{postCode,jdbcType=VARCHAR}</if>
+		<if test="address != null and address != ''">,address=#{address,jdbcType=VARCHAR}</if>
+		<if test="treeLevel != null and treeLevel != ''">,tree_level=#{treeLevel,jdbcType=SMALLINT}</if>
+		<if test="treePath != null and treePath != ''">,tree_path=#{treePath,jdbcType=VARCHAR}</if>
+		<if test="isChildNode != null and isChildNode != ''">,is_child_node=#{isChildNode,jdbcType=SMALLINT}</if>
+		<if test="isDelete != null and isDelete != ''">,is_delete=#{isDelete,jdbcType=SMALLINT}</if>
+		<if test="version != null and version != ''">,version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **insert fields example**
+		###########################################
+		<if test="id != null and id != ''">,id</if>
+		<if test="parentId != null and parentId != ''">,parent_id</if>
+		<if test="parentName != null and parentName != ''">,parent_name</if>
+		<if test="orgType != null and orgType != ''">,org_type</if>
+		<if test="code != null and code != ''">,code</if>
+		<if test="name != null and name != ''">,name</if>
+		<if test="shortName != null and shortName != ''">,short_name</if>
+		<if test="registerName != null and registerName != ''">,register_name</if>
+		<if test="officePhone != null and officePhone != ''">,office_phone</if>
+		<if test="fax != null and fax != ''">,fax</if>
+		<if test="postCode != null and postCode != ''">,post_code</if>
+		<if test="address != null and address != ''">,address</if>
+		<if test="treeLevel != null and treeLevel != ''">,tree_level</if>
+		<if test="treePath != null and treePath != ''">,tree_path</if>
+		<if test="isChildNode != null and isChildNode != ''">,is_child_node</if>
+		<if test="isDelete != null and isDelete != ''">,is_delete</if>
+		<if test="version != null and version != ''">,version</if>
+		<if test="createTime != null and createTime != ''">,create_time</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time</if>
+		<if test="comment != null and comment != ''">,comment</if>
+		###########################################
+		### **insert values criteria example**
+		###########################################	
+		<if test="id != null and id != ''">,#{id,jdbcType=BIGINT}</if>
+		<if test="parentId != null and parentId != ''">,#{parentId,jdbcType=BIGINT}</if>
+		<if test="parentName != null and parentName != ''">,#{parentName,jdbcType=VARCHAR}</if>
+		<if test="orgType != null and orgType != ''">,#{orgType,jdbcType=TINYINT}</if>
+		<if test="code != null and code != ''">,#{code,jdbcType=VARCHAR}</if>
+		<if test="name != null and name != ''">,#{name,jdbcType=VARCHAR}</if>
+		<if test="shortName != null and shortName != ''">,#{shortName,jdbcType=VARCHAR}</if>
+		<if test="registerName != null and registerName != ''">,#{registerName,jdbcType=VARCHAR}</if>
+		<if test="officePhone != null and officePhone != ''">,#{officePhone,jdbcType=VARCHAR}</if>
+		<if test="fax != null and fax != ''">,#{fax,jdbcType=VARCHAR}</if>
+		<if test="postCode != null and postCode != ''">,#{postCode,jdbcType=VARCHAR}</if>
+		<if test="address != null and address != ''">,#{address,jdbcType=VARCHAR}</if>
+		<if test="treeLevel != null and treeLevel != ''">,#{treeLevel,jdbcType=SMALLINT}</if>
+		<if test="treePath != null and treePath != ''">,#{treePath,jdbcType=VARCHAR}</if>
+		<if test="isChildNode != null and isChildNode != ''">,#{isChildNode,jdbcType=SMALLINT}</if>
+		<if test="isDelete != null and isDelete != ''">,#{isDelete,jdbcType=SMALLINT}</if>
+		<if test="version != null and version != ''">,#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **sql example**
+		###########################################	
+	<insert id="save" parameterMap="organization">
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			select LAST_INSERT_ID() as generatedKey   
+		</selectKey>
+	</insert>
+	
+	<update id="updateById" parameterMap="organization">
+		<include refid="organization_update"/>
+		<include refid="organization_update_set"/>
+		<include refid="organization_update_where_id"/>
+	</update>
+
+	<delete id="removeCriteria" parameterMap="organization">
+		<include refid="organization_delete"/>
+		<include refid="organization_update_where"/>
+	</delete>
+	
+	<delete id="removeById" parameterType="java.lang.Long">
+		<include refid="organization_delete"/>
+		<include refid="organization_update_where_id"/>
+	</delete>
+	
+	<select id="listCriteria" resultMap="organization" parameterMap="organization" useCache="true">
+		<include refid="organization_select"/>
+		<include refid="organization_select_fields"/>
+		<include refid="organization_form"/>
+		<include refid="organization_where"/>
+		<include refid="organization_order"/>
+		<include refid="organization_group"/>
+	</select>
+	
+	<select id="getOneById" resultMap="organization" parameterType="java.lang.Long" useCache="true">
+		<include refid="organization_select"/>
+		<include refid="organization_select_fields"/>
+		<include refid="organization_form"/>
+		<include refid="organization_where_id"/>
+	</select>		
+	-->
+	
+	<select id="getOneByCode" resultMap="organization" parameterType="java.lang.String" useCache="true">
+		<include refid="organization_select"/>
+		<include refid="organization_select_fields"/>
+		<include refid="organization_form"/>
+		where _organization.code=#{code,jdbcType=VARCHAR}
+	</select>	
+</mapper>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bs.service.modules.uc.role.IRoleDao">
+	<!--
+		<include refid="role_select"/>
+		<include refid="role_select_count"/>
+		<include refid="role_select_distinct"/>
+		<include refid="role_select_fields"/>
+		<include refid="role_form"/>
+		<include refid="role_where"/>
+		<include refid="role_inner_all"/>
+		<include refid="role_left_all"/>
+		<include refid="role_left_roleAuthRelation"/>
+		<include refid="role_left_userRoleRelation"/>
+		<include refid="role_where"/>
+		<include refid="role_where_id"/>
+		<include refid="role_where_reference_id"/>
+		<include refid="role_order"/>
+		<include refid="role_group"/>
+		<include refid="role_limit"/>
+		<include refid="role_update"/>
+		<include refid="role_update_set"/>
+		<include refid="role_update_set_null"/>
+		<include refid="role_insert"/>
+		<include refid="role_delete"/>
+		###########################################
+		### **where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and _role.id=#{id,jdbcType=BIGINT}</if>
+		<if test="name != null and name != ''">and _role.name=#{name,jdbcType=VARCHAR}</if>
+		<if test="roleType != null and roleType != ''">and _role.role_type=#{roleType,jdbcType=TINYINT}</if>
+		<if test="roleStatus != null and roleStatus != ''">and _role.role_status=#{roleStatus,jdbcType=TINYINT}</if>
+		<if test="version != null and version != ''">and _role.version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and _role.create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and _role.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and _role.comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **update where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and id=#{id,jdbcType=BIGINT}</if>
+		<if test="name != null and name != ''">and name=#{name,jdbcType=VARCHAR}</if>
+		<if test="roleType != null and roleType != ''">and role_type=#{roleType,jdbcType=TINYINT}</if>
+		<if test="roleStatus != null and roleStatus != ''">and role_status=#{roleStatus,jdbcType=TINYINT}</if>
+		<if test="version != null and version != ''">and version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **set fields example**
+		###########################################
+		<if test="id != null and id != ''">,id=#{id,jdbcType=BIGINT}</if>
+		<if test="name != null and name != ''">,name=#{name,jdbcType=VARCHAR}</if>
+		<if test="roleType != null and roleType != ''">,role_type=#{roleType,jdbcType=TINYINT}</if>
+		<if test="roleStatus != null and roleStatus != ''">,role_status=#{roleStatus,jdbcType=TINYINT}</if>
+		<if test="version != null and version != ''">,version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **insert fields example**
+		###########################################
+		<if test="id != null and id != ''">,id</if>
+		<if test="name != null and name != ''">,name</if>
+		<if test="roleType != null and roleType != ''">,role_type</if>
+		<if test="roleStatus != null and roleStatus != ''">,role_status</if>
+		<if test="version != null and version != ''">,version</if>
+		<if test="createTime != null and createTime != ''">,create_time</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time</if>
+		<if test="comment != null and comment != ''">,comment</if>
+		###########################################
+		### **insert values criteria example**
+		###########################################	
+		<if test="id != null and id != ''">,#{id,jdbcType=BIGINT}</if>
+		<if test="name != null and name != ''">,#{name,jdbcType=VARCHAR}</if>
+		<if test="roleType != null and roleType != ''">,#{roleType,jdbcType=TINYINT}</if>
+		<if test="roleStatus != null and roleStatus != ''">,#{roleStatus,jdbcType=TINYINT}</if>
+		<if test="version != null and version != ''">,#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **sql example**
+		###########################################	
+	<insert id="save" parameterMap="role">
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			select LAST_INSERT_ID() as generatedKey   
+		</selectKey>
+	</insert>
+	
+	<update id="updateById" parameterMap="role">
+		<include refid="role_update"/>
+		<include refid="role_update_set"/>
+		<include refid="role_update_where_id"/>
+	</update>
+
+	<delete id="removeCriteria" parameterMap="role">
+		<include refid="role_delete"/>
+		<include refid="role_update_where"/>
+	</delete>
+	
+	<delete id="removeById" parameterType="java.lang.Long">
+		<include refid="role_delete"/>
+		<include refid="role_update_where_id"/>
+	</delete>
+	
+	<select id="listCriteria" resultMap="role" parameterMap="role" useCache="true">
+		<include refid="role_select"/>
+		<include refid="role_select_fields"/>
+		<include refid="role_form"/>
+		<include refid="role_where"/>
+		<include refid="role_order"/>
+		<include refid="role_group"/>
+	</select>
+	
+	<select id="getOneById" resultMap="role" parameterType="java.lang.Long" useCache="true">
+		<include refid="role_select"/>
+		<include refid="role_select_fields"/>
+		<include refid="role_form"/>
+		<include refid="role_where_id"/>
+	</select>		
+	-->
+</mapper>

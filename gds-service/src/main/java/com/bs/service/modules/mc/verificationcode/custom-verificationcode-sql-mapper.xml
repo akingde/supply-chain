@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bs.service.modules.mc.verificationcode.IVerificationCodeDao">
+	<!--
+		<include refid="verificationCode_select"/>
+		<include refid="verificationCode_select_count"/>
+		<include refid="verificationCode_select_distinct"/>
+		<include refid="verificationCode_select_fields"/>
+		<include refid="verificationCode_form"/>
+		<include refid="verificationCode_where"/>
+		<include refid="verificationCode_inner_all"/>
+		<include refid="verificationCode_left_all"/>
+		<include refid="verificationCode_where"/>
+		<include refid="verificationCode_where_id"/>
+		<include refid="verificationCode_where_reference_id"/>
+		<include refid="verificationCode_order"/>
+		<include refid="verificationCode_group"/>
+		<include refid="verificationCode_limit"/>
+		<include refid="verificationCode_update"/>
+		<include refid="verificationCode_update_set"/>
+		<include refid="verificationCode_update_set_null"/>
+		<include refid="verificationCode_insert"/>
+		<include refid="verificationCode_delete"/>
+		###########################################
+		### **where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and _verificationCode.id=#{id,jdbcType=BIGINT}</if>
+		<if test="bussinessCode != null and bussinessCode != ''">and _verificationCode.bussiness_code=#{bussinessCode,jdbcType=VARCHAR}</if>
+		<if test="mobilePhone != null and mobilePhone != ''">and _verificationCode.mobile_phone=#{mobilePhone,jdbcType=VARCHAR}</if>
+		<if test="code != null and code != ''">and _verificationCode.code=#{code,jdbcType=VARCHAR}</if>
+		<if test="expiredTime != null and expiredTime != ''">and _verificationCode.expired_time=#{expiredTime,jdbcType=BIGINT}</if>
+		<if test="version != null and version != ''">and _verificationCode.version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and _verificationCode.create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and _verificationCode.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and _verificationCode.comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **update where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and id=#{id,jdbcType=BIGINT}</if>
+		<if test="bussinessCode != null and bussinessCode != ''">and bussiness_code=#{bussinessCode,jdbcType=VARCHAR}</if>
+		<if test="mobilePhone != null and mobilePhone != ''">and mobile_phone=#{mobilePhone,jdbcType=VARCHAR}</if>
+		<if test="code != null and code != ''">and code=#{code,jdbcType=VARCHAR}</if>
+		<if test="expiredTime != null and expiredTime != ''">and expired_time=#{expiredTime,jdbcType=BIGINT}</if>
+		<if test="version != null and version != ''">and version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **set fields example**
+		###########################################
+		<if test="id != null and id != ''">,id=#{id,jdbcType=BIGINT}</if>
+		<if test="bussinessCode != null and bussinessCode != ''">,bussiness_code=#{bussinessCode,jdbcType=VARCHAR}</if>
+		<if test="mobilePhone != null and mobilePhone != ''">,mobile_phone=#{mobilePhone,jdbcType=VARCHAR}</if>
+		<if test="code != null and code != ''">,code=#{code,jdbcType=VARCHAR}</if>
+		<if test="expiredTime != null and expiredTime != ''">,expired_time=#{expiredTime,jdbcType=BIGINT}</if>
+		<if test="version != null and version != ''">,version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **insert fields example**
+		###########################################
+		<if test="id != null and id != ''">,id</if>
+		<if test="bussinessCode != null and bussinessCode != ''">,bussiness_code</if>
+		<if test="mobilePhone != null and mobilePhone != ''">,mobile_phone</if>
+		<if test="code != null and code != ''">,code</if>
+		<if test="expiredTime != null and expiredTime != ''">,expired_time</if>
+		<if test="version != null and version != ''">,version</if>
+		<if test="createTime != null and createTime != ''">,create_time</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time</if>
+		<if test="comment != null and comment != ''">,comment</if>
+		###########################################
+		### **insert values criteria example**
+		###########################################	
+		<if test="id != null and id != ''">,#{id,jdbcType=BIGINT}</if>
+		<if test="bussinessCode != null and bussinessCode != ''">,#{bussinessCode,jdbcType=VARCHAR}</if>
+		<if test="mobilePhone != null and mobilePhone != ''">,#{mobilePhone,jdbcType=VARCHAR}</if>
+		<if test="code != null and code != ''">,#{code,jdbcType=VARCHAR}</if>
+		<if test="expiredTime != null and expiredTime != ''">,#{expiredTime,jdbcType=BIGINT}</if>
+		<if test="version != null and version != ''">,#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **sql example**
+		###########################################	
+	<insert id="save" parameterMap="verificationCode">
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			select LAST_INSERT_ID() as generatedKey   
+		</selectKey>
+	</insert>
+	
+	<update id="updateById" parameterMap="verificationCode">
+		<include refid="verificationCode_update"/>
+		<include refid="verificationCode_update_set"/>
+		<include refid="verificationCode_update_where_id"/>
+	</update>
+
+	<delete id="removeCriteria" parameterMap="verificationCode">
+		<include refid="verificationCode_delete"/>
+		<include refid="verificationCode_update_where"/>
+	</delete>
+	
+	<delete id="removeById" parameterType="java.lang.Long">
+		<include refid="verificationCode_delete"/>
+		<include refid="verificationCode_update_where_id"/>
+	</delete>
+	
+	<select id="listCriteria" resultMap="verificationCode" parameterMap="verificationCode" useCache="true">
+		<include refid="verificationCode_select"/>
+		<include refid="verificationCode_select_fields"/>
+		<include refid="verificationCode_form"/>
+		<include refid="verificationCode_where"/>
+		<include refid="verificationCode_order"/>
+		<include refid="verificationCode_group"/>
+	</select>
+	
+	<select id="getOneById" resultMap="verificationCode" parameterType="java.lang.Long" useCache="true">
+		<include refid="verificationCode_select"/>
+		<include refid="verificationCode_select_fields"/>
+		<include refid="verificationCode_form"/>
+		<include refid="verificationCode_where_id"/>
+	</select>		
+	-->
+</mapper>

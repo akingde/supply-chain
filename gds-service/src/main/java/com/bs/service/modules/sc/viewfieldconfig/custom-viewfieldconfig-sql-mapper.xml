@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bs.service.modules.sc.viewfieldconfig.IViewFieldConfigDao">
+	<!--
+		<include refid="viewFieldConfig_select"/>
+		<include refid="viewFieldConfig_select_count"/>
+		<include refid="viewFieldConfig_select_distinct"/>
+		<include refid="viewFieldConfig_select_fields"/>
+		<include refid="viewFieldConfig_form"/>
+		<include refid="viewFieldConfig_where"/>
+		<include refid="viewFieldConfig_inner_all"/>
+		<include refid="viewFieldConfig_inner_viewConfig"/>
+		<include refid="viewFieldConfig_inner_tableColumn"/>
+		<include refid="viewFieldConfig_inner_fieldDataCategory"/>
+		<include refid="viewFieldConfig_left_all"/>
+		<include refid="viewFieldConfig_where"/>
+		<include refid="viewFieldConfig_where_id"/>
+		<include refid="viewFieldConfig_where_reference_id"/>
+		<include refid="viewFieldConfig_order"/>
+		<include refid="viewFieldConfig_group"/>
+		<include refid="viewFieldConfig_limit"/>
+		<include refid="viewFieldConfig_update"/>
+		<include refid="viewFieldConfig_update_set"/>
+		<include refid="viewFieldConfig_update_set_null"/>
+		<include refid="viewFieldConfig_insert"/>
+		<include refid="viewFieldConfig_delete"/>
+		###########################################
+		### **where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and _viewFieldConfig.id=#{id,jdbcType=BIGINT}</if>
+		<if test="viewId != null and viewId != ''">and _viewFieldConfig.view_id=#{viewId,jdbcType=BIGINT}</if>
+		<if test="authId != null and authId != ''">and _viewFieldConfig.auth_id=#{authId,jdbcType=BIGINT}</if>
+		<if test="tableId != null and tableId != ''">and _viewFieldConfig.table_id=#{tableId,jdbcType=BIGINT}</if>
+		<if test="columnId != null and columnId != ''">and _viewFieldConfig.column_id=#{columnId,jdbcType=BIGINT}</if>
+		<if test="dataCategoryId != null and dataCategoryId != ''">and _viewFieldConfig.data_category_id=#{dataCategoryId,jdbcType=BIGINT}</if>
+		<if test="authCode != null and authCode != ''">and _viewFieldConfig.auth_code=#{authCode,jdbcType=BIGINT}</if>
+		<if test="authName != null and authName != ''">and _viewFieldConfig.auth_name=#{authName,jdbcType=VARCHAR}</if>
+		<if test="tableCode != null and tableCode != ''">and _viewFieldConfig.table_code=#{tableCode,jdbcType=VARCHAR}</if>
+		<if test="tableName != null and tableName != ''">and _viewFieldConfig.table_name=#{tableName,jdbcType=VARCHAR}</if>
+		<if test="entityName != null and entityName != ''">and _viewFieldConfig.entity_name=#{entityName,jdbcType=VARCHAR}</if>
+		<if test="fieldIndex != null and fieldIndex != ''">and _viewFieldConfig.field_index=#{fieldIndex,jdbcType=VARCHAR}</if>
+		<if test="fieldCode != null and fieldCode != ''">and _viewFieldConfig.field_code=#{fieldCode,jdbcType=VARCHAR}</if>
+		<if test="fieldName != null and fieldName != ''">and _viewFieldConfig.field_name=#{fieldName,jdbcType=VARCHAR}</if>
+		<if test="fieldLabel != null and fieldLabel != ''">and _viewFieldConfig.field_label=#{fieldLabel,jdbcType=VARCHAR}</if>
+		<if test="fieldType != null and fieldType != ''">and _viewFieldConfig.field_type=#{fieldType,jdbcType=SMALLINT}</if>
+		<if test="fieldShowType != null and fieldShowType != ''">and _viewFieldConfig.field_show_type=#{fieldShowType,jdbcType=SMALLINT}</if>
+		<if test="fieldFrozen != null and fieldFrozen != ''">and _viewFieldConfig.field_frozen=#{fieldFrozen,jdbcType=SMALLINT}</if>
+		<if test="fieldWidth != null and fieldWidth != ''">and _viewFieldConfig.field_width=#{fieldWidth,jdbcType=VARCHAR}</if>
+		<if test="fieldAlign != null and fieldAlign != ''">and _viewFieldConfig.field_align=#{fieldAlign,jdbcType=SMALLINT}</if>
+		<if test="fieldDatefmt != null and fieldDatefmt != ''">and _viewFieldConfig.field_datefmt=#{fieldDatefmt,jdbcType=VARCHAR}</if>
+		<if test="fieldFormatter != null and fieldFormatter != ''">and _viewFieldConfig.field_formatter=#{fieldFormatter,jdbcType=SMALLINT}</if>
+		<if test="fieldFormatterCode != null and fieldFormatterCode != ''">and _viewFieldConfig.field_formatter_code=#{fieldFormatterCode,jdbcType=VARCHAR}</if>
+		<if test="fieldHidden != null and fieldHidden != ''">and _viewFieldConfig.field_hidden=#{fieldHidden,jdbcType=SMALLINT}</if>
+		<if test="fieldKey != null and fieldKey != ''">and _viewFieldConfig.field_key=#{fieldKey,jdbcType=VARCHAR}</if>
+		<if test="fieldSortable != null and fieldSortable != ''">and _viewFieldConfig.field_sortable=#{fieldSortable,jdbcType=SMALLINT}</if>
+		<if test="fieldSort != null and fieldSort != ''">and _viewFieldConfig.field_sort=#{fieldSort,jdbcType=INT}</if>
+		<if test="fieldJson != null and fieldJson != ''">and _viewFieldConfig.field_json=#{fieldJson,jdbcType=TEXT}</if>
+		<if test="isPromptField != null and isPromptField != ''">and _viewFieldConfig.is_prompt_field=#{isPromptField,jdbcType=SMALLINT}</if>
+		<if test="isTreeListField != null and isTreeListField != ''">and _viewFieldConfig.is_tree_list_field=#{isTreeListField,jdbcType=SMALLINT}</if>
+		<if test="searchType != null and searchType != ''">and _viewFieldConfig.search_type=#{searchType,jdbcType=SMALLINT}</if>
+		<if test="searchGroup != null and searchGroup != ''">and _viewFieldConfig.search_group=#{searchGroup,jdbcType=INT}</if>
+		<if test="searchOperator != null and searchOperator != ''">and _viewFieldConfig.search_operator=#{searchOperator,jdbcType=SMALLINT}</if>
+		<if test="searchFieldShowType != null and searchFieldShowType != ''">and _viewFieldConfig.search_field_show_type=#{searchFieldShowType,jdbcType=SMALLINT}</if>
+		<if test="searchRegular != null and searchRegular != ''">and _viewFieldConfig.search_regular=#{searchRegular,jdbcType=VARCHAR}</if>
+		<if test="isAdd != null and isAdd != ''">and _viewFieldConfig.is_add=#{isAdd,jdbcType=SMALLINT}</if>
+		<if test="addTime != null and addTime != ''">and _viewFieldConfig.add_time=#{addTime,jdbcType=DATETIME}</if>
+		<if test="version != null and version != ''">and _viewFieldConfig.version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and _viewFieldConfig.create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and _viewFieldConfig.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and _viewFieldConfig.comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **update where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and id=#{id,jdbcType=BIGINT}</if>
+		<if test="viewId != null and viewId != ''">and view_id=#{viewId,jdbcType=BIGINT}</if>
+		<if test="authId != null and authId != ''">and auth_id=#{authId,jdbcType=BIGINT}</if>
+		<if test="tableId != null and tableId != ''">and table_id=#{tableId,jdbcType=BIGINT}</if>
+		<if test="columnId != null and columnId != ''">and column_id=#{columnId,jdbcType=BIGINT}</if>
+		<if test="dataCategoryId != null and dataCategoryId != ''">and data_category_id=#{dataCategoryId,jdbcType=BIGINT}</if>
+		<if test="authCode != null and authCode != ''">and auth_code=#{authCode,jdbcType=BIGINT}</if>
+		<if test="authName != null and authName != ''">and auth_name=#{authName,jdbcType=VARCHAR}</if>
+		<if test="tableCode != null and tableCode != ''">and table_code=#{tableCode,jdbcType=VARCHAR}</if>
+		<if test="tableName != null and tableName != ''">and table_name=#{tableName,jdbcType=VARCHAR}</if>
+		<if test="entityName != null and entityName != ''">and entity_name=#{entityName,jdbcType=VARCHAR}</if>
+		<if test="fieldIndex != null and fieldIndex != ''">and field_index=#{fieldIndex,jdbcType=VARCHAR}</if>
+		<if test="fieldCode != null and fieldCode != ''">and field_code=#{fieldCode,jdbcType=VARCHAR}</if>
+		<if test="fieldName != null and fieldName != ''">and field_name=#{fieldName,jdbcType=VARCHAR}</if>
+		<if test="fieldLabel != null and fieldLabel != ''">and field_label=#{fieldLabel,jdbcType=VARCHAR}</if>
+		<if test="fieldType != null and fieldType != ''">and field_type=#{fieldType,jdbcType=SMALLINT}</if>
+		<if test="fieldShowType != null and fieldShowType != ''">and field_show_type=#{fieldShowType,jdbcType=SMALLINT}</if>
+		<if test="fieldFrozen != null and fieldFrozen != ''">and field_frozen=#{fieldFrozen,jdbcType=SMALLINT}</if>
+		<if test="fieldWidth != null and fieldWidth != ''">and field_width=#{fieldWidth,jdbcType=VARCHAR}</if>
+		<if test="fieldAlign != null and fieldAlign != ''">and field_align=#{fieldAlign,jdbcType=SMALLINT}</if>
+		<if test="fieldDatefmt != null and fieldDatefmt != ''">and field_datefmt=#{fieldDatefmt,jdbcType=VARCHAR}</if>
+		<if test="fieldFormatter != null and fieldFormatter != ''">and field_formatter=#{fieldFormatter,jdbcType=SMALLINT}</if>
+		<if test="fieldFormatterCode != null and fieldFormatterCode != ''">and field_formatter_code=#{fieldFormatterCode,jdbcType=VARCHAR}</if>
+		<if test="fieldHidden != null and fieldHidden != ''">and field_hidden=#{fieldHidden,jdbcType=SMALLINT}</if>
+		<if test="fieldKey != null and fieldKey != ''">and field_key=#{fieldKey,jdbcType=VARCHAR}</if>
+		<if test="fieldSortable != null and fieldSortable != ''">and field_sortable=#{fieldSortable,jdbcType=SMALLINT}</if>
+		<if test="fieldSort != null and fieldSort != ''">and field_sort=#{fieldSort,jdbcType=INT}</if>
+		<if test="fieldJson != null and fieldJson != ''">and field_json=#{fieldJson,jdbcType=TEXT}</if>
+		<if test="isPromptField != null and isPromptField != ''">and is_prompt_field=#{isPromptField,jdbcType=SMALLINT}</if>
+		<if test="isTreeListField != null and isTreeListField != ''">and is_tree_list_field=#{isTreeListField,jdbcType=SMALLINT}</if>
+		<if test="searchType != null and searchType != ''">and search_type=#{searchType,jdbcType=SMALLINT}</if>
+		<if test="searchGroup != null and searchGroup != ''">and search_group=#{searchGroup,jdbcType=INT}</if>
+		<if test="searchOperator != null and searchOperator != ''">and search_operator=#{searchOperator,jdbcType=SMALLINT}</if>
+		<if test="searchFieldShowType != null and searchFieldShowType != ''">and search_field_show_type=#{searchFieldShowType,jdbcType=SMALLINT}</if>
+		<if test="searchRegular != null and searchRegular != ''">and search_regular=#{searchRegular,jdbcType=VARCHAR}</if>
+		<if test="isAdd != null and isAdd != ''">and is_add=#{isAdd,jdbcType=SMALLINT}</if>
+		<if test="addTime != null and addTime != ''">and add_time=#{addTime,jdbcType=DATETIME}</if>
+		<if test="version != null and version != ''">and version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **set fields example**
+		###########################################
+		<if test="id != null and id != ''">,id=#{id,jdbcType=BIGINT}</if>
+		<if test="viewId != null and viewId != ''">,view_id=#{viewId,jdbcType=BIGINT}</if>
+		<if test="authId != null and authId != ''">,auth_id=#{authId,jdbcType=BIGINT}</if>
+		<if test="tableId != null and tableId != ''">,table_id=#{tableId,jdbcType=BIGINT}</if>
+		<if test="columnId != null and columnId != ''">,column_id=#{columnId,jdbcType=BIGINT}</if>
+		<if test="dataCategoryId != null and dataCategoryId != ''">,data_category_id=#{dataCategoryId,jdbcType=BIGINT}</if>
+		<if test="authCode != null and authCode != ''">,auth_code=#{authCode,jdbcType=BIGINT}</if>
+		<if test="authName != null and authName != ''">,auth_name=#{authName,jdbcType=VARCHAR}</if>
+		<if test="tableCode != null and tableCode != ''">,table_code=#{tableCode,jdbcType=VARCHAR}</if>
+		<if test="tableName != null and tableName != ''">,table_name=#{tableName,jdbcType=VARCHAR}</if>
+		<if test="entityName != null and entityName != ''">,entity_name=#{entityName,jdbcType=VARCHAR}</if>
+		<if test="fieldIndex != null and fieldIndex != ''">,field_index=#{fieldIndex,jdbcType=VARCHAR}</if>
+		<if test="fieldCode != null and fieldCode != ''">,field_code=#{fieldCode,jdbcType=VARCHAR}</if>
+		<if test="fieldName != null and fieldName != ''">,field_name=#{fieldName,jdbcType=VARCHAR}</if>
+		<if test="fieldLabel != null and fieldLabel != ''">,field_label=#{fieldLabel,jdbcType=VARCHAR}</if>
+		<if test="fieldType != null and fieldType != ''">,field_type=#{fieldType,jdbcType=SMALLINT}</if>
+		<if test="fieldShowType != null and fieldShowType != ''">,field_show_type=#{fieldShowType,jdbcType=SMALLINT}</if>
+		<if test="fieldFrozen != null and fieldFrozen != ''">,field_frozen=#{fieldFrozen,jdbcType=SMALLINT}</if>
+		<if test="fieldWidth != null and fieldWidth != ''">,field_width=#{fieldWidth,jdbcType=VARCHAR}</if>
+		<if test="fieldAlign != null and fieldAlign != ''">,field_align=#{fieldAlign,jdbcType=SMALLINT}</if>
+		<if test="fieldDatefmt != null and fieldDatefmt != ''">,field_datefmt=#{fieldDatefmt,jdbcType=VARCHAR}</if>
+		<if test="fieldFormatter != null and fieldFormatter != ''">,field_formatter=#{fieldFormatter,jdbcType=SMALLINT}</if>
+		<if test="fieldFormatterCode != null and fieldFormatterCode != ''">,field_formatter_code=#{fieldFormatterCode,jdbcType=VARCHAR}</if>
+		<if test="fieldHidden != null and fieldHidden != ''">,field_hidden=#{fieldHidden,jdbcType=SMALLINT}</if>
+		<if test="fieldKey != null and fieldKey != ''">,field_key=#{fieldKey,jdbcType=VARCHAR}</if>
+		<if test="fieldSortable != null and fieldSortable != ''">,field_sortable=#{fieldSortable,jdbcType=SMALLINT}</if>
+		<if test="fieldSort != null and fieldSort != ''">,field_sort=#{fieldSort,jdbcType=INT}</if>
+		<if test="fieldJson != null and fieldJson != ''">,field_json=#{fieldJson,jdbcType=TEXT}</if>
+		<if test="isPromptField != null and isPromptField != ''">,is_prompt_field=#{isPromptField,jdbcType=SMALLINT}</if>
+		<if test="isTreeListField != null and isTreeListField != ''">,is_tree_list_field=#{isTreeListField,jdbcType=SMALLINT}</if>
+		<if test="searchType != null and searchType != ''">,search_type=#{searchType,jdbcType=SMALLINT}</if>
+		<if test="searchGroup != null and searchGroup != ''">,search_group=#{searchGroup,jdbcType=INT}</if>
+		<if test="searchOperator != null and searchOperator != ''">,search_operator=#{searchOperator,jdbcType=SMALLINT}</if>
+		<if test="searchFieldShowType != null and searchFieldShowType != ''">,search_field_show_type=#{searchFieldShowType,jdbcType=SMALLINT}</if>
+		<if test="searchRegular != null and searchRegular != ''">,search_regular=#{searchRegular,jdbcType=VARCHAR}</if>
+		<if test="isAdd != null and isAdd != ''">,is_add=#{isAdd,jdbcType=SMALLINT}</if>
+		<if test="addTime != null and addTime != ''">,add_time=#{addTime,jdbcType=DATETIME}</if>
+		<if test="version != null and version != ''">,version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **insert fields example**
+		###########################################
+		<if test="id != null and id != ''">,id</if>
+		<if test="viewId != null and viewId != ''">,view_id</if>
+		<if test="authId != null and authId != ''">,auth_id</if>
+		<if test="tableId != null and tableId != ''">,table_id</if>
+		<if test="columnId != null and columnId != ''">,column_id</if>
+		<if test="dataCategoryId != null and dataCategoryId != ''">,data_category_id</if>
+		<if test="authCode != null and authCode != ''">,auth_code</if>
+		<if test="authName != null and authName != ''">,auth_name</if>
+		<if test="tableCode != null and tableCode != ''">,table_code</if>
+		<if test="tableName != null and tableName != ''">,table_name</if>
+		<if test="entityName != null and entityName != ''">,entity_name</if>
+		<if test="fieldIndex != null and fieldIndex != ''">,field_index</if>
+		<if test="fieldCode != null and fieldCode != ''">,field_code</if>
+		<if test="fieldName != null and fieldName != ''">,field_name</if>
+		<if test="fieldLabel != null and fieldLabel != ''">,field_label</if>
+		<if test="fieldType != null and fieldType != ''">,field_type</if>
+		<if test="fieldShowType != null and fieldShowType != ''">,field_show_type</if>
+		<if test="fieldFrozen != null and fieldFrozen != ''">,field_frozen</if>
+		<if test="fieldWidth != null and fieldWidth != ''">,field_width</if>
+		<if test="fieldAlign != null and fieldAlign != ''">,field_align</if>
+		<if test="fieldDatefmt != null and fieldDatefmt != ''">,field_datefmt</if>
+		<if test="fieldFormatter != null and fieldFormatter != ''">,field_formatter</if>
+		<if test="fieldFormatterCode != null and fieldFormatterCode != ''">,field_formatter_code</if>
+		<if test="fieldHidden != null and fieldHidden != ''">,field_hidden</if>
+		<if test="fieldKey != null and fieldKey != ''">,field_key</if>
+		<if test="fieldSortable != null and fieldSortable != ''">,field_sortable</if>
+		<if test="fieldSort != null and fieldSort != ''">,field_sort</if>
+		<if test="fieldJson != null and fieldJson != ''">,field_json</if>
+		<if test="isPromptField != null and isPromptField != ''">,is_prompt_field</if>
+		<if test="isTreeListField != null and isTreeListField != ''">,is_tree_list_field</if>
+		<if test="searchType != null and searchType != ''">,search_type</if>
+		<if test="searchGroup != null and searchGroup != ''">,search_group</if>
+		<if test="searchOperator != null and searchOperator != ''">,search_operator</if>
+		<if test="searchFieldShowType != null and searchFieldShowType != ''">,search_field_show_type</if>
+		<if test="searchRegular != null and searchRegular != ''">,search_regular</if>
+		<if test="isAdd != null and isAdd != ''">,is_add</if>
+		<if test="addTime != null and addTime != ''">,add_time</if>
+		<if test="version != null and version != ''">,version</if>
+		<if test="createTime != null and createTime != ''">,create_time</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time</if>
+		<if test="comment != null and comment != ''">,comment</if>
+		###########################################
+		### **insert values criteria example**
+		###########################################	
+		<if test="id != null and id != ''">,#{id,jdbcType=BIGINT}</if>
+		<if test="viewId != null and viewId != ''">,#{viewId,jdbcType=BIGINT}</if>
+		<if test="authId != null and authId != ''">,#{authId,jdbcType=BIGINT}</if>
+		<if test="tableId != null and tableId != ''">,#{tableId,jdbcType=BIGINT}</if>
+		<if test="columnId != null and columnId != ''">,#{columnId,jdbcType=BIGINT}</if>
+		<if test="dataCategoryId != null and dataCategoryId != ''">,#{dataCategoryId,jdbcType=BIGINT}</if>
+		<if test="authCode != null and authCode != ''">,#{authCode,jdbcType=BIGINT}</if>
+		<if test="authName != null and authName != ''">,#{authName,jdbcType=VARCHAR}</if>
+		<if test="tableCode != null and tableCode != ''">,#{tableCode,jdbcType=VARCHAR}</if>
+		<if test="tableName != null and tableName != ''">,#{tableName,jdbcType=VARCHAR}</if>
+		<if test="entityName != null and entityName != ''">,#{entityName,jdbcType=VARCHAR}</if>
+		<if test="fieldIndex != null and fieldIndex != ''">,#{fieldIndex,jdbcType=VARCHAR}</if>
+		<if test="fieldCode != null and fieldCode != ''">,#{fieldCode,jdbcType=VARCHAR}</if>
+		<if test="fieldName != null and fieldName != ''">,#{fieldName,jdbcType=VARCHAR}</if>
+		<if test="fieldLabel != null and fieldLabel != ''">,#{fieldLabel,jdbcType=VARCHAR}</if>
+		<if test="fieldType != null and fieldType != ''">,#{fieldType,jdbcType=SMALLINT}</if>
+		<if test="fieldShowType != null and fieldShowType != ''">,#{fieldShowType,jdbcType=SMALLINT}</if>
+		<if test="fieldFrozen != null and fieldFrozen != ''">,#{fieldFrozen,jdbcType=SMALLINT}</if>
+		<if test="fieldWidth != null and fieldWidth != ''">,#{fieldWidth,jdbcType=VARCHAR}</if>
+		<if test="fieldAlign != null and fieldAlign != ''">,#{fieldAlign,jdbcType=SMALLINT}</if>
+		<if test="fieldDatefmt != null and fieldDatefmt != ''">,#{fieldDatefmt,jdbcType=VARCHAR}</if>
+		<if test="fieldFormatter != null and fieldFormatter != ''">,#{fieldFormatter,jdbcType=SMALLINT}</if>
+		<if test="fieldFormatterCode != null and fieldFormatterCode != ''">,#{fieldFormatterCode,jdbcType=VARCHAR}</if>
+		<if test="fieldHidden != null and fieldHidden != ''">,#{fieldHidden,jdbcType=SMALLINT}</if>
+		<if test="fieldKey != null and fieldKey != ''">,#{fieldKey,jdbcType=VARCHAR}</if>
+		<if test="fieldSortable != null and fieldSortable != ''">,#{fieldSortable,jdbcType=SMALLINT}</if>
+		<if test="fieldSort != null and fieldSort != ''">,#{fieldSort,jdbcType=INT}</if>
+		<if test="fieldJson != null and fieldJson != ''">,#{fieldJson,jdbcType=TEXT}</if>
+		<if test="isPromptField != null and isPromptField != ''">,#{isPromptField,jdbcType=SMALLINT}</if>
+		<if test="isTreeListField != null and isTreeListField != ''">,#{isTreeListField,jdbcType=SMALLINT}</if>
+		<if test="searchType != null and searchType != ''">,#{searchType,jdbcType=SMALLINT}</if>
+		<if test="searchGroup != null and searchGroup != ''">,#{searchGroup,jdbcType=INT}</if>
+		<if test="searchOperator != null and searchOperator != ''">,#{searchOperator,jdbcType=SMALLINT}</if>
+		<if test="searchFieldShowType != null and searchFieldShowType != ''">,#{searchFieldShowType,jdbcType=SMALLINT}</if>
+		<if test="searchRegular != null and searchRegular != ''">,#{searchRegular,jdbcType=VARCHAR}</if>
+		<if test="isAdd != null and isAdd != ''">,#{isAdd,jdbcType=SMALLINT}</if>
+		<if test="addTime != null and addTime != ''">,#{addTime,jdbcType=DATETIME}</if>
+		<if test="version != null and version != ''">,#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **sql example**
+		###########################################	
+	<insert id="save" parameterMap="viewFieldConfig">
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			select LAST_INSERT_ID() as generatedKey   
+		</selectKey>
+	</insert>
+	
+	<update id="updateById" parameterMap="viewFieldConfig">
+		<include refid="viewFieldConfig_update"/>
+		<include refid="viewFieldConfig_update_set"/>
+		<include refid="viewFieldConfig_update_where_id"/>
+	</update>
+
+	<delete id="removeCriteria" parameterMap="viewFieldConfig">
+		<include refid="viewFieldConfig_delete"/>
+		<include refid="viewFieldConfig_update_where"/>
+	</delete>
+	
+	<delete id="removeById" parameterType="java.lang.Long">
+		<include refid="viewFieldConfig_delete"/>
+		<include refid="viewFieldConfig_update_where_id"/>
+	</delete>
+	
+	<select id="listCriteria" resultMap="viewFieldConfig" parameterMap="viewFieldConfig" useCache="true">
+		<include refid="viewFieldConfig_select"/>
+		<include refid="viewFieldConfig_select_fields"/>
+		<include refid="viewFieldConfig_form"/>
+		<include refid="viewFieldConfig_where"/>
+		<include refid="viewFieldConfig_order"/>
+		<include refid="viewFieldConfig_group"/>
+	</select>
+	
+	<select id="getOneById" resultMap="viewFieldConfig" parameterType="java.lang.Long" useCache="true">
+		<include refid="viewFieldConfig_select"/>
+		<include refid="viewFieldConfig_select_fields"/>
+		<include refid="viewFieldConfig_form"/>
+		<include refid="viewFieldConfig_where_id"/>
+	</select>		
+	-->
+</mapper>

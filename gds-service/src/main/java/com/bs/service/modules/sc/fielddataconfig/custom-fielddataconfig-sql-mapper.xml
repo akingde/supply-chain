@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bs.service.modules.sc.fielddataconfig.IFieldDataConfigDao">
+	<!--
+		<include refid="fieldDataConfig_select"/>
+		<include refid="fieldDataConfig_select_count"/>
+		<include refid="fieldDataConfig_select_distinct"/>
+		<include refid="fieldDataConfig_select_fields"/>
+		<include refid="fieldDataConfig_form"/>
+		<include refid="fieldDataConfig_where"/>
+		<include refid="fieldDataConfig_inner_all"/>
+		<include refid="fieldDataConfig_inner_fieldDataCategory"/>
+		<include refid="fieldDataConfig_left_all"/>
+		<include refid="fieldDataConfig_where"/>
+		<include refid="fieldDataConfig_where_id"/>
+		<include refid="fieldDataConfig_where_reference_id"/>
+		<include refid="fieldDataConfig_order"/>
+		<include refid="fieldDataConfig_group"/>
+		<include refid="fieldDataConfig_limit"/>
+		<include refid="fieldDataConfig_update"/>
+		<include refid="fieldDataConfig_update_set"/>
+		<include refid="fieldDataConfig_update_set_null"/>
+		<include refid="fieldDataConfig_insert"/>
+		<include refid="fieldDataConfig_delete"/>
+		###########################################
+		### **where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and _fieldDataConfig.id=#{id,jdbcType=BIGINT}</if>
+		<if test="cateId != null and cateId != ''">and _fieldDataConfig.cate_id=#{cateId,jdbcType=BIGINT}</if>
+		<if test="cateCode != null and cateCode != ''">and _fieldDataConfig.cate_code=#{cateCode,jdbcType=VARCHAR}</if>
+		<if test="cateName != null and cateName != ''">and _fieldDataConfig.cate_name=#{cateName,jdbcType=VARCHAR}</if>
+		<if test="dataName != null and dataName != ''">and _fieldDataConfig.data_name=#{dataName,jdbcType=VARCHAR}</if>
+		<if test="dataLabel != null and dataLabel != ''">and _fieldDataConfig.data_label=#{dataLabel,jdbcType=VARCHAR}</if>
+		<if test="dataCode != null and dataCode != ''">and _fieldDataConfig.data_code=#{dataCode,jdbcType=VARCHAR}</if>
+		<if test="dataValue != null and dataValue != ''">and _fieldDataConfig.data_value=#{dataValue,jdbcType=VARCHAR}</if>
+		<if test="version != null and version != ''">and _fieldDataConfig.version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and _fieldDataConfig.create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and _fieldDataConfig.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and _fieldDataConfig.comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **update where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and id=#{id,jdbcType=BIGINT}</if>
+		<if test="cateId != null and cateId != ''">and cate_id=#{cateId,jdbcType=BIGINT}</if>
+		<if test="cateCode != null and cateCode != ''">and cate_code=#{cateCode,jdbcType=VARCHAR}</if>
+		<if test="cateName != null and cateName != ''">and cate_name=#{cateName,jdbcType=VARCHAR}</if>
+		<if test="dataName != null and dataName != ''">and data_name=#{dataName,jdbcType=VARCHAR}</if>
+		<if test="dataLabel != null and dataLabel != ''">and data_label=#{dataLabel,jdbcType=VARCHAR}</if>
+		<if test="dataCode != null and dataCode != ''">and data_code=#{dataCode,jdbcType=VARCHAR}</if>
+		<if test="dataValue != null and dataValue != ''">and data_value=#{dataValue,jdbcType=VARCHAR}</if>
+		<if test="version != null and version != ''">and version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **set fields example**
+		###########################################
+		<if test="id != null and id != ''">,id=#{id,jdbcType=BIGINT}</if>
+		<if test="cateId != null and cateId != ''">,cate_id=#{cateId,jdbcType=BIGINT}</if>
+		<if test="cateCode != null and cateCode != ''">,cate_code=#{cateCode,jdbcType=VARCHAR}</if>
+		<if test="cateName != null and cateName != ''">,cate_name=#{cateName,jdbcType=VARCHAR}</if>
+		<if test="dataName != null and dataName != ''">,data_name=#{dataName,jdbcType=VARCHAR}</if>
+		<if test="dataLabel != null and dataLabel != ''">,data_label=#{dataLabel,jdbcType=VARCHAR}</if>
+		<if test="dataCode != null and dataCode != ''">,data_code=#{dataCode,jdbcType=VARCHAR}</if>
+		<if test="dataValue != null and dataValue != ''">,data_value=#{dataValue,jdbcType=VARCHAR}</if>
+		<if test="version != null and version != ''">,version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **insert fields example**
+		###########################################
+		<if test="id != null and id != ''">,id</if>
+		<if test="cateId != null and cateId != ''">,cate_id</if>
+		<if test="cateCode != null and cateCode != ''">,cate_code</if>
+		<if test="cateName != null and cateName != ''">,cate_name</if>
+		<if test="dataName != null and dataName != ''">,data_name</if>
+		<if test="dataLabel != null and dataLabel != ''">,data_label</if>
+		<if test="dataCode != null and dataCode != ''">,data_code</if>
+		<if test="dataValue != null and dataValue != ''">,data_value</if>
+		<if test="version != null and version != ''">,version</if>
+		<if test="createTime != null and createTime != ''">,create_time</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time</if>
+		<if test="comment != null and comment != ''">,comment</if>
+		###########################################
+		### **insert values criteria example**
+		###########################################	
+		<if test="id != null and id != ''">,#{id,jdbcType=BIGINT}</if>
+		<if test="cateId != null and cateId != ''">,#{cateId,jdbcType=BIGINT}</if>
+		<if test="cateCode != null and cateCode != ''">,#{cateCode,jdbcType=VARCHAR}</if>
+		<if test="cateName != null and cateName != ''">,#{cateName,jdbcType=VARCHAR}</if>
+		<if test="dataName != null and dataName != ''">,#{dataName,jdbcType=VARCHAR}</if>
+		<if test="dataLabel != null and dataLabel != ''">,#{dataLabel,jdbcType=VARCHAR}</if>
+		<if test="dataCode != null and dataCode != ''">,#{dataCode,jdbcType=VARCHAR}</if>
+		<if test="dataValue != null and dataValue != ''">,#{dataValue,jdbcType=VARCHAR}</if>
+		<if test="version != null and version != ''">,#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **sql example**
+		###########################################	
+	<insert id="save" parameterMap="fieldDataConfig">
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			select LAST_INSERT_ID() as generatedKey   
+		</selectKey>
+	</insert>
+	
+	<update id="updateById" parameterMap="fieldDataConfig">
+		<include refid="fieldDataConfig_update"/>
+		<include refid="fieldDataConfig_update_set"/>
+		<include refid="fieldDataConfig_update_where_id"/>
+	</update>
+
+	<delete id="removeCriteria" parameterMap="fieldDataConfig">
+		<include refid="fieldDataConfig_delete"/>
+		<include refid="fieldDataConfig_update_where"/>
+	</delete>
+	
+	<delete id="removeById" parameterType="java.lang.Long">
+		<include refid="fieldDataConfig_delete"/>
+		<include refid="fieldDataConfig_update_where_id"/>
+	</delete>
+	
+	<select id="listCriteria" resultMap="fieldDataConfig" parameterMap="fieldDataConfig" useCache="true">
+		<include refid="fieldDataConfig_select"/>
+		<include refid="fieldDataConfig_select_fields"/>
+		<include refid="fieldDataConfig_form"/>
+		<include refid="fieldDataConfig_where"/>
+		<include refid="fieldDataConfig_order"/>
+		<include refid="fieldDataConfig_group"/>
+	</select>
+	
+	<select id="getOneById" resultMap="fieldDataConfig" parameterType="java.lang.Long" useCache="true">
+		<include refid="fieldDataConfig_select"/>
+		<include refid="fieldDataConfig_select_fields"/>
+		<include refid="fieldDataConfig_form"/>
+		<include refid="fieldDataConfig_where_id"/>
+	</select>		
+	-->
+</mapper>

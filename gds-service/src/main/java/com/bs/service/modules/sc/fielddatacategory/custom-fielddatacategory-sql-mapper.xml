@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bs.service.modules.sc.fielddatacategory.IFieldDataCategoryDao">
+	<!--
+		<include refid="fieldDataCategory_select"/>
+		<include refid="fieldDataCategory_select_count"/>
+		<include refid="fieldDataCategory_select_distinct"/>
+		<include refid="fieldDataCategory_select_fields"/>
+		<include refid="fieldDataCategory_form"/>
+		<include refid="fieldDataCategory_where"/>
+		<include refid="fieldDataCategory_inner_all"/>
+		<include refid="fieldDataCategory_left_all"/>
+		<include refid="fieldDataCategory_left_fieldDataConfig"/>
+		<include refid="fieldDataCategory_left_viewFieldConfig"/>
+		<include refid="fieldDataCategory_where"/>
+		<include refid="fieldDataCategory_where_id"/>
+		<include refid="fieldDataCategory_where_reference_id"/>
+		<include refid="fieldDataCategory_order"/>
+		<include refid="fieldDataCategory_group"/>
+		<include refid="fieldDataCategory_limit"/>
+		<include refid="fieldDataCategory_update"/>
+		<include refid="fieldDataCategory_update_set"/>
+		<include refid="fieldDataCategory_update_set_null"/>
+		<include refid="fieldDataCategory_insert"/>
+		<include refid="fieldDataCategory_delete"/>
+		###########################################
+		### **where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and _fieldDataCategory.id=#{id,jdbcType=BIGINT}</if>
+		<if test="cateName != null and cateName != ''">and _fieldDataCategory.cate_name=#{cateName,jdbcType=VARCHAR}</if>
+		<if test="cateCode != null and cateCode != ''">and _fieldDataCategory.cate_code=#{cateCode,jdbcType=VARCHAR}</if>
+		<if test="createTime != null and createTime != ''">and _fieldDataCategory.create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and _fieldDataCategory.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		###########################################
+		### **update where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and id=#{id,jdbcType=BIGINT}</if>
+		<if test="cateName != null and cateName != ''">and cate_name=#{cateName,jdbcType=VARCHAR}</if>
+		<if test="cateCode != null and cateCode != ''">and cate_code=#{cateCode,jdbcType=VARCHAR}</if>
+		<if test="createTime != null and createTime != ''">and create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		###########################################
+		### **set fields example**
+		###########################################
+		<if test="id != null and id != ''">,id=#{id,jdbcType=BIGINT}</if>
+		<if test="cateName != null and cateName != ''">,cate_name=#{cateName,jdbcType=VARCHAR}</if>
+		<if test="cateCode != null and cateCode != ''">,cate_code=#{cateCode,jdbcType=VARCHAR}</if>
+		<if test="createTime != null and createTime != ''">,create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		###########################################
+		### **insert fields example**
+		###########################################
+		<if test="id != null and id != ''">,id</if>
+		<if test="cateName != null and cateName != ''">,cate_name</if>
+		<if test="cateCode != null and cateCode != ''">,cate_code</if>
+		<if test="createTime != null and createTime != ''">,create_time</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time</if>
+		###########################################
+		### **insert values criteria example**
+		###########################################	
+		<if test="id != null and id != ''">,#{id,jdbcType=BIGINT}</if>
+		<if test="cateName != null and cateName != ''">,#{cateName,jdbcType=VARCHAR}</if>
+		<if test="cateCode != null and cateCode != ''">,#{cateCode,jdbcType=VARCHAR}</if>
+		<if test="createTime != null and createTime != ''">,#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,#{modifyTime,jdbcType=DATETIME}</if>
+		###########################################
+		### **sql example**
+		###########################################	
+	<insert id="save" parameterMap="fieldDataCategory">
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			select LAST_INSERT_ID() as generatedKey   
+		</selectKey>
+	</insert>
+	
+	<update id="updateById" parameterMap="fieldDataCategory">
+		<include refid="fieldDataCategory_update"/>
+		<include refid="fieldDataCategory_update_set"/>
+		<include refid="fieldDataCategory_update_where_id"/>
+	</update>
+
+	<delete id="removeCriteria" parameterMap="fieldDataCategory">
+		<include refid="fieldDataCategory_delete"/>
+		<include refid="fieldDataCategory_update_where"/>
+	</delete>
+	
+	<delete id="removeById" parameterType="java.lang.Long">
+		<include refid="fieldDataCategory_delete"/>
+		<include refid="fieldDataCategory_update_where_id"/>
+	</delete>
+	
+	<select id="listCriteria" resultMap="fieldDataCategory" parameterMap="fieldDataCategory" useCache="true">
+		<include refid="fieldDataCategory_select"/>
+		<include refid="fieldDataCategory_select_fields"/>
+		<include refid="fieldDataCategory_form"/>
+		<include refid="fieldDataCategory_where"/>
+		<include refid="fieldDataCategory_order"/>
+		<include refid="fieldDataCategory_group"/>
+	</select>
+	
+	<select id="getOneById" resultMap="fieldDataCategory" parameterType="java.lang.Long" useCache="true">
+		<include refid="fieldDataCategory_select"/>
+		<include refid="fieldDataCategory_select_fields"/>
+		<include refid="fieldDataCategory_form"/>
+		<include refid="fieldDataCategory_where_id"/>
+	</select>		
+	-->
+</mapper>

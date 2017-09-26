@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<uc name="用户中心" code="1">
+	<system name="系统管理" code="101">
+		<organization name="机构管理" code="10101">
+			<save name="创建" code="1010101" menu-type="top" model-name="UC_Organization"/>
+			<update name="修改" code="1010102" menu-type="shortcut" model-name="UC_Organization"/>
+			<remove name="删除" code="1010103" wildcard-path="/*" menu-type="shortcut" model-name="UC_Organization"/>
+			<detail name="明细" code="1010104" menu-type="shortcut" model-name="UC_Organization"/>
+			<config name="参数配置" code="1010105" menu-type="shortcut" model-name="UC_Organization"/>
+		</organization>
+		<role name="角色管理" code="10102">
+			<save name="创建" code="1010201" menu-type="top" model-name="UC_Role"/>
+			<update name="修改" code="1010202" menu-type="shortcut" model-name="UC_Role"/>
+			<funcauth name="功能授权" code="1010203" menu-type="shortcut" model-name="UC_Role"/>
+			<remove name="删除" code="1010204" menu-type="shortcut" model-name="UC_Role"/>
+			<disable name="禁用" code="1010205" menu-type="shortcut" model-name="UC_User" />
+		</role>
+		<user name="用户管理" code="10103">
+			<save name="创建" code="1010301" menu-type="top" model-name="UC_User"/>
+			<update name="修改" code="1010302" menu-type="shortcut" model-name="UC_User"/>
+			<disable name="启停" code="1010303" menu-type="shortcut" model-name="UC_User" />
+			<bind name="绑定角色" code="1010304" menu-type="shortcut" model-name="UC_User"/>
+			<resetpwd name="重置密码" code="1010305" menu-type="shortcut" model-name="UC_User" />
+			<org name="管辖机构" code="1010306" menu-type="shortcut" model-name="UC_User" />
+			<remove name="删除" code="1010307" menu-type="shortcut" model-name="UC_User"/>
+		</user>
+		<log name="操作日志" code="10104">
+			<remove name="删除" code="1010401" menu-type="shortcut" model-name="UC_Log"/>
+		</log>
+		<password name="修改密码" code="10105" model-name="UC_User"/>
+	</system>
+	<account name="账户管理" code="102">
+		<orgfund name="资金管理" code="10201">
+			<recharge name="充值" code="1020101" menu-type="shortcut" model-name="CC_Member" />
+			<withdraw name="提现" code="1020102" menu-type="shortcut" model-name="CC_Member" />
+			<tradeflow name="交易流水" code="1020103" menu-type="shortcut" model-name="CC_Member" />
+			<query name="账户查询" code="1020104" menu-type="shortcut" model-name="CC_Member" />
+		</orgfund>
+	</account>
+</uc>

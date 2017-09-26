@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bs.service.modules.uc.roleauthrelation.IRoleAuthRelationDao">
+	<!--
+		<include refid="roleAuthRelation_select"/>
+		<include refid="roleAuthRelation_select_count"/>
+		<include refid="roleAuthRelation_select_distinct"/>
+		<include refid="roleAuthRelation_select_fields"/>
+		<include refid="roleAuthRelation_form"/>
+		<include refid="roleAuthRelation_where"/>
+		<include refid="roleAuthRelation_inner_all"/>
+		<include refid="roleAuthRelation_inner_role"/>
+		<include refid="roleAuthRelation_inner_authorization"/>
+		<include refid="roleAuthRelation_left_all"/>
+		<include refid="roleAuthRelation_where"/>
+		<include refid="roleAuthRelation_where_id"/>
+		<include refid="roleAuthRelation_where_reference_id"/>
+		<include refid="roleAuthRelation_order"/>
+		<include refid="roleAuthRelation_group"/>
+		<include refid="roleAuthRelation_limit"/>
+		<include refid="roleAuthRelation_update"/>
+		<include refid="roleAuthRelation_update_set"/>
+		<include refid="roleAuthRelation_update_set_null"/>
+		<include refid="roleAuthRelation_insert"/>
+		<include refid="roleAuthRelation_delete"/>
+		###########################################
+		### **where criteria example**
+		###########################################
+		<if test="roleId != null and roleId != ''">and _roleAuthRelation.role_id=#{roleId,jdbcType=BIGINT}</if>
+		<if test="authId != null and authId != ''">and _roleAuthRelation.auth_id=#{authId,jdbcType=BIGINT}</if>
+		###########################################
+		### **update where criteria example**
+		###########################################
+		<if test="roleId != null and roleId != ''">and role_id=#{roleId,jdbcType=BIGINT}</if>
+		<if test="authId != null and authId != ''">and auth_id=#{authId,jdbcType=BIGINT}</if>
+		###########################################
+		### **set fields example**
+		###########################################
+		<if test="roleId != null and roleId != ''">,role_id=#{roleId,jdbcType=BIGINT}</if>
+		<if test="authId != null and authId != ''">,auth_id=#{authId,jdbcType=BIGINT}</if>
+		###########################################
+		### **insert fields example**
+		###########################################
+		<if test="roleId != null and roleId != ''">,role_id</if>
+		<if test="authId != null and authId != ''">,auth_id</if>
+		###########################################
+		### **insert values criteria example**
+		###########################################	
+		<if test="roleId != null and roleId != ''">,#{roleId,jdbcType=BIGINT}</if>
+		<if test="authId != null and authId != ''">,#{authId,jdbcType=BIGINT}</if>
+		###########################################
+		### **sql example**
+		###########################################	
+	<insert id="save" parameterMap="roleAuthRelation">
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			select LAST_INSERT_ID() as generatedKey   
+		</selectKey>
+	</insert>
+	
+
+	<delete id="removeCriteria" parameterMap="roleAuthRelation">
+		<include refid="roleAuthRelation_delete"/>
+		<include refid="roleAuthRelation_update_where"/>
+	</delete>
+	
+	
+	<select id="listCriteria" resultMap="roleAuthRelation" parameterMap="roleAuthRelation" useCache="true">
+		<include refid="roleAuthRelation_select"/>
+		<include refid="roleAuthRelation_select_fields"/>
+		<include refid="roleAuthRelation_form"/>
+		<include refid="roleAuthRelation_where"/>
+		<include refid="roleAuthRelation_order"/>
+		<include refid="roleAuthRelation_group"/>
+	</select>
+	
+	-->
+</mapper>

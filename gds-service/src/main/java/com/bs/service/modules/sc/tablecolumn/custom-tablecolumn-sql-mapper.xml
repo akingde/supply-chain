@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bs.service.modules.sc.tablecolumn.ITableColumnDao">
+	<!--
+		<include refid="tableColumn_select"/>
+		<include refid="tableColumn_select_count"/>
+		<include refid="tableColumn_select_distinct"/>
+		<include refid="tableColumn_select_fields"/>
+		<include refid="tableColumn_form"/>
+		<include refid="tableColumn_where"/>
+		<include refid="tableColumn_inner_all"/>
+		<include refid="tableColumn_inner_table"/>
+		<include refid="tableColumn_left_all"/>
+		<include refid="tableColumn_left_tableIndex"/>
+		<include refid="tableColumn_left_viewFieldConfig"/>
+		<include refid="tableColumn_where"/>
+		<include refid="tableColumn_where_id"/>
+		<include refid="tableColumn_where_reference_id"/>
+		<include refid="tableColumn_order"/>
+		<include refid="tableColumn_group"/>
+		<include refid="tableColumn_limit"/>
+		<include refid="tableColumn_update"/>
+		<include refid="tableColumn_update_set"/>
+		<include refid="tableColumn_update_set_null"/>
+		<include refid="tableColumn_insert"/>
+		<include refid="tableColumn_delete"/>
+		###########################################
+		### **where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and _tableColumn.id=#{id,jdbcType=BIGINT}</if>
+		<if test="tableId != null and tableId != ''">and _tableColumn.table_id=#{tableId,jdbcType=BIGINT}</if>
+		<if test="objectId != null and objectId != ''">and _tableColumn.object_id=#{objectId,jdbcType=VARCHAR}</if>
+		<if test="code != null and code != ''">and _tableColumn.code=#{code,jdbcType=VARCHAR}</if>
+		<if test="name != null and name != ''">and _tableColumn.name=#{name,jdbcType=VARCHAR}</if>
+		<if test="showName != null and showName != ''">and _tableColumn.show_name=#{showName,jdbcType=VARCHAR}</if>
+		<if test="defaultValue != null and defaultValue != ''">and _tableColumn.default_value=#{defaultValue,jdbcType=VARCHAR}</if>
+		<if test="dataType != null and dataType != ''">and _tableColumn.data_type=#{dataType,jdbcType=VARCHAR}</if>
+		<if test="length != null and length != ''">and _tableColumn.length=#{length,jdbcType=SMALLINT}</if>
+		<if test="creationDate != null and creationDate != ''">and _tableColumn.creation_date=#{creationDate,jdbcType=BIGINT}</if>
+		<if test="modificationDate != null and modificationDate != ''">and _tableColumn.modification_date=#{modificationDate,jdbcType=BIGINT}</if>
+		<if test="version != null and version != ''">and _tableColumn.version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and _tableColumn.create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and _tableColumn.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and _tableColumn.comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **update where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and id=#{id,jdbcType=BIGINT}</if>
+		<if test="tableId != null and tableId != ''">and table_id=#{tableId,jdbcType=BIGINT}</if>
+		<if test="objectId != null and objectId != ''">and object_id=#{objectId,jdbcType=VARCHAR}</if>
+		<if test="code != null and code != ''">and code=#{code,jdbcType=VARCHAR}</if>
+		<if test="name != null and name != ''">and name=#{name,jdbcType=VARCHAR}</if>
+		<if test="showName != null and showName != ''">and show_name=#{showName,jdbcType=VARCHAR}</if>
+		<if test="defaultValue != null and defaultValue != ''">and default_value=#{defaultValue,jdbcType=VARCHAR}</if>
+		<if test="dataType != null and dataType != ''">and data_type=#{dataType,jdbcType=VARCHAR}</if>
+		<if test="length != null and length != ''">and length=#{length,jdbcType=SMALLINT}</if>
+		<if test="creationDate != null and creationDate != ''">and creation_date=#{creationDate,jdbcType=BIGINT}</if>
+		<if test="modificationDate != null and modificationDate != ''">and modification_date=#{modificationDate,jdbcType=BIGINT}</if>
+		<if test="version != null and version != ''">and version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **set fields example**
+		###########################################
+		<if test="id != null and id != ''">,id=#{id,jdbcType=BIGINT}</if>
+		<if test="tableId != null and tableId != ''">,table_id=#{tableId,jdbcType=BIGINT}</if>
+		<if test="objectId != null and objectId != ''">,object_id=#{objectId,jdbcType=VARCHAR}</if>
+		<if test="code != null and code != ''">,code=#{code,jdbcType=VARCHAR}</if>
+		<if test="name != null and name != ''">,name=#{name,jdbcType=VARCHAR}</if>
+		<if test="showName != null and showName != ''">,show_name=#{showName,jdbcType=VARCHAR}</if>
+		<if test="defaultValue != null and defaultValue != ''">,default_value=#{defaultValue,jdbcType=VARCHAR}</if>
+		<if test="dataType != null and dataType != ''">,data_type=#{dataType,jdbcType=VARCHAR}</if>
+		<if test="length != null and length != ''">,length=#{length,jdbcType=SMALLINT}</if>
+		<if test="creationDate != null and creationDate != ''">,creation_date=#{creationDate,jdbcType=BIGINT}</if>
+		<if test="modificationDate != null and modificationDate != ''">,modification_date=#{modificationDate,jdbcType=BIGINT}</if>
+		<if test="version != null and version != ''">,version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **insert fields example**
+		###########################################
+		<if test="id != null and id != ''">,id</if>
+		<if test="tableId != null and tableId != ''">,table_id</if>
+		<if test="objectId != null and objectId != ''">,object_id</if>
+		<if test="code != null and code != ''">,code</if>
+		<if test="name != null and name != ''">,name</if>
+		<if test="showName != null and showName != ''">,show_name</if>
+		<if test="defaultValue != null and defaultValue != ''">,default_value</if>
+		<if test="dataType != null and dataType != ''">,data_type</if>
+		<if test="length != null and length != ''">,length</if>
+		<if test="creationDate != null and creationDate != ''">,creation_date</if>
+		<if test="modificationDate != null and modificationDate != ''">,modification_date</if>
+		<if test="version != null and version != ''">,version</if>
+		<if test="createTime != null and createTime != ''">,create_time</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time</if>
+		<if test="comment != null and comment != ''">,comment</if>
+		###########################################
+		### **insert values criteria example**
+		###########################################	
+		<if test="id != null and id != ''">,#{id,jdbcType=BIGINT}</if>
+		<if test="tableId != null and tableId != ''">,#{tableId,jdbcType=BIGINT}</if>
+		<if test="objectId != null and objectId != ''">,#{objectId,jdbcType=VARCHAR}</if>
+		<if test="code != null and code != ''">,#{code,jdbcType=VARCHAR}</if>
+		<if test="name != null and name != ''">,#{name,jdbcType=VARCHAR}</if>
+		<if test="showName != null and showName != ''">,#{showName,jdbcType=VARCHAR}</if>
+		<if test="defaultValue != null and defaultValue != ''">,#{defaultValue,jdbcType=VARCHAR}</if>
+		<if test="dataType != null and dataType != ''">,#{dataType,jdbcType=VARCHAR}</if>
+		<if test="length != null and length != ''">,#{length,jdbcType=SMALLINT}</if>
+		<if test="creationDate != null and creationDate != ''">,#{creationDate,jdbcType=BIGINT}</if>
+		<if test="modificationDate != null and modificationDate != ''">,#{modificationDate,jdbcType=BIGINT}</if>
+		<if test="version != null and version != ''">,#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **sql example**
+		###########################################	
+	<insert id="save" parameterMap="tableColumn">
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			select LAST_INSERT_ID() as generatedKey   
+		</selectKey>
+	</insert>
+	
+	<update id="updateById" parameterMap="tableColumn">
+		<include refid="tableColumn_update"/>
+		<include refid="tableColumn_update_set"/>
+		<include refid="tableColumn_update_where_id"/>
+	</update>
+
+	<delete id="removeCriteria" parameterMap="tableColumn">
+		<include refid="tableColumn_delete"/>
+		<include refid="tableColumn_update_where"/>
+	</delete>
+	
+	<delete id="removeById" parameterType="java.lang.Long">
+		<include refid="tableColumn_delete"/>
+		<include refid="tableColumn_update_where_id"/>
+	</delete>
+	
+	<select id="listCriteria" resultMap="tableColumn" parameterMap="tableColumn" useCache="true">
+		<include refid="tableColumn_select"/>
+		<include refid="tableColumn_select_fields"/>
+		<include refid="tableColumn_form"/>
+		<include refid="tableColumn_where"/>
+		<include refid="tableColumn_order"/>
+		<include refid="tableColumn_group"/>
+	</select>
+	
+	<select id="getOneById" resultMap="tableColumn" parameterType="java.lang.Long" useCache="true">
+		<include refid="tableColumn_select"/>
+		<include refid="tableColumn_select_fields"/>
+		<include refid="tableColumn_form"/>
+		<include refid="tableColumn_where_id"/>
+	</select>		
+	-->
+</mapper>

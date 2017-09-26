@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bs.service.modules.sc.area.IAreaDao">
+	<!--
+		<include refid="area_select"/>
+		<include refid="area_select_count"/>
+		<include refid="area_select_distinct"/>
+		<include refid="area_select_fields"/>
+		<include refid="area_form"/>
+		<include refid="area_where"/>
+		<include refid="area_inner_all"/>
+		<include refid="area_left_all"/>
+		<include refid="area_where"/>
+		<include refid="area_where_id"/>
+		<include refid="area_where_reference_id"/>
+		<include refid="area_order"/>
+		<include refid="area_group"/>
+		<include refid="area_limit"/>
+		<include refid="area_update"/>
+		<include refid="area_update_set"/>
+		<include refid="area_update_set_null"/>
+		<include refid="area_insert"/>
+		<include refid="area_delete"/>
+		###########################################
+		### **where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and _area.id=#{id,jdbcType=BIGINT}</if>
+		<if test="parentCode != null and parentCode != ''">and _area.parent_code=#{parentCode,jdbcType=VARCHAR}</if>
+		<if test="code != null and code != ''">and _area.code=#{code,jdbcType=VARCHAR}</if>
+		<if test="name != null and name != ''">and _area.name=#{name,jdbcType=VARCHAR}</if>
+		<if test="spelling != null and spelling != ''">and _area.spelling=#{spelling,jdbcType=VARCHAR}</if>
+		<if test="treeLevel != null and treeLevel != ''">and _area.tree_level=#{treeLevel,jdbcType=SMALLINT}</if>
+		<if test="treePath != null and treePath != ''">and _area.tree_path=#{treePath,jdbcType=VARCHAR}</if>
+		<if test="isChildNode != null and isChildNode != ''">and _area.is_child_node=#{isChildNode,jdbcType=TINYINT}</if>
+		<if test="areaType != null and areaType != ''">and _area.area_type=#{areaType,jdbcType=TINYINT}</if>
+		<if test="isDelete != null and isDelete != ''">and _area.is_delete=#{isDelete,jdbcType=TINYINT}</if>
+		<if test="version != null and version != ''">and _area.version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and _area.create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and _area.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and _area.comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **update where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and id=#{id,jdbcType=BIGINT}</if>
+		<if test="parentCode != null and parentCode != ''">and parent_code=#{parentCode,jdbcType=VARCHAR}</if>
+		<if test="code != null and code != ''">and code=#{code,jdbcType=VARCHAR}</if>
+		<if test="name != null and name != ''">and name=#{name,jdbcType=VARCHAR}</if>
+		<if test="spelling != null and spelling != ''">and spelling=#{spelling,jdbcType=VARCHAR}</if>
+		<if test="treeLevel != null and treeLevel != ''">and tree_level=#{treeLevel,jdbcType=SMALLINT}</if>
+		<if test="treePath != null and treePath != ''">and tree_path=#{treePath,jdbcType=VARCHAR}</if>
+		<if test="isChildNode != null and isChildNode != ''">and is_child_node=#{isChildNode,jdbcType=TINYINT}</if>
+		<if test="areaType != null and areaType != ''">and area_type=#{areaType,jdbcType=TINYINT}</if>
+		<if test="isDelete != null and isDelete != ''">and is_delete=#{isDelete,jdbcType=TINYINT}</if>
+		<if test="version != null and version != ''">and version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **set fields example**
+		###########################################
+		<if test="id != null and id != ''">,id=#{id,jdbcType=BIGINT}</if>
+		<if test="parentCode != null and parentCode != ''">,parent_code=#{parentCode,jdbcType=VARCHAR}</if>
+		<if test="code != null and code != ''">,code=#{code,jdbcType=VARCHAR}</if>
+		<if test="name != null and name != ''">,name=#{name,jdbcType=VARCHAR}</if>
+		<if test="spelling != null and spelling != ''">,spelling=#{spelling,jdbcType=VARCHAR}</if>
+		<if test="treeLevel != null and treeLevel != ''">,tree_level=#{treeLevel,jdbcType=SMALLINT}</if>
+		<if test="treePath != null and treePath != ''">,tree_path=#{treePath,jdbcType=VARCHAR}</if>
+		<if test="isChildNode != null and isChildNode != ''">,is_child_node=#{isChildNode,jdbcType=TINYINT}</if>
+		<if test="areaType != null and areaType != ''">,area_type=#{areaType,jdbcType=TINYINT}</if>
+		<if test="isDelete != null and isDelete != ''">,is_delete=#{isDelete,jdbcType=TINYINT}</if>
+		<if test="version != null and version != ''">,version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **insert fields example**
+		###########################################
+		<if test="id != null and id != ''">,id</if>
+		<if test="parentCode != null and parentCode != ''">,parent_code</if>
+		<if test="code != null and code != ''">,code</if>
+		<if test="name != null and name != ''">,name</if>
+		<if test="spelling != null and spelling != ''">,spelling</if>
+		<if test="treeLevel != null and treeLevel != ''">,tree_level</if>
+		<if test="treePath != null and treePath != ''">,tree_path</if>
+		<if test="isChildNode != null and isChildNode != ''">,is_child_node</if>
+		<if test="areaType != null and areaType != ''">,area_type</if>
+		<if test="isDelete != null and isDelete != ''">,is_delete</if>
+		<if test="version != null and version != ''">,version</if>
+		<if test="createTime != null and createTime != ''">,create_time</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time</if>
+		<if test="comment != null and comment != ''">,comment</if>
+		###########################################
+		### **insert values criteria example**
+		###########################################	
+		<if test="id != null and id != ''">,#{id,jdbcType=BIGINT}</if>
+		<if test="parentCode != null and parentCode != ''">,#{parentCode,jdbcType=VARCHAR}</if>
+		<if test="code != null and code != ''">,#{code,jdbcType=VARCHAR}</if>
+		<if test="name != null and name != ''">,#{name,jdbcType=VARCHAR}</if>
+		<if test="spelling != null and spelling != ''">,#{spelling,jdbcType=VARCHAR}</if>
+		<if test="treeLevel != null and treeLevel != ''">,#{treeLevel,jdbcType=SMALLINT}</if>
+		<if test="treePath != null and treePath != ''">,#{treePath,jdbcType=VARCHAR}</if>
+		<if test="isChildNode != null and isChildNode != ''">,#{isChildNode,jdbcType=TINYINT}</if>
+		<if test="areaType != null and areaType != ''">,#{areaType,jdbcType=TINYINT}</if>
+		<if test="isDelete != null and isDelete != ''">,#{isDelete,jdbcType=TINYINT}</if>
+		<if test="version != null and version != ''">,#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **sql example**
+		###########################################	
+	<insert id="save" parameterMap="area">
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			select LAST_INSERT_ID() as generatedKey   
+		</selectKey>
+	</insert>
+	
+	<update id="updateById" parameterMap="area">
+		<include refid="area_update"/>
+		<include refid="area_update_set"/>
+		<include refid="area_update_where_id"/>
+	</update>
+
+	<delete id="removeCriteria" parameterMap="area">
+		<include refid="area_delete"/>
+		<include refid="area_update_where"/>
+	</delete>
+	
+	<delete id="removeById" parameterType="java.lang.Long">
+		<include refid="area_delete"/>
+		<include refid="area_update_where_id"/>
+	</delete>
+	
+	<select id="listCriteria" resultMap="area" parameterMap="area" useCache="true">
+		<include refid="area_select"/>
+		<include refid="area_select_fields"/>
+		<include refid="area_form"/>
+		<include refid="area_where"/>
+		<include refid="area_order"/>
+		<include refid="area_group"/>
+	</select>
+	
+	<select id="getOneById" resultMap="area" parameterType="java.lang.Long" useCache="true">
+		<include refid="area_select"/>
+		<include refid="area_select_fields"/>
+		<include refid="area_form"/>
+		<include refid="area_where_id"/>
+	</select>		
+	-->
+</mapper>

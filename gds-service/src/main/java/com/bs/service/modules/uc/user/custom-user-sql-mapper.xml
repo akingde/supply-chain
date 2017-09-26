@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bs.service.modules.uc.user.IUserDao">
+	<!--
+		<include refid="user_select"/>
+		<include refid="user_select_count"/>
+		<include refid="user_select_distinct"/>
+		<include refid="user_select_fields"/>
+		<include refid="user_form"/>
+		<include refid="user_where"/>
+		<include refid="user_inner_all"/>
+		<include refid="user_inner_organization"/>
+		<include refid="user_left_all"/>
+		<include refid="user_left_userRoleRelation"/>
+		<include refid="user_where"/>
+		<include refid="user_where_id"/>
+		<include refid="user_where_reference_id"/>
+		<include refid="user_order"/>
+		<include refid="user_group"/>
+		<include refid="user_limit"/>
+		<include refid="user_update"/>
+		<include refid="user_update_set"/>
+		<include refid="user_update_set_null"/>
+		<include refid="user_insert"/>
+		<include refid="user_delete"/>
+		###########################################
+		### **where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and _user.id=#{id,jdbcType=BIGINT}</if>
+		<if test="orgId != null and orgId != ''">and _user.org_id=#{orgId,jdbcType=BIGINT}</if>
+		<if test="orgIds != null and orgIds != ''">and _user.org_ids=#{orgIds,jdbcType=VARCHAR}</if>
+		<if test="account != null and account != ''">and _user.account=#{account,jdbcType=VARCHAR}</if>
+		<if test="password != null and password != ''">and _user.password=#{password,jdbcType=VARCHAR}</if>
+		<if test="orgName != null and orgName != ''">and _user.org_name=#{orgName,jdbcType=VARCHAR}</if>
+		<if test="orgCode != null and orgCode != ''">and _user.org_code=#{orgCode,jdbcType=VARCHAR}</if>
+		<if test="userType != null and userType != ''">and _user.user_type=#{userType,jdbcType=TINYINT}</if>
+		<if test="isAdmin != null and isAdmin != ''">and _user.is_admin=#{isAdmin,jdbcType=TINYINT}</if>
+		<if test="isPosition != null and isPosition != ''">and _user.is_position=#{isPosition,jdbcType=TINYINT}</if>
+		<if test="name != null and name != ''">and _user.name=#{name,jdbcType=VARCHAR}</if>
+		<if test="mobilePhone != null and mobilePhone != ''">and _user.mobile_phone=#{mobilePhone,jdbcType=VARCHAR}</if>
+		<if test="email != null and email != ''">and _user.email=#{email,jdbcType=VARCHAR}</if>
+		<if test="officePhone != null and officePhone != ''">and _user.office_phone=#{officePhone,jdbcType=VARCHAR}</if>
+		<if test="gender != null and gender != ''">and _user.gender=#{gender,jdbcType=TINYINT}</if>
+		<if test="birthday != null and birthday != ''">and _user.birthday=#{birthday,jdbcType=DATETIME}</if>
+		<if test="head != null and head != ''">and _user.head=#{head,jdbcType=VARCHAR}</if>
+		<if test="signature != null and signature != ''">and _user.signature=#{signature,jdbcType=VARCHAR}</if>
+		<if test="userStatus != null and userStatus != ''">and _user.user_status=#{userStatus,jdbcType=TINYINT}</if>
+		<if test="version != null and version != ''">and _user.version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and _user.create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and _user.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and _user.comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **update where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and id=#{id,jdbcType=BIGINT}</if>
+		<if test="orgId != null and orgId != ''">and org_id=#{orgId,jdbcType=BIGINT}</if>
+		<if test="orgIds != null and orgIds != ''">and org_ids=#{orgIds,jdbcType=VARCHAR}</if>
+		<if test="account != null and account != ''">and account=#{account,jdbcType=VARCHAR}</if>
+		<if test="password != null and password != ''">and password=#{password,jdbcType=VARCHAR}</if>
+		<if test="orgName != null and orgName != ''">and org_name=#{orgName,jdbcType=VARCHAR}</if>
+		<if test="orgCode != null and orgCode != ''">and org_code=#{orgCode,jdbcType=VARCHAR}</if>
+		<if test="userType != null and userType != ''">and user_type=#{userType,jdbcType=TINYINT}</if>
+		<if test="isAdmin != null and isAdmin != ''">and is_admin=#{isAdmin,jdbcType=TINYINT}</if>
+		<if test="isPosition != null and isPosition != ''">and is_position=#{isPosition,jdbcType=TINYINT}</if>
+		<if test="name != null and name != ''">and name=#{name,jdbcType=VARCHAR}</if>
+		<if test="mobilePhone != null and mobilePhone != ''">and mobile_phone=#{mobilePhone,jdbcType=VARCHAR}</if>
+		<if test="email != null and email != ''">and email=#{email,jdbcType=VARCHAR}</if>
+		<if test="officePhone != null and officePhone != ''">and office_phone=#{officePhone,jdbcType=VARCHAR}</if>
+		<if test="gender != null and gender != ''">and gender=#{gender,jdbcType=TINYINT}</if>
+		<if test="birthday != null and birthday != ''">and birthday=#{birthday,jdbcType=DATETIME}</if>
+		<if test="head != null and head != ''">and head=#{head,jdbcType=VARCHAR}</if>
+		<if test="signature != null and signature != ''">and signature=#{signature,jdbcType=VARCHAR}</if>
+		<if test="userStatus != null and userStatus != ''">and user_status=#{userStatus,jdbcType=TINYINT}</if>
+		<if test="version != null and version != ''">and version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **set fields example**
+		###########################################
+		<if test="id != null and id != ''">,id=#{id,jdbcType=BIGINT}</if>
+		<if test="orgId != null and orgId != ''">,org_id=#{orgId,jdbcType=BIGINT}</if>
+		<if test="orgIds != null and orgIds != ''">,org_ids=#{orgIds,jdbcType=VARCHAR}</if>
+		<if test="account != null and account != ''">,account=#{account,jdbcType=VARCHAR}</if>
+		<if test="password != null and password != ''">,password=#{password,jdbcType=VARCHAR}</if>
+		<if test="orgName != null and orgName != ''">,org_name=#{orgName,jdbcType=VARCHAR}</if>
+		<if test="orgCode != null and orgCode != ''">,org_code=#{orgCode,jdbcType=VARCHAR}</if>
+		<if test="userType != null and userType != ''">,user_type=#{userType,jdbcType=TINYINT}</if>
+		<if test="isAdmin != null and isAdmin != ''">,is_admin=#{isAdmin,jdbcType=TINYINT}</if>
+		<if test="isPosition != null and isPosition != ''">,is_position=#{isPosition,jdbcType=TINYINT}</if>
+		<if test="name != null and name != ''">,name=#{name,jdbcType=VARCHAR}</if>
+		<if test="mobilePhone != null and mobilePhone != ''">,mobile_phone=#{mobilePhone,jdbcType=VARCHAR}</if>
+		<if test="email != null and email != ''">,email=#{email,jdbcType=VARCHAR}</if>
+		<if test="officePhone != null and officePhone != ''">,office_phone=#{officePhone,jdbcType=VARCHAR}</if>
+		<if test="gender != null and gender != ''">,gender=#{gender,jdbcType=TINYINT}</if>
+		<if test="birthday != null and birthday != ''">,birthday=#{birthday,jdbcType=DATETIME}</if>
+		<if test="head != null and head != ''">,head=#{head,jdbcType=VARCHAR}</if>
+		<if test="signature != null and signature != ''">,signature=#{signature,jdbcType=VARCHAR}</if>
+		<if test="userStatus != null and userStatus != ''">,user_status=#{userStatus,jdbcType=TINYINT}</if>
+		<if test="version != null and version != ''">,version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **insert fields example**
+		###########################################
+		<if test="id != null and id != ''">,id</if>
+		<if test="orgId != null and orgId != ''">,org_id</if>
+		<if test="orgIds != null and orgIds != ''">,org_ids</if>
+		<if test="account != null and account != ''">,account</if>
+		<if test="password != null and password != ''">,password</if>
+		<if test="orgName != null and orgName != ''">,org_name</if>
+		<if test="orgCode != null and orgCode != ''">,org_code</if>
+		<if test="userType != null and userType != ''">,user_type</if>
+		<if test="isAdmin != null and isAdmin != ''">,is_admin</if>
+		<if test="isPosition != null and isPosition != ''">,is_position</if>
+		<if test="name != null and name != ''">,name</if>
+		<if test="mobilePhone != null and mobilePhone != ''">,mobile_phone</if>
+		<if test="email != null and email != ''">,email</if>
+		<if test="officePhone != null and officePhone != ''">,office_phone</if>
+		<if test="gender != null and gender != ''">,gender</if>
+		<if test="birthday != null and birthday != ''">,birthday</if>
+		<if test="head != null and head != ''">,head</if>
+		<if test="signature != null and signature != ''">,signature</if>
+		<if test="userStatus != null and userStatus != ''">,user_status</if>
+		<if test="version != null and version != ''">,version</if>
+		<if test="createTime != null and createTime != ''">,create_time</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time</if>
+		<if test="comment != null and comment != ''">,comment</if>
+		###########################################
+		### **insert values criteria example**
+		###########################################	
+		<if test="id != null and id != ''">,#{id,jdbcType=BIGINT}</if>
+		<if test="orgId != null and orgId != ''">,#{orgId,jdbcType=BIGINT}</if>
+		<if test="orgIds != null and orgIds != ''">,#{orgIds,jdbcType=VARCHAR}</if>
+		<if test="account != null and account != ''">,#{account,jdbcType=VARCHAR}</if>
+		<if test="password != null and password != ''">,#{password,jdbcType=VARCHAR}</if>
+		<if test="orgName != null and orgName != ''">,#{orgName,jdbcType=VARCHAR}</if>
+		<if test="orgCode != null and orgCode != ''">,#{orgCode,jdbcType=VARCHAR}</if>
+		<if test="userType != null and userType != ''">,#{userType,jdbcType=TINYINT}</if>
+		<if test="isAdmin != null and isAdmin != ''">,#{isAdmin,jdbcType=TINYINT}</if>
+		<if test="isPosition != null and isPosition != ''">,#{isPosition,jdbcType=TINYINT}</if>
+		<if test="name != null and name != ''">,#{name,jdbcType=VARCHAR}</if>
+		<if test="mobilePhone != null and mobilePhone != ''">,#{mobilePhone,jdbcType=VARCHAR}</if>
+		<if test="email != null and email != ''">,#{email,jdbcType=VARCHAR}</if>
+		<if test="officePhone != null and officePhone != ''">,#{officePhone,jdbcType=VARCHAR}</if>
+		<if test="gender != null and gender != ''">,#{gender,jdbcType=TINYINT}</if>
+		<if test="birthday != null and birthday != ''">,#{birthday,jdbcType=DATETIME}</if>
+		<if test="head != null and head != ''">,#{head,jdbcType=VARCHAR}</if>
+		<if test="signature != null and signature != ''">,#{signature,jdbcType=VARCHAR}</if>
+		<if test="userStatus != null and userStatus != ''">,#{userStatus,jdbcType=TINYINT}</if>
+		<if test="version != null and version != ''">,#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **sql example**
+		###########################################	
+	<insert id="save" parameterMap="user">
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			select LAST_INSERT_ID() as generatedKey   
+		</selectKey>
+	</insert>
+	
+	<update id="updateById" parameterMap="user">
+		<include refid="user_update"/>
+		<include refid="user_update_set"/>
+		<include refid="user_update_where_id"/>
+	</update>
+
+	<delete id="removeCriteria" parameterMap="user">
+		<include refid="user_delete"/>
+		<include refid="user_update_where"/>
+	</delete>
+	
+	<delete id="removeById" parameterType="java.lang.Long">
+		<include refid="user_delete"/>
+		<include refid="user_update_where_id"/>
+	</delete>
+	
+	<select id="listCriteria" resultMap="user" parameterMap="user" useCache="true">
+		<include refid="user_select"/>
+		<include refid="user_select_fields"/>
+		<include refid="user_form"/>
+		<include refid="user_where"/>
+		<include refid="user_order"/>
+		<include refid="user_group"/>
+	</select>
+	
+	<select id="getOneById" resultMap="user" parameterType="java.lang.Long" useCache="true">
+		<include refid="user_select"/>
+		<include refid="user_select_fields"/>
+		<include refid="user_form"/>
+		<include refid="user_where_id"/>
+	</select>		
+	-->
+	
+	<select id="getOneByAccount" resultMap="user" parameterType="java.lang.String" useCache="true">
+		<include refid="user_select"/>
+		<include refid="user_select_fields"/>
+		<include refid="user_form"/>
+		where _user.account=#{account,jdbcType=VARCHAR}
+	</select>	
+</mapper>

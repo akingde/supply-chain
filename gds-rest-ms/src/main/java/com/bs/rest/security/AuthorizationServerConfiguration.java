@@ -1,0 +1,70 @@
+package com.bs.rest.security;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+
+import com.bs.rest.config.SecurityConfig;
+
+
+@Configuration
+@EnableAuthorizationServer
+public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
+
+//	private static String REALM = "MY_OAUTH_REALM";
+	
+	@Autowired
+	private SecurityConfig securityConfig;
+	
+	@Autowired
+	private TokenStore tokenStore;
+
+	@Autowired
+	private UserApprovalHandler userApprovalHandler;
+
+	@Autowired
+	@Qualifier("authenticationManagerBean")
+	private AuthenticationManager authenticationManager;
+
+	@Override
+	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+		//客户端ID
+		String clientId = securityConfig.getClientId();
+		String resourceId = securityConfig.getResourceId();
+		//密码
+		String secret = securityConfig.getSecret();
+		//token有效期
+		Integer accessTokenSeconds = securityConfig.getAccessTokenSeconds();
+		//刷新token有效期
+		Integer refreshTokenSeconds = securityConfig.getRefreshTokenSeconds();
+		clients.inMemory()
+	        .withClient(clientId)
+	        .resourceIds(resourceId)
+            .authorizedGrantTypes(SecurityConfig.PASSWORD, SecurityConfig.AUTHORIZATION_CODE, SecurityConfig.REFRESH_TOKEN, SecurityConfig.IMPLICIT)
+            .authorities(SecurityConfig.ROLE_CLIENT,SecurityConfig.ROLE_TRUSTED_CLIENT)
+            .scopes(SecurityConfig.READ, SecurityConfig.WRITE, SecurityConfig.TRUST)//授权用户的操作权限
+            .secret(secret)
+            .accessTokenValiditySeconds(accessTokenSeconds)
+            .refreshTokenValiditySeconds(refreshTokenSeconds);
+	}
+
+	@Override
+	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+		endpoints.tokenStore(tokenStore).userApprovalHandler(userApprovalHandler)
+				.authenticationManager(authenticationManager);
+	}
+
+	@Override
+	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+//		oauthServer.realm(REALM + "/client");
+	}
+
+}

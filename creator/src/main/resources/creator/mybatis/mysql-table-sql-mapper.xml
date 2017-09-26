@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="table">
+	<parameterMap id="tableParam" type="com.bubi.creator.entity.PdmTable" />
+	<!-- 用户结果集 -->
+	<resultMap id="tableResult" type="com.bubi.creator.entity.PdmTable">
+		<id property="id" column="id" javaType="java.lang.Long" />
+		<result property="objectId" column="object_id" />
+		<result property="code" column="code" />
+		<result property="name" column="name" />
+		<result property="type" column="type" />
+		<result property="creationDate" column="creation_date" />
+		<result property="modificationDate" column="modification_date" />
+		<result property="comment" column="comment" />
+	</resultMap>
+	
+	<select id="select_all" resultMap="tableResult" parameterMap="tableParam">
+		select * from sc_table
+	</select>
+	
+	<select id="select_one_by_id"  resultMap="tableResult" parameterMap="tableParam">
+		select * from sc_table where id=${id}
+	</select>
+	
+	<select id="select_one_by_objid"  resultMap="tableResult" parameterMap="tableParam">
+		select * from sc_table where object_id=#{objectId}
+	</select>
+	
+	<select id="select_data" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select * from ${table}
+	</select>
+	
+	<update id="update" parameterMap="tableParam">
+		update sc_table
+		<set>
+			<trim prefixOverrides=",">
+				<if test="objectId != null and objectId != ''">,object_id = #{objectId}</if>
+				<if test="originalCode != null and originalCode != ''">,code = #{originalCode}</if>
+				<if test="name != null and name != ''">,name = #{name}</if>
+				<if test="creationDate != null">,creation_date=${creationDate}</if>
+				<if test="modificationDate != null">,modification_date = ${modificationDate}</if>
+				<if test="modifyTime != null">,modify_time = #{modifTime}</if>
+				<if test="comment != null and comment != ''">,comment = #{comment}</if>
+			</trim>
+		</set>
+		<where>
+			<if test="id != null and id != ''">
+				and id=${id}
+			</if>
+		</where>	
+	</update>
+	
+	<update id="update_by_code" parameterMap="tableParam">
+		update sc_table
+		<set>
+			<trim prefixOverrides=",">
+				<if test="objectId != null and objectId != ''">,object_id = #{objectId}</if>
+				<if test="originalCode != null and originalCode != ''">,code = #{originalCode}</if>
+				<if test="name != null and name != ''">,name = #{name}</if>
+				<if test="creationDate != null">,creation_date=${creationDate}</if>
+				<if test="modificationDate != null">,modification_date = ${modificationDate}</if>
+				<if test="comment != null and comment != ''">,comment = #{comment}</if>
+			</trim>
+		</set>
+		<where>
+			<if test="code != null and code != ''">
+				and code=${code}
+			</if>
+		</where>	
+	</update>
+	
+	<insert id="insert" parameterMap="tableParam">
+		insert into sc_table
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="objectId != null and objectId != ''">,object_id</if>
+			<if test="originalCode != null and originalCode != ''">,code</if>
+			<if test="name != null and name != ''">,name</if>
+			<if test="creationDate != null">,creation_date</if>
+			<if test="modificationDate != null">,modification_date</if>
+			<if test="comment != null and comment != ''">,comment</if>
+		</trim>
+		values
+		<trim prefix="(" prefixOverrides="," suffix=")">
+			<if test="objectId != null and objectId != ''">,#{objectId}</if>
+			<if test="originalCode != null and originalCode != ''">,#{originalCode}</if>
+			<if test="name != null and name != ''">,#{name}</if>
+		    <if test="creationDate != null">,${creationDate}</if>
+			<if test="modificationDate != null">,${modificationDate}</if>
+			<if test="comment != null and comment != ''">,#{comment}</if>
+		</trim>
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			  select LAST_INSERT_ID() as generatedKey   
+		</selectKey>
+	</insert>
+	
+	
+	<delete id="delete_by_id" parameterMap="tableParam">
+		delete from sc_table where id=${id}
+	</delete>
+	
+	<delete id="delete_all" parameterMap="tableParam">
+		delete from sc_table
+	</delete>
+	
+	<delete id="delete" parameterMap="tableParam">
+		delete from sc_table
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null">
+					and id=${id}
+				</if>
+			</trim>
+		</where>	
+	</delete>
+</mapper>

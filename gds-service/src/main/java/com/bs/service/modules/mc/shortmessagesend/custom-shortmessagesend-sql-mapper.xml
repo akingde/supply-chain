@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bs.service.modules.mc.shortmessagesend.IShortMessageSendDao">
+	<!--
+		<include refid="shortMessageSend_select"/>
+		<include refid="shortMessageSend_select_count"/>
+		<include refid="shortMessageSend_select_distinct"/>
+		<include refid="shortMessageSend_select_fields"/>
+		<include refid="shortMessageSend_form"/>
+		<include refid="shortMessageSend_where"/>
+		<include refid="shortMessageSend_inner_all"/>
+		<include refid="shortMessageSend_inner_shortMessageProvider"/>
+		<include refid="shortMessageSend_left_all"/>
+		<include refid="shortMessageSend_where"/>
+		<include refid="shortMessageSend_where_id"/>
+		<include refid="shortMessageSend_where_reference_id"/>
+		<include refid="shortMessageSend_order"/>
+		<include refid="shortMessageSend_group"/>
+		<include refid="shortMessageSend_limit"/>
+		<include refid="shortMessageSend_update"/>
+		<include refid="shortMessageSend_update_set"/>
+		<include refid="shortMessageSend_update_set_null"/>
+		<include refid="shortMessageSend_insert"/>
+		<include refid="shortMessageSend_delete"/>
+		###########################################
+		### **where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and _shortMessageSend.id=#{id,jdbcType=BIGINT}</if>
+		<if test="code != null and code != ''">and _shortMessageSend.code=#{code,jdbcType=VARCHAR}</if>
+		<if test="memberId != null and memberId != ''">and _shortMessageSend.member_id=#{memberId,jdbcType=BIGINT}</if>
+		<if test="mobilePhone != null and mobilePhone != ''">and _shortMessageSend.mobile_phone=#{mobilePhone,jdbcType=VARCHAR}</if>
+		<if test="content != null and content != ''">and _shortMessageSend.content=#{content,jdbcType=VARCHAR}</if>
+		<if test="businessCode != null and businessCode != ''">and _shortMessageSend.business_code=#{businessCode,jdbcType=VARCHAR}</if>
+		<if test="businessDesc != null and businessDesc != ''">and _shortMessageSend.business_desc=#{businessDesc,jdbcType=VARCHAR}</if>
+		<if test="spCode != null and spCode != ''">and _shortMessageSend.sp_code=#{spCode,jdbcType=VARCHAR}</if>
+		<if test="isRetry != null and isRetry != ''">and _shortMessageSend.is_retry=#{isRetry,jdbcType=SMALLINT}</if>
+		<if test="retryCount != null and retryCount != ''">and _shortMessageSend.retry_count=#{retryCount,jdbcType=SMALLINT}</if>
+		<if test="messageSerial != null and messageSerial != ''">and _shortMessageSend.message_serial=#{messageSerial,jdbcType=VARCHAR}</if>
+		<if test="sendStatus != null and sendStatus != ''">and _shortMessageSend.send_status=#{sendStatus,jdbcType=SMALLINT}</if>
+		<if test="statusReport != null and statusReport != ''">and _shortMessageSend.status_report=#{statusReport,jdbcType=SMALLINT}</if>
+		<if test="statements != null and statements != ''">and _shortMessageSend.statements=#{statements,jdbcType=VARCHAR}</if>
+		<if test="messageType != null and messageType != ''">and _shortMessageSend.message_type=#{messageType,jdbcType=SMALLINT}</if>
+		<if test="sendType != null and sendType != ''">and _shortMessageSend.send_type=#{sendType,jdbcType=SMALLINT}</if>
+		<if test="sendBeginHour != null and sendBeginHour != ''">and _shortMessageSend.send_begin_hour=#{sendBeginHour,jdbcType=INT}</if>
+		<if test="sendEndHour != null and sendEndHour != ''">and _shortMessageSend.send_end_hour=#{sendEndHour,jdbcType=INT}</if>
+		<if test="totalCount != null and totalCount != ''">and _shortMessageSend.total_count=#{totalCount,jdbcType=INT}</if>
+		<if test="sendTime != null and sendTime != ''">and _shortMessageSend.send_time=#{sendTime,jdbcType=DATETIME}</if>
+		<if test="timeout != null and timeout != ''">and _shortMessageSend.timeout=#{timeout,jdbcType=BIGINT}</if>
+		<if test="originTime != null and originTime != ''">and _shortMessageSend.origin_time=#{originTime,jdbcType=BIGINT}</if>
+		<if test="version != null and version != ''">and _shortMessageSend.version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and _shortMessageSend.create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and _shortMessageSend.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and _shortMessageSend.comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **update where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and id=#{id,jdbcType=BIGINT}</if>
+		<if test="code != null and code != ''">and code=#{code,jdbcType=VARCHAR}</if>
+		<if test="memberId != null and memberId != ''">and member_id=#{memberId,jdbcType=BIGINT}</if>
+		<if test="mobilePhone != null and mobilePhone != ''">and mobile_phone=#{mobilePhone,jdbcType=VARCHAR}</if>
+		<if test="content != null and content != ''">and content=#{content,jdbcType=VARCHAR}</if>
+		<if test="businessCode != null and businessCode != ''">and business_code=#{businessCode,jdbcType=VARCHAR}</if>
+		<if test="businessDesc != null and businessDesc != ''">and business_desc=#{businessDesc,jdbcType=VARCHAR}</if>
+		<if test="spCode != null and spCode != ''">and sp_code=#{spCode,jdbcType=VARCHAR}</if>
+		<if test="isRetry != null and isRetry != ''">and is_retry=#{isRetry,jdbcType=SMALLINT}</if>
+		<if test="retryCount != null and retryCount != ''">and retry_count=#{retryCount,jdbcType=SMALLINT}</if>
+		<if test="messageSerial != null and messageSerial != ''">and message_serial=#{messageSerial,jdbcType=VARCHAR}</if>
+		<if test="sendStatus != null and sendStatus != ''">and send_status=#{sendStatus,jdbcType=SMALLINT}</if>
+		<if test="statusReport != null and statusReport != ''">and status_report=#{statusReport,jdbcType=SMALLINT}</if>
+		<if test="statements != null and statements != ''">and statements=#{statements,jdbcType=VARCHAR}</if>
+		<if test="messageType != null and messageType != ''">and message_type=#{messageType,jdbcType=SMALLINT}</if>
+		<if test="sendType != null and sendType != ''">and send_type=#{sendType,jdbcType=SMALLINT}</if>
+		<if test="sendBeginHour != null and sendBeginHour != ''">and send_begin_hour=#{sendBeginHour,jdbcType=INT}</if>
+		<if test="sendEndHour != null and sendEndHour != ''">and send_end_hour=#{sendEndHour,jdbcType=INT}</if>
+		<if test="totalCount != null and totalCount != ''">and total_count=#{totalCount,jdbcType=INT}</if>
+		<if test="sendTime != null and sendTime != ''">and send_time=#{sendTime,jdbcType=DATETIME}</if>
+		<if test="timeout != null and timeout != ''">and timeout=#{timeout,jdbcType=BIGINT}</if>
+		<if test="originTime != null and originTime != ''">and origin_time=#{originTime,jdbcType=BIGINT}</if>
+		<if test="version != null and version != ''">and version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **set fields example**
+		###########################################
+		<if test="id != null and id != ''">,id=#{id,jdbcType=BIGINT}</if>
+		<if test="code != null and code != ''">,code=#{code,jdbcType=VARCHAR}</if>
+		<if test="memberId != null and memberId != ''">,member_id=#{memberId,jdbcType=BIGINT}</if>
+		<if test="mobilePhone != null and mobilePhone != ''">,mobile_phone=#{mobilePhone,jdbcType=VARCHAR}</if>
+		<if test="content != null and content != ''">,content=#{content,jdbcType=VARCHAR}</if>
+		<if test="businessCode != null and businessCode != ''">,business_code=#{businessCode,jdbcType=VARCHAR}</if>
+		<if test="businessDesc != null and businessDesc != ''">,business_desc=#{businessDesc,jdbcType=VARCHAR}</if>
+		<if test="spCode != null and spCode != ''">,sp_code=#{spCode,jdbcType=VARCHAR}</if>
+		<if test="isRetry != null and isRetry != ''">,is_retry=#{isRetry,jdbcType=SMALLINT}</if>
+		<if test="retryCount != null and retryCount != ''">,retry_count=#{retryCount,jdbcType=SMALLINT}</if>
+		<if test="messageSerial != null and messageSerial != ''">,message_serial=#{messageSerial,jdbcType=VARCHAR}</if>
+		<if test="sendStatus != null and sendStatus != ''">,send_status=#{sendStatus,jdbcType=SMALLINT}</if>
+		<if test="statusReport != null and statusReport != ''">,status_report=#{statusReport,jdbcType=SMALLINT}</if>
+		<if test="statements != null and statements != ''">,statements=#{statements,jdbcType=VARCHAR}</if>
+		<if test="messageType != null and messageType != ''">,message_type=#{messageType,jdbcType=SMALLINT}</if>
+		<if test="sendType != null and sendType != ''">,send_type=#{sendType,jdbcType=SMALLINT}</if>
+		<if test="sendBeginHour != null and sendBeginHour != ''">,send_begin_hour=#{sendBeginHour,jdbcType=INT}</if>
+		<if test="sendEndHour != null and sendEndHour != ''">,send_end_hour=#{sendEndHour,jdbcType=INT}</if>
+		<if test="totalCount != null and totalCount != ''">,total_count=#{totalCount,jdbcType=INT}</if>
+		<if test="sendTime != null and sendTime != ''">,send_time=#{sendTime,jdbcType=DATETIME}</if>
+		<if test="timeout != null and timeout != ''">,timeout=#{timeout,jdbcType=BIGINT}</if>
+		<if test="originTime != null and originTime != ''">,origin_time=#{originTime,jdbcType=BIGINT}</if>
+		<if test="version != null and version != ''">,version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **insert fields example**
+		###########################################
+		<if test="id != null and id != ''">,id</if>
+		<if test="code != null and code != ''">,code</if>
+		<if test="memberId != null and memberId != ''">,member_id</if>
+		<if test="mobilePhone != null and mobilePhone != ''">,mobile_phone</if>
+		<if test="content != null and content != ''">,content</if>
+		<if test="businessCode != null and businessCode != ''">,business_code</if>
+		<if test="businessDesc != null and businessDesc != ''">,business_desc</if>
+		<if test="spCode != null and spCode != ''">,sp_code</if>
+		<if test="isRetry != null and isRetry != ''">,is_retry</if>
+		<if test="retryCount != null and retryCount != ''">,retry_count</if>
+		<if test="messageSerial != null and messageSerial != ''">,message_serial</if>
+		<if test="sendStatus != null and sendStatus != ''">,send_status</if>
+		<if test="statusReport != null and statusReport != ''">,status_report</if>
+		<if test="statements != null and statements != ''">,statements</if>
+		<if test="messageType != null and messageType != ''">,message_type</if>
+		<if test="sendType != null and sendType != ''">,send_type</if>
+		<if test="sendBeginHour != null and sendBeginHour != ''">,send_begin_hour</if>
+		<if test="sendEndHour != null and sendEndHour != ''">,send_end_hour</if>
+		<if test="totalCount != null and totalCount != ''">,total_count</if>
+		<if test="sendTime != null and sendTime != ''">,send_time</if>
+		<if test="timeout != null and timeout != ''">,timeout</if>
+		<if test="originTime != null and originTime != ''">,origin_time</if>
+		<if test="version != null and version != ''">,version</if>
+		<if test="createTime != null and createTime != ''">,create_time</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time</if>
+		<if test="comment != null and comment != ''">,comment</if>
+		###########################################
+		### **insert values criteria example**
+		###########################################	
+		<if test="id != null and id != ''">,#{id,jdbcType=BIGINT}</if>
+		<if test="code != null and code != ''">,#{code,jdbcType=VARCHAR}</if>
+		<if test="memberId != null and memberId != ''">,#{memberId,jdbcType=BIGINT}</if>
+		<if test="mobilePhone != null and mobilePhone != ''">,#{mobilePhone,jdbcType=VARCHAR}</if>
+		<if test="content != null and content != ''">,#{content,jdbcType=VARCHAR}</if>
+		<if test="businessCode != null and businessCode != ''">,#{businessCode,jdbcType=VARCHAR}</if>
+		<if test="businessDesc != null and businessDesc != ''">,#{businessDesc,jdbcType=VARCHAR}</if>
+		<if test="spCode != null and spCode != ''">,#{spCode,jdbcType=VARCHAR}</if>
+		<if test="isRetry != null and isRetry != ''">,#{isRetry,jdbcType=SMALLINT}</if>
+		<if test="retryCount != null and retryCount != ''">,#{retryCount,jdbcType=SMALLINT}</if>
+		<if test="messageSerial != null and messageSerial != ''">,#{messageSerial,jdbcType=VARCHAR}</if>
+		<if test="sendStatus != null and sendStatus != ''">,#{sendStatus,jdbcType=SMALLINT}</if>
+		<if test="statusReport != null and statusReport != ''">,#{statusReport,jdbcType=SMALLINT}</if>
+		<if test="statements != null and statements != ''">,#{statements,jdbcType=VARCHAR}</if>
+		<if test="messageType != null and messageType != ''">,#{messageType,jdbcType=SMALLINT}</if>
+		<if test="sendType != null and sendType != ''">,#{sendType,jdbcType=SMALLINT}</if>
+		<if test="sendBeginHour != null and sendBeginHour != ''">,#{sendBeginHour,jdbcType=INT}</if>
+		<if test="sendEndHour != null and sendEndHour != ''">,#{sendEndHour,jdbcType=INT}</if>
+		<if test="totalCount != null and totalCount != ''">,#{totalCount,jdbcType=INT}</if>
+		<if test="sendTime != null and sendTime != ''">,#{sendTime,jdbcType=DATETIME}</if>
+		<if test="timeout != null and timeout != ''">,#{timeout,jdbcType=BIGINT}</if>
+		<if test="originTime != null and originTime != ''">,#{originTime,jdbcType=BIGINT}</if>
+		<if test="version != null and version != ''">,#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **sql example**
+		###########################################	
+	<insert id="save" parameterMap="shortMessageSend">
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			select LAST_INSERT_ID() as generatedKey   
+		</selectKey>
+	</insert>
+	
+	<update id="updateById" parameterMap="shortMessageSend">
+		<include refid="shortMessageSend_update"/>
+		<include refid="shortMessageSend_update_set"/>
+		<include refid="shortMessageSend_update_where_id"/>
+	</update>
+
+	<delete id="removeCriteria" parameterMap="shortMessageSend">
+		<include refid="shortMessageSend_delete"/>
+		<include refid="shortMessageSend_update_where"/>
+	</delete>
+	
+	<delete id="removeById" parameterType="java.lang.Long">
+		<include refid="shortMessageSend_delete"/>
+		<include refid="shortMessageSend_update_where_id"/>
+	</delete>
+	
+	<select id="listCriteria" resultMap="shortMessageSend" parameterMap="shortMessageSend" useCache="true">
+		<include refid="shortMessageSend_select"/>
+		<include refid="shortMessageSend_select_fields"/>
+		<include refid="shortMessageSend_form"/>
+		<include refid="shortMessageSend_where"/>
+		<include refid="shortMessageSend_order"/>
+		<include refid="shortMessageSend_group"/>
+	</select>
+	
+	<select id="getOneById" resultMap="shortMessageSend" parameterType="java.lang.Long" useCache="true">
+		<include refid="shortMessageSend_select"/>
+		<include refid="shortMessageSend_select_fields"/>
+		<include refid="shortMessageSend_form"/>
+		<include refid="shortMessageSend_where_id"/>
+	</select>		
+	-->
+</mapper>

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bs.service.modules.sc.viewconfig.IViewConfigDao">
+	<!--
+		<include refid="viewConfig_select"/>
+		<include refid="viewConfig_select_count"/>
+		<include refid="viewConfig_select_distinct"/>
+		<include refid="viewConfig_select_fields"/>
+		<include refid="viewConfig_form"/>
+		<include refid="viewConfig_where"/>
+		<include refid="viewConfig_inner_all"/>
+		<include refid="viewConfig_left_all"/>
+		<include refid="viewConfig_left_viewFieldConfig"/>
+		<include refid="viewConfig_left_authorization"/>
+		<include refid="viewConfig_where"/>
+		<include refid="viewConfig_where_id"/>
+		<include refid="viewConfig_where_reference_id"/>
+		<include refid="viewConfig_order"/>
+		<include refid="viewConfig_group"/>
+		<include refid="viewConfig_limit"/>
+		<include refid="viewConfig_update"/>
+		<include refid="viewConfig_update_set"/>
+		<include refid="viewConfig_update_set_null"/>
+		<include refid="viewConfig_insert"/>
+		<include refid="viewConfig_delete"/>
+		###########################################
+		### **where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and _viewConfig.id=#{id,jdbcType=BIGINT}</if>
+		<if test="tableId != null and tableId != ''">and _viewConfig.table_id=#{tableId,jdbcType=BIGINT}</if>
+		<if test="tableIds != null and tableIds != ''">and _viewConfig.table_ids=#{tableIds,jdbcType=VARCHAR}</if>
+		<if test="treeTableId != null and treeTableId != ''">and _viewConfig.tree_table_id=#{treeTableId,jdbcType=BIGINT}</if>
+		<if test="authParentCode != null and authParentCode != ''">and _viewConfig.auth_parent_code=#{authParentCode,jdbcType=BIGINT}</if>
+		<if test="authCode != null and authCode != ''">and _viewConfig.auth_code=#{authCode,jdbcType=BIGINT}</if>
+		<if test="authName != null and authName != ''">and _viewConfig.auth_name=#{authName,jdbcType=VARCHAR}</if>
+		<if test="authParentNames != null and authParentNames != ''">and _viewConfig.auth_parent_names=#{authParentNames,jdbcType=VARCHAR}</if>
+		<if test="authLevel != null and authLevel != ''">and _viewConfig.auth_level=#{authLevel,jdbcType=SMALLINT}</if>
+		<if test="tableCode != null and tableCode != ''">and _viewConfig.table_code=#{tableCode,jdbcType=VARCHAR}</if>
+		<if test="tableName != null and tableName != ''">and _viewConfig.table_name=#{tableName,jdbcType=VARCHAR}</if>
+		<if test="treeTableCode != null and treeTableCode != ''">and _viewConfig.tree_table_code=#{treeTableCode,jdbcType=VARCHAR}</if>
+		<if test="treeTableName != null and treeTableName != ''">and _viewConfig.tree_table_name=#{treeTableName,jdbcType=VARCHAR}</if>
+		<if test="entityName != null and entityName != ''">and _viewConfig.entity_name=#{entityName,jdbcType=VARCHAR}</if>
+		<if test="treeEntityName != null and treeEntityName != ''">and _viewConfig.tree_entity_name=#{treeEntityName,jdbcType=VARCHAR}</if>
+		<if test="methodName != null and methodName != ''">and _viewConfig.method_name=#{methodName,jdbcType=VARCHAR}</if>
+		<if test="viewType != null and viewType != ''">and _viewConfig.view_type=#{viewType,jdbcType=SMALLINT}</if>
+		<if test="viewParentPath != null and viewParentPath != ''">and _viewConfig.view_parent_path=#{viewParentPath,jdbcType=VARCHAR}</if>
+		<if test="viewName != null and viewName != ''">and _viewConfig.view_name=#{viewName,jdbcType=VARCHAR}</if>
+		<if test="viewTemplateName != null and viewTemplateName != ''">and _viewConfig.view_template_name=#{viewTemplateName,jdbcType=VARCHAR}</if>
+		<if test="viewTemplatePath != null and viewTemplatePath != ''">and _viewConfig.view_template_path=#{viewTemplatePath,jdbcType=VARCHAR}</if>
+		<if test="jsTemplateContent != null and jsTemplateContent != ''">and _viewConfig.js_template_content=#{jsTemplateContent,jdbcType=TEXT}</if>
+		<if test="pageTemplateContent != null and pageTemplateContent != ''">and _viewConfig.page_template_content=#{pageTemplateContent,jdbcType=TEXT}</if>
+		<if test="viewGridParam != null and viewGridParam != ''">and _viewConfig.view_grid_param=#{viewGridParam,jdbcType=TEXT}</if>
+		<if test="isShrinktofit != null and isShrinktofit != ''">and _viewConfig.is_shrinktofit=#{isShrinktofit,jdbcType=SMALLINT}</if>
+		<if test="parentViewPosition != null and parentViewPosition != ''">and _viewConfig.parent_view_position=#{parentViewPosition,jdbcType=SMALLINT}</if>
+		<if test="jumpMethodName != null and jumpMethodName != ''">and _viewConfig.jump_method_name=#{jumpMethodName,jdbcType=VARCHAR}</if>
+		<if test="dataMethodName != null and dataMethodName != ''">and _viewConfig.data_method_name=#{dataMethodName,jdbcType=VARCHAR}</if>
+		<if test="isPageBack != null and isPageBack != ''">and _viewConfig.is_page_back=#{isPageBack,jdbcType=SMALLINT}</if>
+		<if test="isConfig != null and isConfig != ''">and _viewConfig.is_config=#{isConfig,jdbcType=SMALLINT}</if>
+		<if test="configTime != null and configTime != ''">and _viewConfig.config_time=#{configTime,jdbcType=DATETIME}</if>
+		<if test="isCenerate != null and isCenerate != ''">and _viewConfig.is_cenerate=#{isCenerate,jdbcType=SMALLINT}</if>
+		<if test="generateTime != null and generateTime != ''">and _viewConfig.generate_time=#{generateTime,jdbcType=DATETIME}</if>
+		<if test="version != null and version != ''">and _viewConfig.version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and _viewConfig.create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and _viewConfig.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and _viewConfig.comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **update where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and id=#{id,jdbcType=BIGINT}</if>
+		<if test="tableId != null and tableId != ''">and table_id=#{tableId,jdbcType=BIGINT}</if>
+		<if test="tableIds != null and tableIds != ''">and table_ids=#{tableIds,jdbcType=VARCHAR}</if>
+		<if test="treeTableId != null and treeTableId != ''">and tree_table_id=#{treeTableId,jdbcType=BIGINT}</if>
+		<if test="authParentCode != null and authParentCode != ''">and auth_parent_code=#{authParentCode,jdbcType=BIGINT}</if>
+		<if test="authCode != null and authCode != ''">and auth_code=#{authCode,jdbcType=BIGINT}</if>
+		<if test="authName != null and authName != ''">and auth_name=#{authName,jdbcType=VARCHAR}</if>
+		<if test="authParentNames != null and authParentNames != ''">and auth_parent_names=#{authParentNames,jdbcType=VARCHAR}</if>
+		<if test="authLevel != null and authLevel != ''">and auth_level=#{authLevel,jdbcType=SMALLINT}</if>
+		<if test="tableCode != null and tableCode != ''">and table_code=#{tableCode,jdbcType=VARCHAR}</if>
+		<if test="tableName != null and tableName != ''">and table_name=#{tableName,jdbcType=VARCHAR}</if>
+		<if test="treeTableCode != null and treeTableCode != ''">and tree_table_code=#{treeTableCode,jdbcType=VARCHAR}</if>
+		<if test="treeTableName != null and treeTableName != ''">and tree_table_name=#{treeTableName,jdbcType=VARCHAR}</if>
+		<if test="entityName != null and entityName != ''">and entity_name=#{entityName,jdbcType=VARCHAR}</if>
+		<if test="treeEntityName != null and treeEntityName != ''">and tree_entity_name=#{treeEntityName,jdbcType=VARCHAR}</if>
+		<if test="methodName != null and methodName != ''">and method_name=#{methodName,jdbcType=VARCHAR}</if>
+		<if test="viewType != null and viewType != ''">and view_type=#{viewType,jdbcType=SMALLINT}</if>
+		<if test="viewParentPath != null and viewParentPath != ''">and view_parent_path=#{viewParentPath,jdbcType=VARCHAR}</if>
+		<if test="viewName != null and viewName != ''">and view_name=#{viewName,jdbcType=VARCHAR}</if>
+		<if test="viewTemplateName != null and viewTemplateName != ''">and view_template_name=#{viewTemplateName,jdbcType=VARCHAR}</if>
+		<if test="viewTemplatePath != null and viewTemplatePath != ''">and view_template_path=#{viewTemplatePath,jdbcType=VARCHAR}</if>
+		<if test="jsTemplateContent != null and jsTemplateContent != ''">and js_template_content=#{jsTemplateContent,jdbcType=TEXT}</if>
+		<if test="pageTemplateContent != null and pageTemplateContent != ''">and page_template_content=#{pageTemplateContent,jdbcType=TEXT}</if>
+		<if test="viewGridParam != null and viewGridParam != ''">and view_grid_param=#{viewGridParam,jdbcType=TEXT}</if>
+		<if test="isShrinktofit != null and isShrinktofit != ''">and is_shrinktofit=#{isShrinktofit,jdbcType=SMALLINT}</if>
+		<if test="parentViewPosition != null and parentViewPosition != ''">and parent_view_position=#{parentViewPosition,jdbcType=SMALLINT}</if>
+		<if test="jumpMethodName != null and jumpMethodName != ''">and jump_method_name=#{jumpMethodName,jdbcType=VARCHAR}</if>
+		<if test="dataMethodName != null and dataMethodName != ''">and data_method_name=#{dataMethodName,jdbcType=VARCHAR}</if>
+		<if test="isPageBack != null and isPageBack != ''">and is_page_back=#{isPageBack,jdbcType=SMALLINT}</if>
+		<if test="isConfig != null and isConfig != ''">and is_config=#{isConfig,jdbcType=SMALLINT}</if>
+		<if test="configTime != null and configTime != ''">and config_time=#{configTime,jdbcType=DATETIME}</if>
+		<if test="isCenerate != null and isCenerate != ''">and is_cenerate=#{isCenerate,jdbcType=SMALLINT}</if>
+		<if test="generateTime != null and generateTime != ''">and generate_time=#{generateTime,jdbcType=DATETIME}</if>
+		<if test="version != null and version != ''">and version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **set fields example**
+		###########################################
+		<if test="id != null and id != ''">,id=#{id,jdbcType=BIGINT}</if>
+		<if test="tableId != null and tableId != ''">,table_id=#{tableId,jdbcType=BIGINT}</if>
+		<if test="tableIds != null and tableIds != ''">,table_ids=#{tableIds,jdbcType=VARCHAR}</if>
+		<if test="treeTableId != null and treeTableId != ''">,tree_table_id=#{treeTableId,jdbcType=BIGINT}</if>
+		<if test="authParentCode != null and authParentCode != ''">,auth_parent_code=#{authParentCode,jdbcType=BIGINT}</if>
+		<if test="authCode != null and authCode != ''">,auth_code=#{authCode,jdbcType=BIGINT}</if>
+		<if test="authName != null and authName != ''">,auth_name=#{authName,jdbcType=VARCHAR}</if>
+		<if test="authParentNames != null and authParentNames != ''">,auth_parent_names=#{authParentNames,jdbcType=VARCHAR}</if>
+		<if test="authLevel != null and authLevel != ''">,auth_level=#{authLevel,jdbcType=SMALLINT}</if>
+		<if test="tableCode != null and tableCode != ''">,table_code=#{tableCode,jdbcType=VARCHAR}</if>
+		<if test="tableName != null and tableName != ''">,table_name=#{tableName,jdbcType=VARCHAR}</if>
+		<if test="treeTableCode != null and treeTableCode != ''">,tree_table_code=#{treeTableCode,jdbcType=VARCHAR}</if>
+		<if test="treeTableName != null and treeTableName != ''">,tree_table_name=#{treeTableName,jdbcType=VARCHAR}</if>
+		<if test="entityName != null and entityName != ''">,entity_name=#{entityName,jdbcType=VARCHAR}</if>
+		<if test="treeEntityName != null and treeEntityName != ''">,tree_entity_name=#{treeEntityName,jdbcType=VARCHAR}</if>
+		<if test="methodName != null and methodName != ''">,method_name=#{methodName,jdbcType=VARCHAR}</if>
+		<if test="viewType != null and viewType != ''">,view_type=#{viewType,jdbcType=SMALLINT}</if>
+		<if test="viewParentPath != null and viewParentPath != ''">,view_parent_path=#{viewParentPath,jdbcType=VARCHAR}</if>
+		<if test="viewName != null and viewName != ''">,view_name=#{viewName,jdbcType=VARCHAR}</if>
+		<if test="viewTemplateName != null and viewTemplateName != ''">,view_template_name=#{viewTemplateName,jdbcType=VARCHAR}</if>
+		<if test="viewTemplatePath != null and viewTemplatePath != ''">,view_template_path=#{viewTemplatePath,jdbcType=VARCHAR}</if>
+		<if test="jsTemplateContent != null and jsTemplateContent != ''">,js_template_content=#{jsTemplateContent,jdbcType=TEXT}</if>
+		<if test="pageTemplateContent != null and pageTemplateContent != ''">,page_template_content=#{pageTemplateContent,jdbcType=TEXT}</if>
+		<if test="viewGridParam != null and viewGridParam != ''">,view_grid_param=#{viewGridParam,jdbcType=TEXT}</if>
+		<if test="isShrinktofit != null and isShrinktofit != ''">,is_shrinktofit=#{isShrinktofit,jdbcType=SMALLINT}</if>
+		<if test="parentViewPosition != null and parentViewPosition != ''">,parent_view_position=#{parentViewPosition,jdbcType=SMALLINT}</if>
+		<if test="jumpMethodName != null and jumpMethodName != ''">,jump_method_name=#{jumpMethodName,jdbcType=VARCHAR}</if>
+		<if test="dataMethodName != null and dataMethodName != ''">,data_method_name=#{dataMethodName,jdbcType=VARCHAR}</if>
+		<if test="isPageBack != null and isPageBack != ''">,is_page_back=#{isPageBack,jdbcType=SMALLINT}</if>
+		<if test="isConfig != null and isConfig != ''">,is_config=#{isConfig,jdbcType=SMALLINT}</if>
+		<if test="configTime != null and configTime != ''">,config_time=#{configTime,jdbcType=DATETIME}</if>
+		<if test="isCenerate != null and isCenerate != ''">,is_cenerate=#{isCenerate,jdbcType=SMALLINT}</if>
+		<if test="generateTime != null and generateTime != ''">,generate_time=#{generateTime,jdbcType=DATETIME}</if>
+		<if test="version != null and version != ''">,version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **insert fields example**
+		###########################################
+		<if test="id != null and id != ''">,id</if>
+		<if test="tableId != null and tableId != ''">,table_id</if>
+		<if test="tableIds != null and tableIds != ''">,table_ids</if>
+		<if test="treeTableId != null and treeTableId != ''">,tree_table_id</if>
+		<if test="authParentCode != null and authParentCode != ''">,auth_parent_code</if>
+		<if test="authCode != null and authCode != ''">,auth_code</if>
+		<if test="authName != null and authName != ''">,auth_name</if>
+		<if test="authParentNames != null and authParentNames != ''">,auth_parent_names</if>
+		<if test="authLevel != null and authLevel != ''">,auth_level</if>
+		<if test="tableCode != null and tableCode != ''">,table_code</if>
+		<if test="tableName != null and tableName != ''">,table_name</if>
+		<if test="treeTableCode != null and treeTableCode != ''">,tree_table_code</if>
+		<if test="treeTableName != null and treeTableName != ''">,tree_table_name</if>
+		<if test="entityName != null and entityName != ''">,entity_name</if>
+		<if test="treeEntityName != null and treeEntityName != ''">,tree_entity_name</if>
+		<if test="methodName != null and methodName != ''">,method_name</if>
+		<if test="viewType != null and viewType != ''">,view_type</if>
+		<if test="viewParentPath != null and viewParentPath != ''">,view_parent_path</if>
+		<if test="viewName != null and viewName != ''">,view_name</if>
+		<if test="viewTemplateName != null and viewTemplateName != ''">,view_template_name</if>
+		<if test="viewTemplatePath != null and viewTemplatePath != ''">,view_template_path</if>
+		<if test="jsTemplateContent != null and jsTemplateContent != ''">,js_template_content</if>
+		<if test="pageTemplateContent != null and pageTemplateContent != ''">,page_template_content</if>
+		<if test="viewGridParam != null and viewGridParam != ''">,view_grid_param</if>
+		<if test="isShrinktofit != null and isShrinktofit != ''">,is_shrinktofit</if>
+		<if test="parentViewPosition != null and parentViewPosition != ''">,parent_view_position</if>
+		<if test="jumpMethodName != null and jumpMethodName != ''">,jump_method_name</if>
+		<if test="dataMethodName != null and dataMethodName != ''">,data_method_name</if>
+		<if test="isPageBack != null and isPageBack != ''">,is_page_back</if>
+		<if test="isConfig != null and isConfig != ''">,is_config</if>
+		<if test="configTime != null and configTime != ''">,config_time</if>
+		<if test="isCenerate != null and isCenerate != ''">,is_cenerate</if>
+		<if test="generateTime != null and generateTime != ''">,generate_time</if>
+		<if test="version != null and version != ''">,version</if>
+		<if test="createTime != null and createTime != ''">,create_time</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time</if>
+		<if test="comment != null and comment != ''">,comment</if>
+		###########################################
+		### **insert values criteria example**
+		###########################################	
+		<if test="id != null and id != ''">,#{id,jdbcType=BIGINT}</if>
+		<if test="tableId != null and tableId != ''">,#{tableId,jdbcType=BIGINT}</if>
+		<if test="tableIds != null and tableIds != ''">,#{tableIds,jdbcType=VARCHAR}</if>
+		<if test="treeTableId != null and treeTableId != ''">,#{treeTableId,jdbcType=BIGINT}</if>
+		<if test="authParentCode != null and authParentCode != ''">,#{authParentCode,jdbcType=BIGINT}</if>
+		<if test="authCode != null and authCode != ''">,#{authCode,jdbcType=BIGINT}</if>
+		<if test="authName != null and authName != ''">,#{authName,jdbcType=VARCHAR}</if>
+		<if test="authParentNames != null and authParentNames != ''">,#{authParentNames,jdbcType=VARCHAR}</if>
+		<if test="authLevel != null and authLevel != ''">,#{authLevel,jdbcType=SMALLINT}</if>
+		<if test="tableCode != null and tableCode != ''">,#{tableCode,jdbcType=VARCHAR}</if>
+		<if test="tableName != null and tableName != ''">,#{tableName,jdbcType=VARCHAR}</if>
+		<if test="treeTableCode != null and treeTableCode != ''">,#{treeTableCode,jdbcType=VARCHAR}</if>
+		<if test="treeTableName != null and treeTableName != ''">,#{treeTableName,jdbcType=VARCHAR}</if>
+		<if test="entityName != null and entityName != ''">,#{entityName,jdbcType=VARCHAR}</if>
+		<if test="treeEntityName != null and treeEntityName != ''">,#{treeEntityName,jdbcType=VARCHAR}</if>
+		<if test="methodName != null and methodName != ''">,#{methodName,jdbcType=VARCHAR}</if>
+		<if test="viewType != null and viewType != ''">,#{viewType,jdbcType=SMALLINT}</if>
+		<if test="viewParentPath != null and viewParentPath != ''">,#{viewParentPath,jdbcType=VARCHAR}</if>
+		<if test="viewName != null and viewName != ''">,#{viewName,jdbcType=VARCHAR}</if>
+		<if test="viewTemplateName != null and viewTemplateName != ''">,#{viewTemplateName,jdbcType=VARCHAR}</if>
+		<if test="viewTemplatePath != null and viewTemplatePath != ''">,#{viewTemplatePath,jdbcType=VARCHAR}</if>
+		<if test="jsTemplateContent != null and jsTemplateContent != ''">,#{jsTemplateContent,jdbcType=TEXT}</if>
+		<if test="pageTemplateContent != null and pageTemplateContent != ''">,#{pageTemplateContent,jdbcType=TEXT}</if>
+		<if test="viewGridParam != null and viewGridParam != ''">,#{viewGridParam,jdbcType=TEXT}</if>
+		<if test="isShrinktofit != null and isShrinktofit != ''">,#{isShrinktofit,jdbcType=SMALLINT}</if>
+		<if test="parentViewPosition != null and parentViewPosition != ''">,#{parentViewPosition,jdbcType=SMALLINT}</if>
+		<if test="jumpMethodName != null and jumpMethodName != ''">,#{jumpMethodName,jdbcType=VARCHAR}</if>
+		<if test="dataMethodName != null and dataMethodName != ''">,#{dataMethodName,jdbcType=VARCHAR}</if>
+		<if test="isPageBack != null and isPageBack != ''">,#{isPageBack,jdbcType=SMALLINT}</if>
+		<if test="isConfig != null and isConfig != ''">,#{isConfig,jdbcType=SMALLINT}</if>
+		<if test="configTime != null and configTime != ''">,#{configTime,jdbcType=DATETIME}</if>
+		<if test="isCenerate != null and isCenerate != ''">,#{isCenerate,jdbcType=SMALLINT}</if>
+		<if test="generateTime != null and generateTime != ''">,#{generateTime,jdbcType=DATETIME}</if>
+		<if test="version != null and version != ''">,#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **sql example**
+		###########################################	
+	<insert id="save" parameterMap="viewConfig">
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			select LAST_INSERT_ID() as generatedKey   
+		</selectKey>
+	</insert>
+	
+	<update id="updateById" parameterMap="viewConfig">
+		<include refid="viewConfig_update"/>
+		<include refid="viewConfig_update_set"/>
+		<include refid="viewConfig_update_where_id"/>
+	</update>
+
+	<delete id="removeCriteria" parameterMap="viewConfig">
+		<include refid="viewConfig_delete"/>
+		<include refid="viewConfig_update_where"/>
+	</delete>
+	
+	<delete id="removeById" parameterType="java.lang.Long">
+		<include refid="viewConfig_delete"/>
+		<include refid="viewConfig_update_where_id"/>
+	</delete>
+	
+	<select id="listCriteria" resultMap="viewConfig" parameterMap="viewConfig" useCache="true">
+		<include refid="viewConfig_select"/>
+		<include refid="viewConfig_select_fields"/>
+		<include refid="viewConfig_form"/>
+		<include refid="viewConfig_where"/>
+		<include refid="viewConfig_order"/>
+		<include refid="viewConfig_group"/>
+	</select>
+	
+	<select id="getOneById" resultMap="viewConfig" parameterType="java.lang.Long" useCache="true">
+		<include refid="viewConfig_select"/>
+		<include refid="viewConfig_select_fields"/>
+		<include refid="viewConfig_form"/>
+		<include refid="viewConfig_where_id"/>
+	</select>		
+	-->
+</mapper>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bs.service.modules.mc.shortmessageprovider.IShortMessageProviderDao">
+	<!--
+		<include refid="shortMessageProvider_select"/>
+		<include refid="shortMessageProvider_select_count"/>
+		<include refid="shortMessageProvider_select_distinct"/>
+		<include refid="shortMessageProvider_select_fields"/>
+		<include refid="shortMessageProvider_form"/>
+		<include refid="shortMessageProvider_where"/>
+		<include refid="shortMessageProvider_inner_all"/>
+		<include refid="shortMessageProvider_left_all"/>
+		<include refid="shortMessageProvider_left_shortMessageSend"/>
+		<include refid="shortMessageProvider_left_shortMessageSent"/>
+		<include refid="shortMessageProvider_where"/>
+		<include refid="shortMessageProvider_where_id"/>
+		<include refid="shortMessageProvider_where_reference_id"/>
+		<include refid="shortMessageProvider_order"/>
+		<include refid="shortMessageProvider_group"/>
+		<include refid="shortMessageProvider_limit"/>
+		<include refid="shortMessageProvider_update"/>
+		<include refid="shortMessageProvider_update_set"/>
+		<include refid="shortMessageProvider_update_set_null"/>
+		<include refid="shortMessageProvider_insert"/>
+		<include refid="shortMessageProvider_delete"/>
+		###########################################
+		### **where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and _shortMessageProvider.id=#{id,jdbcType=BIGINT}</if>
+		<if test="name != null and name != ''">and _shortMessageProvider.name=#{name,jdbcType=VARCHAR}</if>
+		<if test="code != null and code != ''">and _shortMessageProvider.code=#{code,jdbcType=VARCHAR}</if>
+		<if test="account != null and account != ''">and _shortMessageProvider.account=#{account,jdbcType=VARCHAR}</if>
+		<if test="password != null and password != ''">and _shortMessageProvider.password=#{password,jdbcType=VARCHAR}</if>
+		<if test="tunnelCode != null and tunnelCode != ''">and _shortMessageProvider.tunnel_code=#{tunnelCode,jdbcType=VARCHAR}</if>
+		<if test="sendUrl != null and sendUrl != ''">and _shortMessageProvider.send_url=#{sendUrl,jdbcType=VARCHAR}</if>
+		<if test="fetchPath != null and fetchPath != ''">and _shortMessageProvider.fetch_path=#{fetchPath,jdbcType=VARCHAR}</if>
+		<if test="sign != null and sign != ''">and _shortMessageProvider.sign=#{sign,jdbcType=VARCHAR}</if>
+		<if test="formatType != null and formatType != ''">and _shortMessageProvider.format_type=#{formatType,jdbcType=VARCHAR}</if>
+		<if test="isUse != null and isUse != ''">and _shortMessageProvider.is_use=#{isUse,jdbcType=TINYINT}</if>
+		<if test="version != null and version != ''">and _shortMessageProvider.version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and _shortMessageProvider.create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and _shortMessageProvider.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and _shortMessageProvider.comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **update where criteria example**
+		###########################################
+		<if test="id != null and id != ''">and id=#{id,jdbcType=BIGINT}</if>
+		<if test="name != null and name != ''">and name=#{name,jdbcType=VARCHAR}</if>
+		<if test="code != null and code != ''">and code=#{code,jdbcType=VARCHAR}</if>
+		<if test="account != null and account != ''">and account=#{account,jdbcType=VARCHAR}</if>
+		<if test="password != null and password != ''">and password=#{password,jdbcType=VARCHAR}</if>
+		<if test="tunnelCode != null and tunnelCode != ''">and tunnel_code=#{tunnelCode,jdbcType=VARCHAR}</if>
+		<if test="sendUrl != null and sendUrl != ''">and send_url=#{sendUrl,jdbcType=VARCHAR}</if>
+		<if test="fetchPath != null and fetchPath != ''">and fetch_path=#{fetchPath,jdbcType=VARCHAR}</if>
+		<if test="sign != null and sign != ''">and sign=#{sign,jdbcType=VARCHAR}</if>
+		<if test="formatType != null and formatType != ''">and format_type=#{formatType,jdbcType=VARCHAR}</if>
+		<if test="isUse != null and isUse != ''">and is_use=#{isUse,jdbcType=TINYINT}</if>
+		<if test="version != null and version != ''">and version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">and create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">and modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">and comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **set fields example**
+		###########################################
+		<if test="id != null and id != ''">,id=#{id,jdbcType=BIGINT}</if>
+		<if test="name != null and name != ''">,name=#{name,jdbcType=VARCHAR}</if>
+		<if test="code != null and code != ''">,code=#{code,jdbcType=VARCHAR}</if>
+		<if test="account != null and account != ''">,account=#{account,jdbcType=VARCHAR}</if>
+		<if test="password != null and password != ''">,password=#{password,jdbcType=VARCHAR}</if>
+		<if test="tunnelCode != null and tunnelCode != ''">,tunnel_code=#{tunnelCode,jdbcType=VARCHAR}</if>
+		<if test="sendUrl != null and sendUrl != ''">,send_url=#{sendUrl,jdbcType=VARCHAR}</if>
+		<if test="fetchPath != null and fetchPath != ''">,fetch_path=#{fetchPath,jdbcType=VARCHAR}</if>
+		<if test="sign != null and sign != ''">,sign=#{sign,jdbcType=VARCHAR}</if>
+		<if test="formatType != null and formatType != ''">,format_type=#{formatType,jdbcType=VARCHAR}</if>
+		<if test="isUse != null and isUse != ''">,is_use=#{isUse,jdbcType=TINYINT}</if>
+		<if test="version != null and version != ''">,version=#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,create_time=#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,comment=#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **insert fields example**
+		###########################################
+		<if test="id != null and id != ''">,id</if>
+		<if test="name != null and name != ''">,name</if>
+		<if test="code != null and code != ''">,code</if>
+		<if test="account != null and account != ''">,account</if>
+		<if test="password != null and password != ''">,password</if>
+		<if test="tunnelCode != null and tunnelCode != ''">,tunnel_code</if>
+		<if test="sendUrl != null and sendUrl != ''">,send_url</if>
+		<if test="fetchPath != null and fetchPath != ''">,fetch_path</if>
+		<if test="sign != null and sign != ''">,sign</if>
+		<if test="formatType != null and formatType != ''">,format_type</if>
+		<if test="isUse != null and isUse != ''">,is_use</if>
+		<if test="version != null and version != ''">,version</if>
+		<if test="createTime != null and createTime != ''">,create_time</if>
+		<if test="modifyTime != null and modifyTime != ''">,modify_time</if>
+		<if test="comment != null and comment != ''">,comment</if>
+		###########################################
+		### **insert values criteria example**
+		###########################################	
+		<if test="id != null and id != ''">,#{id,jdbcType=BIGINT}</if>
+		<if test="name != null and name != ''">,#{name,jdbcType=VARCHAR}</if>
+		<if test="code != null and code != ''">,#{code,jdbcType=VARCHAR}</if>
+		<if test="account != null and account != ''">,#{account,jdbcType=VARCHAR}</if>
+		<if test="password != null and password != ''">,#{password,jdbcType=VARCHAR}</if>
+		<if test="tunnelCode != null and tunnelCode != ''">,#{tunnelCode,jdbcType=VARCHAR}</if>
+		<if test="sendUrl != null and sendUrl != ''">,#{sendUrl,jdbcType=VARCHAR}</if>
+		<if test="fetchPath != null and fetchPath != ''">,#{fetchPath,jdbcType=VARCHAR}</if>
+		<if test="sign != null and sign != ''">,#{sign,jdbcType=VARCHAR}</if>
+		<if test="formatType != null and formatType != ''">,#{formatType,jdbcType=VARCHAR}</if>
+		<if test="isUse != null and isUse != ''">,#{isUse,jdbcType=TINYINT}</if>
+		<if test="version != null and version != ''">,#{version,jdbcType=BIGINT}</if>
+		<if test="createTime != null and createTime != ''">,#{createTime,jdbcType=DATETIME}</if>
+		<if test="modifyTime != null and modifyTime != ''">,#{modifyTime,jdbcType=DATETIME}</if>
+		<if test="comment != null and comment != ''">,#{comment,jdbcType=VARCHAR}</if>
+		###########################################
+		### **sql example**
+		###########################################	
+	<insert id="save" parameterMap="shortMessageProvider">
+		<selectKey keyProperty="generatedKey" resultType="Long">
+			select LAST_INSERT_ID() as generatedKey   
+		</selectKey>
+	</insert>
+	
+	<update id="updateById" parameterMap="shortMessageProvider">
+		<include refid="shortMessageProvider_update"/>
+		<include refid="shortMessageProvider_update_set"/>
+		<include refid="shortMessageProvider_update_where_id"/>
+	</update>
+
+	<delete id="removeCriteria" parameterMap="shortMessageProvider">
+		<include refid="shortMessageProvider_delete"/>
+		<include refid="shortMessageProvider_update_where"/>
+	</delete>
+	
+	<delete id="removeById" parameterType="java.lang.Long">
+		<include refid="shortMessageProvider_delete"/>
+		<include refid="shortMessageProvider_update_where_id"/>
+	</delete>
+	
+	<select id="listCriteria" resultMap="shortMessageProvider" parameterMap="shortMessageProvider" useCache="true">
+		<include refid="shortMessageProvider_select"/>
+		<include refid="shortMessageProvider_select_fields"/>
+		<include refid="shortMessageProvider_form"/>
+		<include refid="shortMessageProvider_where"/>
+		<include refid="shortMessageProvider_order"/>
+		<include refid="shortMessageProvider_group"/>
+	</select>
+	
+	<select id="getOneById" resultMap="shortMessageProvider" parameterType="java.lang.Long" useCache="true">
+		<include refid="shortMessageProvider_select"/>
+		<include refid="shortMessageProvider_select_fields"/>
+		<include refid="shortMessageProvider_form"/>
+		<include refid="shortMessageProvider_where_id"/>
+	</select>		
+	-->
+</mapper>

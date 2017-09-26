@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>  
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="defaultExecutorType" value="SIMPLE" />
+		<setting name="defaultStatementTimeout" value="25000" />
+	</settings>
+	<typeAliases>
+		<typeAlias alias="paramMap" type="java.util.HashMap"/>
+		<typeAlias alias="resultMap" type="java.util.HashMap"/>
+		<typeAlias alias="role" type="com.bs.service.modules.uc.role.RoleDO"/>
+		<typeAlias alias="userRoleRelation" type="com.bs.service.modules.uc.userrolerelation.UserRoleRelationDO"/>
+		<typeAlias alias="organization" type="com.bs.service.modules.uc.organization.OrganizationDO"/>
+		<typeAlias alias="user" type="com.bs.service.modules.uc.user.UserDO"/>
+		<typeAlias alias="roleAuthRelation" type="com.bs.service.modules.uc.roleauthrelation.RoleAuthRelationDO"/>
+		<typeAlias alias="authorization" type="com.bs.service.modules.uc.authorization.AuthorizationDO"/>
+		<typeAlias alias="log" type="com.bs.service.modules.uc.log.LogDO"/>
+		<typeAlias alias="table" type="com.bs.service.modules.sc.table.TableDO"/>
+		<typeAlias alias="tableColumn" type="com.bs.service.modules.sc.tablecolumn.TableColumnDO"/>
+		<typeAlias alias="tableReference" type="com.bs.service.modules.sc.tablereference.TableReferenceDO"/>
+		<typeAlias alias="tableIndex" type="com.bs.service.modules.sc.tableindex.TableIndexDO"/>
+		<typeAlias alias="area" type="com.bs.service.modules.sc.area.AreaDO"/>
+		<typeAlias alias="verificationCode" type="com.bs.service.modules.mc.verificationcode.VerificationCodeDO"/>
+		<typeAlias alias="shortMessageSend" type="com.bs.service.modules.mc.shortmessagesend.ShortMessageSendDO"/>
+		<typeAlias alias="dictionary" type="com.bs.service.modules.sc.dictionary.DictionaryDO"/>
+		<typeAlias alias="shortMessageSent" type="com.bs.service.modules.mc.shortmessagesent.ShortMessageSentDO"/>
+		<typeAlias alias="dictionaryCategory" type="com.bs.service.modules.sc.dictionarycategory.DictionaryCategoryDO"/>
+		<typeAlias alias="shortMessageProvider" type="com.bs.service.modules.mc.shortmessageprovider.ShortMessageProviderDO"/>
+		<typeAlias alias="viewConfig" type="com.bs.service.modules.sc.viewconfig.ViewConfigDO"/>
+		<typeAlias alias="fieldDataConfig" type="com.bs.service.modules.sc.fielddataconfig.FieldDataConfigDO"/>
+		<typeAlias alias="viewFieldConfig" type="com.bs.service.modules.sc.viewfieldconfig.ViewFieldConfigDO"/>
+		<typeAlias alias="fieldDataCategory" type="com.bs.service.modules.sc.fielddatacategory.FieldDataCategoryDO"/>
+	</typeAliases>
+	<mappers> 
+		<mapper resource="com/bs/service/modules/uc/role/base/base-role-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/uc/role/custom-role-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/uc/userrolerelation/base/base-userrolerelation-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/uc/userrolerelation/custom-userrolerelation-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/uc/organization/base/base-organization-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/uc/organization/custom-organization-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/uc/user/base/base-user-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/uc/user/custom-user-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/uc/roleauthrelation/base/base-roleauthrelation-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/uc/roleauthrelation/custom-roleauthrelation-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/uc/authorization/base/base-authorization-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/uc/authorization/custom-authorization-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/uc/log/base/base-log-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/uc/log/custom-log-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/table/base/base-table-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/table/custom-table-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/tablecolumn/base/base-tablecolumn-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/tablecolumn/custom-tablecolumn-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/tablereference/base/base-tablereference-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/tablereference/custom-tablereference-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/tableindex/base/base-tableindex-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/tableindex/custom-tableindex-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/area/base/base-area-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/area/custom-area-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/mc/verificationcode/base/base-verificationcode-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/mc/verificationcode/custom-verificationcode-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/mc/shortmessagesend/base/base-shortmessagesend-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/mc/shortmessagesend/custom-shortmessagesend-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/dictionary/base/base-dictionary-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/dictionary/custom-dictionary-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/mc/shortmessagesent/base/base-shortmessagesent-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/mc/shortmessagesent/custom-shortmessagesent-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/dictionarycategory/base/base-dictionarycategory-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/dictionarycategory/custom-dictionarycategory-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/mc/shortmessageprovider/base/base-shortmessageprovider-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/mc/shortmessageprovider/custom-shortmessageprovider-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/viewconfig/base/base-viewconfig-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/viewconfig/custom-viewconfig-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/fielddataconfig/base/base-fielddataconfig-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/fielddataconfig/custom-fielddataconfig-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/viewfieldconfig/base/base-viewfieldconfig-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/viewfieldconfig/custom-viewfieldconfig-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/fielddatacategory/base/base-fielddatacategory-sql-mapper.xml" />
+		<mapper resource="com/bs/service/modules/sc/fielddatacategory/custom-fielddatacategory-sql-mapper.xml" />
+    </mappers>
+</configuration>  
+
