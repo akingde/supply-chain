@@ -1,4 +1,4 @@
-package com.bs.service;
+package com.bs;
 
 import java.util.ArrayList;
 
