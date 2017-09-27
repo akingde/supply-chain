@@ -151,11 +151,11 @@ public class ViewFieldConfigController extends BaseController{
 				return returnData;
 			}
 			//调用dubbo 业务
-			ResultData<ViewFieldConfigDTO> resultData = viewFieldConfigApi.removeById(id);
+			ResultData<Long> resultData = viewFieldConfigApi.removeById(id);
 			if (resultData != null) {
 				String code = resultData.getCode();
 				String message = resultData.getMessage();
-				ViewFieldConfigDTO data = resultData.getData();
+				Long data = resultData.getData();
 				returnData.setCode(code);
 				returnData.setMessage(message);
 				returnData.setData(data);

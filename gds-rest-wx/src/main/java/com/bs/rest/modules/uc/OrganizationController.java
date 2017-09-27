@@ -151,11 +151,11 @@ public class OrganizationController extends BaseController{
 				return returnData;
 			}
 			//调用dubbo 业务
-			ResultData<OrganizationDTO> resultData = organizationApi.removeById(id);
+			ResultData<Long> resultData = organizationApi.removeById(id);
 			if (resultData != null) {
 				String code = resultData.getCode();
 				String message = resultData.getMessage();
-				OrganizationDTO data = resultData.getData();
+				Long data = resultData.getData();
 				returnData.setCode(code);
 				returnData.setMessage(message);
 				returnData.setData(data);

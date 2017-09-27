@@ -151,11 +151,11 @@ public class DictionaryController extends BaseController{
 				return returnData;
 			}
 			//调用dubbo 业务
-			ResultData<DictionaryDTO> resultData = dictionaryApi.removeById(id);
+			ResultData<Long> resultData = dictionaryApi.removeById(id);
 			if (resultData != null) {
 				String code = resultData.getCode();
 				String message = resultData.getMessage();
-				DictionaryDTO data = resultData.getData();
+				Long data = resultData.getData();
 				returnData.setCode(code);
 				returnData.setMessage(message);
 				returnData.setData(data);

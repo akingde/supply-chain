@@ -151,11 +151,11 @@ public class VerificationCodeController extends BaseController{
 				return returnData;
 			}
 			//调用dubbo 业务
-			ResultData<VerificationCodeDTO> resultData = verificationCodeApi.removeById(id);
+			ResultData<Long> resultData = verificationCodeApi.removeById(id);
 			if (resultData != null) {
 				String code = resultData.getCode();
 				String message = resultData.getMessage();
-				VerificationCodeDTO data = resultData.getData();
+				Long data = resultData.getData();
 				returnData.setCode(code);
 				returnData.setMessage(message);
 				returnData.setData(data);

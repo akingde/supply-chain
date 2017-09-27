@@ -151,11 +151,11 @@ public class AuthorizationController extends BaseController{
 				return returnData;
 			}
 			//调用dubbo 业务
-			ResultData<AuthorizationDTO> resultData = authorizationApi.removeById(id);
+			ResultData<Long> resultData = authorizationApi.removeById(id);
 			if (resultData != null) {
 				String code = resultData.getCode();
 				String message = resultData.getMessage();
-				AuthorizationDTO data = resultData.getData();
+				Long data = resultData.getData();
 				returnData.setCode(code);
 				returnData.setMessage(message);
 				returnData.setData(data);

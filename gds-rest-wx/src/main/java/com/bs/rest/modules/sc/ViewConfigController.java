@@ -151,11 +151,11 @@ public class ViewConfigController extends BaseController{
 				return returnData;
 			}
 			//调用dubbo 业务
-			ResultData<ViewConfigDTO> resultData = viewConfigApi.removeById(id);
+			ResultData<Long> resultData = viewConfigApi.removeById(id);
 			if (resultData != null) {
 				String code = resultData.getCode();
 				String message = resultData.getMessage();
-				ViewConfigDTO data = resultData.getData();
+				Long data = resultData.getData();
 				returnData.setCode(code);
 				returnData.setMessage(message);
 				returnData.setData(data);

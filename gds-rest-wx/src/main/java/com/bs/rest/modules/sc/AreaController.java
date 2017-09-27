@@ -151,11 +151,11 @@ public class AreaController extends BaseController{
 				return returnData;
 			}
 			//调用dubbo 业务
-			ResultData<AreaDTO> resultData = areaApi.removeById(id);
+			ResultData<Long> resultData = areaApi.removeById(id);
 			if (resultData != null) {
 				String code = resultData.getCode();
 				String message = resultData.getMessage();
-				AreaDTO data = resultData.getData();
+				Long data = resultData.getData();
 				returnData.setCode(code);
 				returnData.setMessage(message);
 				returnData.setData(data);

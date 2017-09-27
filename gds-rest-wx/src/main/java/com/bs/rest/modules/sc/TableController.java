@@ -151,11 +151,11 @@ public class TableController extends BaseController{
 				return returnData;
 			}
 			//调用dubbo 业务
-			ResultData<TableDTO> resultData = tableApi.removeById(id);
+			ResultData<Long> resultData = tableApi.removeById(id);
 			if (resultData != null) {
 				String code = resultData.getCode();
 				String message = resultData.getMessage();
-				TableDTO data = resultData.getData();
+				Long data = resultData.getData();
 				returnData.setCode(code);
 				returnData.setMessage(message);
 				returnData.setData(data);
