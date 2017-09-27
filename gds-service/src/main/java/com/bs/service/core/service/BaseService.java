@@ -85,14 +85,18 @@ public abstract class BaseService{
 	 * @param cls
 	 * @param method
 	 * @param code
+	 * @param replaceMsg []
 	 * @return
 	 */
-	public String getMessage(Class<Object> cls,String method,String code) {
+	public String getMessage(Class<?> cls,String method,String code,String replaceMsg[]) {
 		String returnMsg = null;
 		String key = null;
 		try {
 			key = StringUtil.toLowerCaseFirstOne(cls.getSimpleName()) + "." + method + "." + code;
-			returnMsg = resourceBundleMessageSource.getMessage(key, null, Locale.CHINESE);
+			returnMsg = resourceBundleMessageSource.getMessage(key, replaceMsg, Locale.CHINESE);
+			if (returnMsg == null || returnMsg.equals("")) {
+				returnMsg = key;
+			}
 		}
 		catch(Exception e) {
 			returnMsg = key;
