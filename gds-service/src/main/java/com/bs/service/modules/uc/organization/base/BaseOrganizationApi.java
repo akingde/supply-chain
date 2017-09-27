@@ -68,14 +68,16 @@ public abstract class BaseOrganizationApi<T> extends BaseService{
 			Integer result = organizationService.save(organizationDO);
 			if (result != null && result.compareTo(0) > 0) {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"save",ResultCode.RCODE_SUCCESS, null);
 				resultData.setCode(ResultCode.RCODE_SUCCESS);
+				resultData.setData(organizationDTO);
 				resultData.setMessage(promptMessage);
 			}
 			else {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"save",ResultCode.RCODE_EXECUTE_FAIL, null);
 				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
+				resultData.setData(organizationDTO);
 				resultData.setMessage(promptMessage);
 			}
 		}
@@ -111,14 +113,16 @@ public abstract class BaseOrganizationApi<T> extends BaseService{
 			Integer result = organizationService.updateById(organizationDO);
 			if (result != null && result.compareTo(0) > 0) {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"updateById",ResultCode.RCODE_SUCCESS, null);
 				resultData.setCode(ResultCode.RCODE_SUCCESS);
+				resultData.setData(organizationDTO);
 				resultData.setMessage(promptMessage);
 			}
 			else {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"updateById",ResultCode.RCODE_EXECUTE_FAIL, null);
 				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
+				resultData.setData(organizationDTO);
 				resultData.setMessage(promptMessage);
 			}
 		}
@@ -154,14 +158,16 @@ public abstract class BaseOrganizationApi<T> extends BaseService{
 			Integer result = organizationService.updateCriteria(organizationDO);
 			if (result != null && result.compareTo(0) > 0) {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"updateCriteria",ResultCode.RCODE_SUCCESS, null);
 				resultData.setCode(ResultCode.RCODE_SUCCESS);
+				resultData.setData(organizationDTO);
 				resultData.setMessage(promptMessage);
 			}
 			else {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"updateCriteria",ResultCode.RCODE_EXECUTE_FAIL, null);
 				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
+				resultData.setData(organizationDTO);
 				resultData.setMessage(promptMessage);
 			}
 		}
@@ -197,14 +203,16 @@ public abstract class BaseOrganizationApi<T> extends BaseService{
 			Integer result = organizationService.removeCriteria(organizationDO);
 			if (result != null && result.compareTo(0) > 0) {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"removeCriteria",ResultCode.RCODE_SUCCESS, null);
 				resultData.setCode(ResultCode.RCODE_SUCCESS);
+				resultData.setData(organizationDTO);
 				resultData.setMessage(promptMessage);
 			}
 			else {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"removeCriteria",ResultCode.RCODE_EXECUTE_FAIL, null);
 				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
+				resultData.setData(organizationDTO);
 				resultData.setMessage(promptMessage);
 			}
 		}
@@ -217,8 +225,8 @@ public abstract class BaseOrganizationApi<T> extends BaseService{
 	}
 
 	
-	public ResultData<OrganizationDTO> removeById(Long id) {
-		ResultData<OrganizationDTO> resultData = new ResultData<OrganizationDTO>();
+	public ResultData<Long> removeById(Long id) {
+		ResultData<Long> resultData = new ResultData<Long>();
 		try {
 			//验证输入参数
 			OrganizationDO organizationDO = new OrganizationDO();
@@ -241,14 +249,16 @@ public abstract class BaseOrganizationApi<T> extends BaseService{
 			Integer result = organizationService.removeById(id);
 			if (result != null && result.compareTo(0) > 0) {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"removeById",ResultCode.RCODE_SUCCESS, null);
 				resultData.setCode(ResultCode.RCODE_SUCCESS);
+				resultData.setData(id);
 				resultData.setMessage(promptMessage);
 			}
 			else {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"removeById",ResultCode.RCODE_EXECUTE_FAIL, null);
 				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
+				resultData.setData(id);
 				resultData.setMessage(promptMessage);
 			}
 		}
@@ -265,7 +275,7 @@ public abstract class BaseOrganizationApi<T> extends BaseService{
 		try {
 			organizationService.removeAll();
 			//设置返回码和提示信息
-			String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+			String promptMessage = super.getMessage(this.getClass(),"removeAll",ResultCode.RCODE_SUCCESS, null);
 			resultData.setCode(ResultCode.RCODE_SUCCESS);
 			resultData.setMessage(promptMessage);
 		}
@@ -307,17 +317,11 @@ public abstract class BaseOrganizationApi<T> extends BaseService{
 					listOrganizationDTO.add(organizationDTOTemp);
 				}
 				resultData.setData(listOrganizationDTO);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"listCriteria",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -339,17 +343,11 @@ public abstract class BaseOrganizationApi<T> extends BaseService{
 					listOrganizationDTO.add(organizationDTOTemp);
 				}
 				resultData.setData(listOrganizationDTO);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"listAll",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -380,19 +378,11 @@ public abstract class BaseOrganizationApi<T> extends BaseService{
 				return resultData;
 			}
 			List<Long> resultList = organizationService.listIdsCriteria(organizationDO);
-			if (resultList != null) {
-				resultData.setData(resultList);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
-			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			resultData.setData(resultList);
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"listIdsCriteria",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -431,17 +421,11 @@ public abstract class BaseOrganizationApi<T> extends BaseService{
 					listOrganizationDTO.add(organizationDTOTemp);
 				}
 				resultData.setData(listOrganizationDTO);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"listByInIds",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -477,17 +461,11 @@ public abstract class BaseOrganizationApi<T> extends BaseService{
 				OrganizationDTO resultOrganizationDTO = new OrganizationDTO();
 				BeanUtils.copyProperties(resultOrganizationDO, resultOrganizationDTO);
 				resultData.setData(resultOrganizationDTO);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"getOneById",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -523,17 +501,11 @@ public abstract class BaseOrganizationApi<T> extends BaseService{
 				OrganizationDTO resultOrganizationDTO = new OrganizationDTO();
 				BeanUtils.copyProperties(resultOrganizationDO, resultOrganizationDTO);
 				resultData.setData(resultOrganizationDTO);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"getOneCriteria",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -583,17 +555,11 @@ public abstract class BaseOrganizationApi<T> extends BaseService{
 				pageData.setRows(pageInfo.getPageSize());
 				pageData.setTotal(pageInfo.getPages());
 				resultData.setPageData(pageData);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"paginated",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -643,17 +609,11 @@ public abstract class BaseOrganizationApi<T> extends BaseService{
 				pageData.setRows(pageInfo.getPageSize());
 				pageData.setTotal(pageInfo.getPages());
 				resultData.setPageData(pageData);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"paginatedManual",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

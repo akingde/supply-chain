@@ -52,7 +52,7 @@ public class AuthorizationService extends BaseAuthorizationService<Authorization
 					File tmpFile = new File(pluginFile);
 					logger.debug("验证名称为[" + pluginFile + "]的临时文件是否存在.");
 					// 判断临时文件是否存在
-					if (tmpFile.exists()){
+					if (!tmpFile.exists()){
     					// 若不存在则创建或代表文件已经被修改
     					// 被修改的文件要进行重新加载
     					logger.debug("开始解析名称为[" + path + "]的文件,并解析内容入库.");

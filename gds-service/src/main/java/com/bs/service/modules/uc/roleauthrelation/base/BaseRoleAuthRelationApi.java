@@ -67,14 +67,16 @@ public abstract class BaseRoleAuthRelationApi<T> extends BaseService{
 			Integer result = roleAuthRelationService.save(roleAuthRelationDO);
 			if (result != null && result.compareTo(0) > 0) {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"save",ResultCode.RCODE_SUCCESS, null);
 				resultData.setCode(ResultCode.RCODE_SUCCESS);
+				resultData.setData(roleAuthRelationDTO);
 				resultData.setMessage(promptMessage);
 			}
 			else {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"save",ResultCode.RCODE_EXECUTE_FAIL, null);
 				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
+				resultData.setData(roleAuthRelationDTO);
 				resultData.setMessage(promptMessage);
 			}
 		}
@@ -111,14 +113,16 @@ public abstract class BaseRoleAuthRelationApi<T> extends BaseService{
 			Integer result = roleAuthRelationService.updateCriteria(roleAuthRelationDO);
 			if (result != null && result.compareTo(0) > 0) {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"updateCriteria",ResultCode.RCODE_SUCCESS, null);
 				resultData.setCode(ResultCode.RCODE_SUCCESS);
+				resultData.setData(roleAuthRelationDTO);
 				resultData.setMessage(promptMessage);
 			}
 			else {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"updateCriteria",ResultCode.RCODE_EXECUTE_FAIL, null);
 				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
+				resultData.setData(roleAuthRelationDTO);
 				resultData.setMessage(promptMessage);
 			}
 		}
@@ -154,14 +158,16 @@ public abstract class BaseRoleAuthRelationApi<T> extends BaseService{
 			Integer result = roleAuthRelationService.removeCriteria(roleAuthRelationDO);
 			if (result != null && result.compareTo(0) > 0) {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"removeCriteria",ResultCode.RCODE_SUCCESS, null);
 				resultData.setCode(ResultCode.RCODE_SUCCESS);
+				resultData.setData(roleAuthRelationDTO);
 				resultData.setMessage(promptMessage);
 			}
 			else {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"removeCriteria",ResultCode.RCODE_EXECUTE_FAIL, null);
 				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
+				resultData.setData(roleAuthRelationDTO);
 				resultData.setMessage(promptMessage);
 			}
 		}
@@ -180,7 +186,7 @@ public abstract class BaseRoleAuthRelationApi<T> extends BaseService{
 		try {
 			roleAuthRelationService.removeAll();
 			//设置返回码和提示信息
-			String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+			String promptMessage = super.getMessage(this.getClass(),"removeAll",ResultCode.RCODE_SUCCESS, null);
 			resultData.setCode(ResultCode.RCODE_SUCCESS);
 			resultData.setMessage(promptMessage);
 		}
@@ -222,17 +228,11 @@ public abstract class BaseRoleAuthRelationApi<T> extends BaseService{
 					listRoleAuthRelationDTO.add(roleAuthRelationDTOTemp);
 				}
 				resultData.setData(listRoleAuthRelationDTO);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"listCriteria",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -254,17 +254,11 @@ public abstract class BaseRoleAuthRelationApi<T> extends BaseService{
 					listRoleAuthRelationDTO.add(roleAuthRelationDTOTemp);
 				}
 				resultData.setData(listRoleAuthRelationDTO);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"listAll",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -295,19 +289,11 @@ public abstract class BaseRoleAuthRelationApi<T> extends BaseService{
 				return resultData;
 			}
 			List<Long> resultList = roleAuthRelationService.listIdsCriteria(roleAuthRelationDO);
-			if (resultList != null) {
-				resultData.setData(resultList);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
-			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			resultData.setData(resultList);
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"listIdsCriteria",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -346,17 +332,11 @@ public abstract class BaseRoleAuthRelationApi<T> extends BaseService{
 					listRoleAuthRelationDTO.add(roleAuthRelationDTOTemp);
 				}
 				resultData.setData(listRoleAuthRelationDTO);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"listByInIds",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -393,17 +373,11 @@ public abstract class BaseRoleAuthRelationApi<T> extends BaseService{
 				RoleAuthRelationDTO resultRoleAuthRelationDTO = new RoleAuthRelationDTO();
 				BeanUtils.copyProperties(resultRoleAuthRelationDO, resultRoleAuthRelationDTO);
 				resultData.setData(resultRoleAuthRelationDTO);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"getOneCriteria",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -453,17 +427,11 @@ public abstract class BaseRoleAuthRelationApi<T> extends BaseService{
 				pageData.setRows(pageInfo.getPageSize());
 				pageData.setTotal(pageInfo.getPages());
 				resultData.setPageData(pageData);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"paginated",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -513,17 +481,11 @@ public abstract class BaseRoleAuthRelationApi<T> extends BaseService{
 				pageData.setRows(pageInfo.getPageSize());
 				pageData.setTotal(pageInfo.getPages());
 				resultData.setPageData(pageData);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"paginatedManual",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

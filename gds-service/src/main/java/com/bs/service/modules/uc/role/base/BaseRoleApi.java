@@ -68,14 +68,16 @@ public abstract class BaseRoleApi<T> extends BaseService{
 			Integer result = roleService.save(roleDO);
 			if (result != null && result.compareTo(0) > 0) {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"save",ResultCode.RCODE_SUCCESS, null);
 				resultData.setCode(ResultCode.RCODE_SUCCESS);
+				resultData.setData(roleDTO);
 				resultData.setMessage(promptMessage);
 			}
 			else {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"save",ResultCode.RCODE_EXECUTE_FAIL, null);
 				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
+				resultData.setData(roleDTO);
 				resultData.setMessage(promptMessage);
 			}
 		}
@@ -111,14 +113,16 @@ public abstract class BaseRoleApi<T> extends BaseService{
 			Integer result = roleService.updateById(roleDO);
 			if (result != null && result.compareTo(0) > 0) {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"updateById",ResultCode.RCODE_SUCCESS, null);
 				resultData.setCode(ResultCode.RCODE_SUCCESS);
+				resultData.setData(roleDTO);
 				resultData.setMessage(promptMessage);
 			}
 			else {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"updateById",ResultCode.RCODE_EXECUTE_FAIL, null);
 				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
+				resultData.setData(roleDTO);
 				resultData.setMessage(promptMessage);
 			}
 		}
@@ -154,14 +158,16 @@ public abstract class BaseRoleApi<T> extends BaseService{
 			Integer result = roleService.updateCriteria(roleDO);
 			if (result != null && result.compareTo(0) > 0) {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"updateCriteria",ResultCode.RCODE_SUCCESS, null);
 				resultData.setCode(ResultCode.RCODE_SUCCESS);
+				resultData.setData(roleDTO);
 				resultData.setMessage(promptMessage);
 			}
 			else {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"updateCriteria",ResultCode.RCODE_EXECUTE_FAIL, null);
 				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
+				resultData.setData(roleDTO);
 				resultData.setMessage(promptMessage);
 			}
 		}
@@ -197,14 +203,16 @@ public abstract class BaseRoleApi<T> extends BaseService{
 			Integer result = roleService.removeCriteria(roleDO);
 			if (result != null && result.compareTo(0) > 0) {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"removeCriteria",ResultCode.RCODE_SUCCESS, null);
 				resultData.setCode(ResultCode.RCODE_SUCCESS);
+				resultData.setData(roleDTO);
 				resultData.setMessage(promptMessage);
 			}
 			else {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"removeCriteria",ResultCode.RCODE_EXECUTE_FAIL, null);
 				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
+				resultData.setData(roleDTO);
 				resultData.setMessage(promptMessage);
 			}
 		}
@@ -217,8 +225,8 @@ public abstract class BaseRoleApi<T> extends BaseService{
 	}
 
 	
-	public ResultData<RoleDTO> removeById(Long id) {
-		ResultData<RoleDTO> resultData = new ResultData<RoleDTO>();
+	public ResultData<Long> removeById(Long id) {
+		ResultData<Long> resultData = new ResultData<Long>();
 		try {
 			//验证输入参数
 			RoleDO roleDO = new RoleDO();
@@ -241,14 +249,16 @@ public abstract class BaseRoleApi<T> extends BaseService{
 			Integer result = roleService.removeById(id);
 			if (result != null && result.compareTo(0) > 0) {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"removeById",ResultCode.RCODE_SUCCESS, null);
 				resultData.setCode(ResultCode.RCODE_SUCCESS);
+				resultData.setData(id);
 				resultData.setMessage(promptMessage);
 			}
 			else {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"removeById",ResultCode.RCODE_EXECUTE_FAIL, null);
 				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
+				resultData.setData(id);
 				resultData.setMessage(promptMessage);
 			}
 		}
@@ -265,7 +275,7 @@ public abstract class BaseRoleApi<T> extends BaseService{
 		try {
 			roleService.removeAll();
 			//设置返回码和提示信息
-			String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+			String promptMessage = super.getMessage(this.getClass(),"removeAll",ResultCode.RCODE_SUCCESS, null);
 			resultData.setCode(ResultCode.RCODE_SUCCESS);
 			resultData.setMessage(promptMessage);
 		}
@@ -307,17 +317,11 @@ public abstract class BaseRoleApi<T> extends BaseService{
 					listRoleDTO.add(roleDTOTemp);
 				}
 				resultData.setData(listRoleDTO);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"listCriteria",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -339,17 +343,11 @@ public abstract class BaseRoleApi<T> extends BaseService{
 					listRoleDTO.add(roleDTOTemp);
 				}
 				resultData.setData(listRoleDTO);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"listAll",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -380,19 +378,11 @@ public abstract class BaseRoleApi<T> extends BaseService{
 				return resultData;
 			}
 			List<Long> resultList = roleService.listIdsCriteria(roleDO);
-			if (resultList != null) {
-				resultData.setData(resultList);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
-			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			resultData.setData(resultList);
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"listIdsCriteria",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -431,17 +421,11 @@ public abstract class BaseRoleApi<T> extends BaseService{
 					listRoleDTO.add(roleDTOTemp);
 				}
 				resultData.setData(listRoleDTO);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"listByInIds",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -477,17 +461,11 @@ public abstract class BaseRoleApi<T> extends BaseService{
 				RoleDTO resultRoleDTO = new RoleDTO();
 				BeanUtils.copyProperties(resultRoleDO, resultRoleDTO);
 				resultData.setData(resultRoleDTO);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"getOneById",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -523,17 +501,11 @@ public abstract class BaseRoleApi<T> extends BaseService{
 				RoleDTO resultRoleDTO = new RoleDTO();
 				BeanUtils.copyProperties(resultRoleDO, resultRoleDTO);
 				resultData.setData(resultRoleDTO);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"getOneCriteria",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -583,17 +555,11 @@ public abstract class BaseRoleApi<T> extends BaseService{
 				pageData.setRows(pageInfo.getPageSize());
 				pageData.setTotal(pageInfo.getPages());
 				resultData.setPageData(pageData);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"paginated",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -643,17 +609,11 @@ public abstract class BaseRoleApi<T> extends BaseService{
 				pageData.setRows(pageInfo.getPageSize());
 				pageData.setTotal(pageInfo.getPages());
 				resultData.setPageData(pageData);
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
-				resultData.setCode(ResultCode.RCODE_SUCCESS);
-				resultData.setMessage(promptMessage);
 			}
-			else {
-				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
-				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
-				resultData.setMessage(promptMessage);
-			}
+			//设置返回码和提示信息
+			String promptMessage = super.getMessage(this.getClass(),"paginatedManual",ResultCode.RCODE_SUCCESS, null);
+			resultData.setCode(ResultCode.RCODE_SUCCESS);
+			resultData.setMessage(promptMessage);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

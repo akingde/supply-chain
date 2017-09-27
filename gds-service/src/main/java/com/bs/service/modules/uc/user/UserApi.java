@@ -47,13 +47,13 @@ public class UserApi extends BaseUserApi<UserDTO> implements IUserService{
 				BeanUtils.copyProperties(resultUserDO, resultUserDTO);
 				resultData.setData(resultUserDTO);
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"getUserByAccount",ResultCode.RCODE_SUCCESS, null);
 				resultData.setCode(ResultCode.RCODE_SUCCESS);
 				resultData.setMessage(promptMessage);
 			}
 			else {
 				//设置返回码和提示信息
-				String promptMessage = super.getMessage(ResultCode.RCODE_PARAM_VALID_KEY, null);
+				String promptMessage = super.getMessage(this.getClass(),"getUserByAccount",ResultCode.RCODE_PARAM_VALID, null);
 				resultData.setCode(ResultCode.RCODE_PARAM_VALID);
 				resultData.setMessage(promptMessage);
 			}
