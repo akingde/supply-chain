@@ -33,7 +33,7 @@ public interface IBaseFieldDataCategoryService<T> extends IService<FieldDataCate
 	 * @param id
 	 * @return
 	 */
-	public ResultData<FieldDataCategoryDTO> removeById(Long id);
+	public ResultData<Long> removeById(Long id);
 
 	/**
 	 * 删除所有数据

@@ -33,7 +33,7 @@ public interface IBaseRoleService<T> extends IService<RoleDTO>{
 	 * @param id
 	 * @return
 	 */
-	public ResultData<RoleDTO> removeById(Long id);
+	public ResultData<Long> removeById(Long id);
 
 	/**
 	 * 删除所有数据

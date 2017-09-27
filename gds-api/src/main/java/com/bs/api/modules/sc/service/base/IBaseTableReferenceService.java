@@ -33,7 +33,7 @@ public interface IBaseTableReferenceService<T> extends IService<TableReferenceDT
 	 * @param id
 	 * @return
 	 */
-	public ResultData<TableReferenceDTO> removeById(Long id);
+	public ResultData<Long> removeById(Long id);
 
 	/**
 	 * 删除所有数据

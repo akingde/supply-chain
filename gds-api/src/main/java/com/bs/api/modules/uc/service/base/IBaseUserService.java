@@ -33,7 +33,7 @@ public interface IBaseUserService<T> extends IService<UserDTO>{
 	 * @param id
 	 * @return
 	 */
-	public ResultData<UserDTO> removeById(Long id);
+	public ResultData<Long> removeById(Long id);
 
 	/**
 	 * 删除所有数据

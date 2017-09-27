@@ -33,7 +33,7 @@ public interface IBaseLogService<T> extends IService<LogDTO>{
 	 * @param id
 	 * @return
 	 */
-	public ResultData<LogDTO> removeById(Long id);
+	public ResultData<Long> removeById(Long id);
 
 	/**
 	 * 删除所有数据

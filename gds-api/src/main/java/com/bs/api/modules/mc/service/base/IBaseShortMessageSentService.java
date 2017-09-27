@@ -33,7 +33,7 @@ public interface IBaseShortMessageSentService<T> extends IService<ShortMessageSe
 	 * @param id
 	 * @return
 	 */
-	public ResultData<ShortMessageSentDTO> removeById(Long id);
+	public ResultData<Long> removeById(Long id);
 
 	/**
 	 * 删除所有数据

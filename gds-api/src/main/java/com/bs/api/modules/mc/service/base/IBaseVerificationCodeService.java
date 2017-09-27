@@ -33,7 +33,7 @@ public interface IBaseVerificationCodeService<T> extends IService<VerificationCo
 	 * @param id
 	 * @return
 	 */
-	public ResultData<VerificationCodeDTO> removeById(Long id);
+	public ResultData<Long> removeById(Long id);
 
 	/**
 	 * 删除所有数据

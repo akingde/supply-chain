@@ -33,7 +33,7 @@ public interface IBaseViewFieldConfigService<T> extends IService<ViewFieldConfig
 	 * @param id
 	 * @return
 	 */
-	public ResultData<ViewFieldConfigDTO> removeById(Long id);
+	public ResultData<Long> removeById(Long id);
 
 	/**
 	 * 删除所有数据

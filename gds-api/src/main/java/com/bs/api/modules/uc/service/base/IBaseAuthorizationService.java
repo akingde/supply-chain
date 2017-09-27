@@ -33,7 +33,7 @@ public interface IBaseAuthorizationService<T> extends IService<AuthorizationDTO>
 	 * @param id
 	 * @return
 	 */
-	public ResultData<AuthorizationDTO> removeById(Long id);
+	public ResultData<Long> removeById(Long id);
 
 	/**
 	 * 删除所有数据

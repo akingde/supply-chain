@@ -33,7 +33,7 @@ public interface IBaseTableColumnService<T> extends IService<TableColumnDTO>{
 	 * @param id
 	 * @return
 	 */
-	public ResultData<TableColumnDTO> removeById(Long id);
+	public ResultData<Long> removeById(Long id);
 
 	/**
 	 * 删除所有数据

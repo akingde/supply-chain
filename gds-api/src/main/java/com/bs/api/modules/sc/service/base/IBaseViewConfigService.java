@@ -33,7 +33,7 @@ public interface IBaseViewConfigService<T> extends IService<ViewConfigDTO>{
 	 * @param id
 	 * @return
 	 */
-	public ResultData<ViewConfigDTO> removeById(Long id);
+	public ResultData<Long> removeById(Long id);
 
 	/**
 	 * 删除所有数据

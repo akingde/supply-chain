@@ -33,7 +33,7 @@ public interface IBaseAreaService<T> extends IService<AreaDTO>{
 	 * @param id
 	 * @return
 	 */
-	public ResultData<AreaDTO> removeById(Long id);
+	public ResultData<Long> removeById(Long id);
 
 	/**
 	 * 删除所有数据

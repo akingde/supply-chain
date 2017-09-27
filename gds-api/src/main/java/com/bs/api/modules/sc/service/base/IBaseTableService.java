@@ -33,7 +33,7 @@ public interface IBaseTableService<T> extends IService<TableDTO>{
 	 * @param id
 	 * @return
 	 */
-	public ResultData<TableDTO> removeById(Long id);
+	public ResultData<Long> removeById(Long id);
 
 	/**
 	 * 删除所有数据

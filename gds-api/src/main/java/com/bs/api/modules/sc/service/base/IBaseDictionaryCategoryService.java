@@ -33,7 +33,7 @@ public interface IBaseDictionaryCategoryService<T> extends IService<DictionaryCa
 	 * @param id
 	 * @return
 	 */
-	public ResultData<DictionaryCategoryDTO> removeById(Long id);
+	public ResultData<Long> removeById(Long id);
 
 	/**
 	 * 删除所有数据

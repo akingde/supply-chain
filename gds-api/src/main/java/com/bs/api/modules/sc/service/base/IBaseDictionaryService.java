@@ -33,7 +33,7 @@ public interface IBaseDictionaryService<T> extends IService<DictionaryDTO>{
 	 * @param id
 	 * @return
 	 */
-	public ResultData<DictionaryDTO> removeById(Long id);
+	public ResultData<Long> removeById(Long id);
 
 	/**
 	 * 删除所有数据
