@@ -151,11 +151,11 @@ public class LogController extends BaseController{
 				return returnData;
 			}
 			//调用dubbo 业务
-			ResultData<LogDTO> resultData = logApi.removeById(id);
+			ResultData<Long> resultData = logApi.removeById(id);
 			if (resultData != null) {
 				String code = resultData.getCode();
 				String message = resultData.getMessage();
-				LogDTO data = resultData.getData();
+				Long data = resultData.getData();
 				returnData.setCode(code);
 				returnData.setMessage(message);
 				returnData.setData(data);

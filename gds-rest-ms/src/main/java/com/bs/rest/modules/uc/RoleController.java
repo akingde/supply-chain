@@ -151,11 +151,11 @@ public class RoleController extends BaseController{
 				return returnData;
 			}
 			//调用dubbo 业务
-			ResultData<RoleDTO> resultData = roleApi.removeById(id);
+			ResultData<Long> resultData = roleApi.removeById(id);
 			if (resultData != null) {
 				String code = resultData.getCode();
 				String message = resultData.getMessage();
-				RoleDTO data = resultData.getData();
+				Long data = resultData.getData();
 				returnData.setCode(code);
 				returnData.setMessage(message);
 				returnData.setData(data);

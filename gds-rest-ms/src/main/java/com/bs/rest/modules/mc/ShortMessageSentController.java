@@ -151,11 +151,11 @@ public class ShortMessageSentController extends BaseController{
 				return returnData;
 			}
 			//调用dubbo 业务
-			ResultData<ShortMessageSentDTO> resultData = shortMessageSentApi.removeById(id);
+			ResultData<Long> resultData = shortMessageSentApi.removeById(id);
 			if (resultData != null) {
 				String code = resultData.getCode();
 				String message = resultData.getMessage();
-				ShortMessageSentDTO data = resultData.getData();
+				Long data = resultData.getData();
 				returnData.setCode(code);
 				returnData.setMessage(message);
 				returnData.setData(data);

@@ -151,11 +151,11 @@ public class FieldDataConfigController extends BaseController{
 				return returnData;
 			}
 			//调用dubbo 业务
-			ResultData<FieldDataConfigDTO> resultData = fieldDataConfigApi.removeById(id);
+			ResultData<Long> resultData = fieldDataConfigApi.removeById(id);
 			if (resultData != null) {
 				String code = resultData.getCode();
 				String message = resultData.getMessage();
-				FieldDataConfigDTO data = resultData.getData();
+				Long data = resultData.getData();
 				returnData.setCode(code);
 				returnData.setMessage(message);
 				returnData.setData(data);
