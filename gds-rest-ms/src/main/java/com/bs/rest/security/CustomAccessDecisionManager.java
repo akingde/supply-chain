@@ -19,12 +19,12 @@ public class CustomAccessDecisionManager implements AccessDecisionManager {
 	public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes)
 			throws AccessDeniedException, InsufficientAuthenticationException {
 		if (configAttributes == null) {
-			throw new AccessDeniedException("make sure configAttributes have inited!");
+			throw new AccessDeniedException("configAttributes is not null!");
 		}
 		//判断访问权限
 		boolean hasRight = check(authentication, configAttributes);
 		if (!hasRight) {
-			throw new AccessDeniedException("make sure you have right to access this service!");
+			throw new AccessDeniedException("unauthorized access!");
 		}
 	}
 
@@ -43,7 +43,7 @@ public class CustomAccessDecisionManager implements AccessDecisionManager {
 			//获取用户登录时候，拿到的系统访问权限
 			Collection<? extends GrantedAuthority> grantedAuthoritys = authentication.getAuthorities();
 			if (grantedAuthoritys == null || grantedAuthoritys.isEmpty()) {
-				throw new AccessDeniedException("make sure you have right to access this service!");
+				throw new AccessDeniedException("unauthorized access!");
 			}
 			for (GrantedAuthority grantedAuthority : grantedAuthoritys) {
 				if (role.equals(grantedAuthority.getAuthority())) {
