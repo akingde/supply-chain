@@ -164,11 +164,11 @@ public class ${entity}Controller extends BaseController{
 				return returnData;
 			}
 			//调用dubbo 业务
-			ResultData<${entity}DTO> resultData = ${entity?uncap_first}Api.removeById(id);
+			ResultData<Long> resultData = ${entity?uncap_first}Api.removeById(id);
 			if (resultData != null) {
 				String code = resultData.getCode();
 				String message = resultData.getMessage();
-				${entity}DTO data = resultData.getData();
+				Long data = resultData.getData();
 				returnData.setCode(code);
 				returnData.setMessage(message);
 				returnData.setData(data);

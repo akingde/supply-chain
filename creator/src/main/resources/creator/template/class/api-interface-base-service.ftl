@@ -44,7 +44,7 @@ public interface IBase${entity}Service<T> extends IService<${entity}DTO>{
 	 * @param id
 	 * @return
 	 */
-	public ResultData<${entity}DTO> removeById(Long id);
+	public ResultData<Long> removeById(Long id);
 	</#if>
 
 	/**
