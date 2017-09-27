@@ -25,17 +25,9 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
+		http.anonymous().disable();
 		http.requestMatchers()
-			.antMatchers("/*")
-		  	.and().authorizeRequests().antMatchers("/oauth/token",
-					"/images/**",
-					"/configuration/ui/**",
-					"/configuration/security/**",
-					"/configuration**",
-		  			"/swagger-resources",
-		  			"/swagger-ui.html",
-		  			"/webjars/**",
-		  			"/v2/api-docs/**").permitAll()
+			.antMatchers("/**")
 			.and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 	}
 

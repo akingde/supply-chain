@@ -24,6 +24,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
 	
+	private static final AntPathRequestMatcher indexRequestMatcher = new AntPathRequestMatcher("/");
 	private static final AntPathRequestMatcher oauthRequestMatcher = new AntPathRequestMatcher("/oauth/**");
 	private static final AntPathRequestMatcher swaggerRequestMatcher = new AntPathRequestMatcher("/swagger-ui.html");
 	private static final AntPathRequestMatcher swaggerResRequestMatcher = new AntPathRequestMatcher("/swagger-resources");
@@ -61,7 +62,10 @@ public class CustomFilterSecurityInterceptor extends AbstractSecurityInterceptor
 	}
 
 	public void invoke(FilterInvocation fi) throws IOException, ServletException {
+//		System.out.println(fi.getHttpRequest().getRequestURI());
+//		System.out.println("session id:" + fi.getHttpRequest().getSession().getId());
 		//非鉴权地址直接跳过
+		boolean isIndex = indexRequestMatcher.matches(fi.getHttpRequest());
 		boolean isOauth = oauthRequestMatcher.matches(fi.getHttpRequest());
 		boolean isSwagger = swaggerRequestMatcher.matches(fi.getHttpRequest());
 		boolean isSwaggerRes = swaggerResRequestMatcher.matches(fi.getHttpRequest());
@@ -71,7 +75,7 @@ public class CustomFilterSecurityInterceptor extends AbstractSecurityInterceptor
 		boolean isImage = imagesRequestMatcher.matches(fi.getHttpRequest());
 		boolean isV2doc = v2docRequestMatcher.matches(fi.getHttpRequest());
 		InterceptorStatusToken token = null;
-		if (!isOauth && !isSwagger && !isSwaggerRes && !isFavicon && !isWebjars && !isConfig && !isImage && !isV2doc) {
+		if (!isIndex && !isOauth && !isSwagger && !isSwaggerRes && !isFavicon && !isWebjars && !isConfig && !isImage && !isV2doc) {
 			 token = super.beforeInvocation(fi);
 		}
 		try {

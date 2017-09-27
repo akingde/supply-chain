@@ -19,7 +19,7 @@ import com.bs.rest.config.SecurityConfig;
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-//	private static String REALM = "MY_OAUTH_REALM";
+	private static String REALM = "MY_OAUTH_REALM";
 	
 	@Autowired
 	private SecurityConfig securityConfig;
@@ -64,7 +64,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-//		oauthServer.realm(REALM + "/client");
+		oauthServer.realm(REALM + "/client");
 	}
 
 }

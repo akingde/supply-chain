@@ -43,15 +43,9 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/oauth/token",
-				"/images/**",
-				"/configuration/ui/**",
-				"/configuration/security/**",
-				"/configuration**",
-	  			"/swagger-resources",
-	  			"/swagger-ui.html",
-	  			"/webjars/**",
-	  			"/v2/api-docs/**").permitAll();
+    	http.anonymous().disable();
+		http.csrf().disable().authorizeRequests().antMatchers("/oauth/token").permitAll()
+		.and().authorizeRequests().anyRequest().authenticated();
     }
 
     @Override
