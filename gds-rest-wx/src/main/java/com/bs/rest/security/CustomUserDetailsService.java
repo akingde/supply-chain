@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -55,7 +54,24 @@ public class CustomUserDetailsService implements UserDetailsService {
         		}
         	}
         }
-        return new User(username,userDTO.getPassword(),collection);
+        //设置登录用户信息，如果需要可能自定义增加
+        CustomUserDetails customUserDetails = new CustomUserDetails(username,userDTO.getPassword(),collection);
+        customUserDetails.setId(userDTO.getId());
+        customUserDetails.setAccount(userDTO.getAccount());
+        customUserDetails.setBirthday(userDTO.getBirthday());
+        customUserDetails.setEmail(userDTO.getEmail());
+        customUserDetails.setGender(userDTO.getGender());
+        customUserDetails.setIsAdmin(userDTO.getIsAdmin());
+        customUserDetails.setIsPosition(userDTO.getIsPosition());
+        customUserDetails.setMobilePhone(userDTO.getMobilePhone());
+        customUserDetails.setName(userDTO.getName());
+        customUserDetails.setOrgCode(userDTO.getOrgCode());
+        customUserDetails.setOrgId(userDTO.getOrgId());
+        customUserDetails.setOrgIds(userDTO.getOrgIds());
+        customUserDetails.setOfficePhone(userDTO.getOfficePhone());
+        customUserDetails.setUserStatus(userDTO.getUserStatus());
+        customUserDetails.setUserType(userDTO.getUserType());
+        return customUserDetails;
     }
 
 }
