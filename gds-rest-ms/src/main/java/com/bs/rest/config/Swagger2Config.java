@@ -52,58 +52,58 @@ public class Swagger2Config extends WebMvcConfigurationSupport {
 	// .version("1.0")
 	// .build();
 	// }
-	@Value("${security.userOauth.clientId}")
+	@Value("${swagger.oauth2.clientId}")
 	private String authClientId;
 
-	@Value("${security.userOauth.clientSecret}")
+	@Value("${swagger.oauth2.clientSecret}")
 	private String authClientSecret;
 
-	@Value("${security.userOauth.type}")
+	@Value("${swagger.oauth2.type}")
 	private String type;
 
-	@Value("${security.userOauth.authorizationUrl}")
+	@Value("${swagger.oauth2.authorizationUrl}")
 	private String authorizationUrl;
 
-	@Value("${security.userOauth.tokenUrl}")
+	@Value("${swagger.oauth2.tokenUrl}")
 	private String tokenUrl;
 
-	@Value("${security.userOauth.tokenName}")
+	@Value("${swagger.oauth2.tokenName}")
 	private String tokenName;
 
-	@Value("${security.userOauth.scope.code}")
+	@Value("${swagger.oauth2.scope.code}")
 	private String scopeCode;
 
-	@Value("${security.userOauth.scope.desc}")
+	@Value("${swagger.oauth2.scope.desc}")
 	private String scopeDesc;
 
-	@Value("${app.key}")
+	@Value("${api.key}")
 	private String appKey;
 
-	@Value("${app.name}")
+	@Value("${api.name}")
 	private String appName;
 
-	@Value("${app.desc}")
+	@Value("${api.desc}")
 	private String appDesc;
 
-	@Value("${app.version}")
+	@Value("${api.version}")
 	private String appVersion;
 
-	@Value("${app.termsOfServiceUrl}")
+	@Value("${api.termsOfServiceUrl}")
 	private String termsOfServiceUrl;
 
-	@Value("${app.contact.name}")
+	@Value("${api.contact.name}")
 	private String contactName;
 
-	@Value("${app.contact.url}")
+	@Value("${api.contact.url}")
 	private String contactUrl;
 
-	@Value("${app.contact.email}")
+	@Value("${api.contact.email}")
 	private String contactEmail;
 
-	@Value("${app.license}")
+	@Value("${api.license}")
 	private String license;
 
-	@Value("${app.licenseUrl}")
+	@Value("${api.licenseUrl}")
 	private String licenseUrl;
 
 	/**
