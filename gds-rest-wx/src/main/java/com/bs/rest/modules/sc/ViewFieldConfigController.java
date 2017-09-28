@@ -46,7 +46,7 @@ public class ViewFieldConfigController extends BaseController{
 
 	public static Logger logger = Logger.getLogger(ViewFieldConfigController.class);
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private IViewFieldConfigService viewFieldConfigApi;
 	
 	@ApiOperation(value = "视图字段配置信息存储表-数据添加(保存)")

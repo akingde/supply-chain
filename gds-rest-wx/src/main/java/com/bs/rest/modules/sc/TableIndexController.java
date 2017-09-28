@@ -46,7 +46,7 @@ public class TableIndexController extends BaseController{
 
 	public static Logger logger = Logger.getLogger(TableIndexController.class);
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private ITableIndexService tableIndexApi;
 	
 	@ApiOperation(value = "表索引信息存储表-数据添加(保存)")

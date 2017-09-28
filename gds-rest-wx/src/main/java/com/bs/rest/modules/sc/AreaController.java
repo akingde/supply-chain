@@ -46,7 +46,7 @@ public class AreaController extends BaseController{
 
 	public static Logger logger = Logger.getLogger(AreaController.class);
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private IAreaService areaApi;
 	
 	@ApiOperation(value = "地区信息存储表-数据添加(保存)")

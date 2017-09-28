@@ -46,7 +46,7 @@ public class TableColumnController extends BaseController{
 
 	public static Logger logger = Logger.getLogger(TableColumnController.class);
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private ITableColumnService tableColumnApi;
 	
 	@ApiOperation(value = "表结构存储表-数据添加(保存)")

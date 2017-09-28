@@ -46,7 +46,7 @@ public class ShortMessageSendController extends BaseController{
 
 	public static Logger logger = Logger.getLogger(ShortMessageSendController.class);
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private IShortMessageSendService shortMessageSendApi;
 	
 	@ApiOperation(value = "业务短信发送存储表-数据添加(保存)")

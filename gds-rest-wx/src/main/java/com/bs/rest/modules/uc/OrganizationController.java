@@ -46,7 +46,7 @@ public class OrganizationController extends BaseController{
 
 	public static Logger logger = Logger.getLogger(OrganizationController.class);
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private IOrganizationService organizationApi;
 	
 	@ApiOperation(value = "机构信息表-数据添加(保存)")

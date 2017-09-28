@@ -46,7 +46,7 @@ public class TableReferenceController extends BaseController{
 
 	public static Logger logger = Logger.getLogger(TableReferenceController.class);
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private ITableReferenceService tableReferenceApi;
 	
 	@ApiOperation(value = "表关系信息存储表-数据添加(保存)")

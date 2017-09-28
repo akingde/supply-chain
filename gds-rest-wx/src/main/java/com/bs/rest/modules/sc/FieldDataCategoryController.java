@@ -46,7 +46,7 @@ public class FieldDataCategoryController extends BaseController{
 
 	public static Logger logger = Logger.getLogger(FieldDataCategoryController.class);
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private IFieldDataCategoryService fieldDataCategoryApi;
 	
 	@ApiOperation(value = "视图字段数据分类信息存储表-数据添加(保存)")

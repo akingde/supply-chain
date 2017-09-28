@@ -34,10 +34,10 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
 	private static Map<String, ConfigAttribute> configAttributeWildcardMap = null;
 	
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private IAuthorizationService authorizationApi;
 	
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private IRoleService roleApi;
 	
 	/**
