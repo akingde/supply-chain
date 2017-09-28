@@ -22,14 +22,14 @@ public class AuthorizationService extends BaseAuthorizationService<Authorization
 
 	@Autowired
 	private MultipleLoadPluginConfigXml multipleLoadPluginConfigXml;
-	
+
 	@Override
-	public void afterPropertiesSet() throws Exception{
-		//获取初始化的xml配置文件
+	public void afterPropertiesSet() throws Exception {
+		// 获取初始化的xml配置文件
 		String pluginNameArr[] = multipleLoadPluginConfigXml.getPluginNames();
-		for(String path:pluginNameArr){
-			if(path != null){
-				try{
+		for (String path : pluginNameArr) {
+			if (path != null) {
+				try {
 					File xmlFile = new File(path);
 					if (!xmlFile.exists()) {
 						continue;
@@ -39,45 +39,45 @@ public class AuthorizationService extends BaseAuthorizationService<Authorization
 					String parentPath = parentFile.getPath() + File.separator + "tmp";
 					// 若临时文件目录不存在，则创建目录
 					File tmpFilePath = new File(parentPath);
-					if(!tmpFilePath.exists()){
+					if (!tmpFilePath.exists()) {
 						tmpFilePath.mkdirs();
 					}
 					// 插件文件名称
 					String pluginFileName = xmlFile.getName();
 					// 替换后的临时文件前缀
-//					String tmpFileName = pluginFileName.replaceAll(".xml","");
+					// String tmpFileName = pluginFileName.replaceAll(".xml","");
 					String tmpFileName = pluginFileName + "_" + xmlFile.lastModified() + ".tmp";
 					// 临时文件名称
 					String pluginFile = parentPath + File.separator + tmpFileName;
 					File tmpFile = new File(pluginFile);
 					logger.debug("验证名称为[" + pluginFile + "]的临时文件是否存在.");
 					// 判断临时文件是否存在
-					if (!tmpFile.exists()){
-    					// 若不存在则创建或代表文件已经被修改
-    					// 被修改的文件要进行重新加载
-    					logger.debug("开始解析名称为[" + path + "]的文件,并解析内容入库.");
-    					try {
-    						this.parserXml(path);
-    						tmpFile.createNewFile();
-    					}
-    					catch(Exception e) {
-    						if (tmpFile.exists()) {
-    							tmpFile.delete();
-    						}
-    					}
-    					File files[] = tmpFilePath.listFiles();
-    					if(files != null){
-    						for(File fileTemp:files){
-    							String fileTempName = fileTemp.getName();
-    							int index = fileTempName.indexOf(pluginFileName);
-    							if(index >= 0 && !fileTempName.equals(tmpFileName)){
-    								fileTemp.delete();
-    							}
-    						}
-    					}
+					if (!tmpFile.exists()) {
+						// 若不存在则创建或代表文件已经被修改
+						// 被修改的文件要进行重新加载
+						logger.debug("开始解析名称为[" + path + "]的文件,并解析内容入库.");
+						try {
+							this.parserXml(path);
+							tmpFile.createNewFile();
+						}
+						catch (Exception e) {
+							if (tmpFile.exists()) {
+								tmpFile.delete();
+							}
+						}
+						File files[] = tmpFilePath.listFiles();
+						if (files != null) {
+							for (File fileTemp : files) {
+								String fileTempName = fileTemp.getName();
+								int index = fileTempName.indexOf(pluginFileName);
+								if (index >= 0 && !fileTempName.equals(tmpFileName)) {
+									fileTemp.delete();
+								}
+							}
+						}
 					}
 				}
-				catch(Exception e){
+				catch (Exception e) {
 					e.printStackTrace();
 					logger.debug("开始解析名称为[" + path + "]的文件为找到或解析失败.");
 					System.exit(0);
@@ -91,8 +91,8 @@ public class AuthorizationService extends BaseAuthorizationService<Authorization
 	 * @param fileName
 	 * @throws Exception
 	 */
-	private void parserXml(String pfile) throws Exception{
-		try{
+	private void parserXml(String pfile) throws Exception {
+		try {
 			SAXReader saxReader = new SAXReader();
 			// 把文件读入到文档
 			Document document = saxReader.read(pfile);
@@ -102,70 +102,70 @@ public class AuthorizationService extends BaseAuthorizationService<Authorization
 			int index = 1;
 			// 树形结构描述关系
 			String relationPath = ",0,";
-			if(node != null){
+			if (node != null) {
 				String nodeName = node.getName();
 				// 系统权限信息
 				AuthorizationDO authorization = new AuthorizationDO();
 				// 代码
-				String code = this.getNodeAttrValue(node,"code");
-				if(code != null){
+				String code = this.getNodeAttrValue(node, "code");
+				if (code != null) {
 					authorization.setCode(Long.parseLong(code));
 				}
 
 				relationPath += code + ",";
 				// 中文名称
-				String name = this.getNodeAttrValue(node,"name");
-				if(name != null){
+				String name = this.getNodeAttrValue(node, "name");
+				if (name != null) {
 					authorization.setName(name);
 				}
 				// 权限类型 开发可见权限，上线可见权限
-				String type = this.getNodeAttrValue(node,"auth-type");
-				if(type != null){
+				String type = this.getNodeAttrValue(node, "auth-type");
+				if (type != null) {
 					authorization.setAuthType(Integer.parseInt(type));
 				}
-				else{
+				else {
 					authorization.setAuthType(0);
 				}
 				// 菜单类型 目前分top和shortcut两类
-				String menuType = this.getNodeAttrValue(node,"menu-type");
-				if(menuType != null){
+				String menuType = this.getNodeAttrValue(node, "menu-type");
+				if (menuType != null) {
 					authorization.setMenuType(menuType);
 				}
 				// 设置调用方法名称（service层方法）
-				String methodName = this.getNodeAttrValue(node,"method-name");
-				if(methodName != null && !methodName.equals("")){
+				String methodName = this.getNodeAttrValue(node, "method-name");
+				if (methodName != null && !methodName.equals("")) {
 					authorization.setMethodName(methodName);
 				}
-				else{
+				else {
 					authorization.setMethodName(nodeName);
 				}
 				// restful 风格的通配符路径
-				String wildcardPath = this.getNodeAttrValue(node,"wildcard-path");
-				if(wildcardPath != null && !wildcardPath.equals("")){
+				String wildcardPath = this.getNodeAttrValue(node, "wildcard-path");
+				if (wildcardPath != null && !wildcardPath.equals("")) {
 					authorization.setWildcardPath(wildcardPath);
 				}
 				// 设置调用方法名称（service层方法）
-				String modelFileName = this.getNodeAttrValue(node,"model-file-name");
-				if(modelFileName != null){
+				String modelFileName = this.getNodeAttrValue(node, "model-file-name");
+				if (modelFileName != null) {
 					authorization.setModelFileName(modelFileName);
 				}
 				// 设置模型名称（表名称）
-				String modelName = this.getNodeAttrValue(node,"model-name");
-				if(modelName != null){
+				String modelName = this.getNodeAttrValue(node, "model-name");
+				if (modelName != null) {
 					authorization.setModelName(modelName);
 					// 解析对应实体bean名称
 					int idx = modelName.indexOf("_");
-					if(idx > -1){
-						String modelNameSuffix = modelName.substring(idx + 1,modelName.length());
-						String firstChar = modelNameSuffix.substring(0,1);
-						String lastChar = modelNameSuffix.substring(1,modelNameSuffix.length());
+					if (idx > -1) {
+						String modelNameSuffix = modelName.substring(idx + 1, modelName.length());
+						String firstChar = modelNameSuffix.substring(0, 1);
+						String lastChar = modelNameSuffix.substring(1, modelNameSuffix.length());
 						String entityName = firstChar + lastChar;
 						authorization.setEntityName(entityName);
 					}
 				}
 				// 设置模型名称,开发者自定义模板（一旦设置此值，系统不在调用默认的模板）
-				String templateName = this.getNodeAttrValue(node,"template-name");
-				if(templateName != null){
+				String templateName = this.getNodeAttrValue(node, "template-name");
+				if (templateName != null) {
 					authorization.setTemplateName(templateName);
 				}
 				authorization.setParentCode(0l);
@@ -174,37 +174,37 @@ public class AuthorizationService extends BaseAuthorizationService<Authorization
 				// 设置级别
 				authorization.setTreeLevel(index);
 				authorization.setViewName(nodeName);
-				if(node.elementIterator().hasNext()){
+				if (node.elementIterator().hasNext()) {
 					authorization.setIsChildNode("0");
 				}
-				else{
+				else {
 					authorization.setIsChildNode("1");
 				}
-				try{
+				try {
 					Long parentId = 0l;
 					AuthorizationDO authorizationTemp = authorizationDao.getOneByCode(code);
-					if(authorizationTemp != null){
+					if (authorizationTemp != null) {
 						parentId = authorizationTemp.getId();
 						authorization.setId(authorizationTemp.getId());
 						authorization.setParentId(0l);
 						authorizationDao.updateById(authorization);
 					}
-					else{
+					else {
 						authorization.setParentId(0l);
 						int rval = authorizationDao.save(authorization);
-						if(rval > 0){
+						if (rval > 0) {
 							parentId = authorization.getGeneratedKey();
 						}
 					}
-					this.recursionParser(nodeName,nodeName,parentId,code,name,code,relationPath,++index,node);
+					this.recursionParser(nodeName, nodeName, parentId, code, name, code, relationPath, ++index, node);
 				}
-				catch(Exception e){
+				catch (Exception e) {
 					e.printStackTrace();
 				}
 
 			}
 		}
-		catch(DocumentException e){
+		catch (DocumentException e) {
 			throw new Exception(e.getMessage());
 		}
 	}
@@ -214,23 +214,24 @@ public class AuthorizationService extends BaseAuthorizationService<Authorization
 	 * 
 	 * @param ele
 	 */
-	@SuppressWarnings({"unchecked"})
-	private int recursionParser(String parentController,String parentNodeName,Long parentId,String parentCode,String parentName,String parentOrder,String codeRelation,int index,Element ele){
+	@SuppressWarnings({ "unchecked" })
+	private int recursionParser(String parentController, String parentNodeName, Long parentId, String parentCode, String parentName, String parentOrder, String codeRelation,
+			int index, Element ele) {
 		int childCount = 0;
-		for(Iterator<Element> iterator = ele.elementIterator();iterator.hasNext();){
+		for (Iterator<Element> iterator = ele.elementIterator(); iterator.hasNext();) {
 			Element node = iterator.next();
 			String nodeName = node.getName();
 			String tempParentNodeName = null;
 			String tempController = null;
 			String tempOrderBy = null;
-			if(parentNodeName == null || "".equals(parentNodeName)){
+			if (parentNodeName == null || "".equals(parentNodeName)) {
 				tempParentNodeName = nodeName;
 			}
-			else{
-				if(index > 3){
+			else {
+				if (index > 3) {
 					tempParentNodeName = parentNodeName + "_" + nodeName;
 				}
-				else{
+				else {
 					tempParentNodeName = parentNodeName + "/" + nodeName;
 				}
 			}
@@ -240,58 +241,51 @@ public class AuthorizationService extends BaseAuthorizationService<Authorization
 			authorization.setParentName(parentName);
 			authorization.setViewName(tempParentNodeName);
 			// 设置权限代码
-			String code = this.getNodeAttrValue(node,"code");
-			if(code != null){
+			String code = this.getNodeAttrValue(node, "code");
+			if (code != null) {
 				authorization.setCode(Long.parseLong(code));
 			}
 			// 中文名称
-			String name = this.getNodeAttrValue(node,"name");
-			if(name != null){
+			String name = this.getNodeAttrValue(node, "name");
+			if (name != null) {
 				authorization.setName(name);
 			}
 			// 权限类型 开发可见权限，上线可见权限
-			String type = this.getNodeAttrValue(node,"auth-type");
-			if(type != null){
+			String type = this.getNodeAttrValue(node, "auth-type");
+			if (type != null) {
 				authorization.setAuthType(Integer.parseInt(type));
 			}
-			else{
+			else {
 				authorization.setAuthType(0);
 			}
 			// 菜单类型 目前分top和shortcut两类
-			String menuType = this.getNodeAttrValue(node,"menu-type");
-			if(menuType != null){
+			String menuType = this.getNodeAttrValue(node, "menu-type");
+			if (menuType != null) {
 				authorization.setMenuType(menuType);
 			}
 			// 设置调用方法名称（service层方法）
-			String methodName = this.getNodeAttrValue(node,"method-name");
-			if(methodName != null && !methodName.equals("")){
+			String methodName = this.getNodeAttrValue(node, "method-name");
+			if (methodName != null && !methodName.equals("")) {
 				authorization.setMethodName(methodName);
 			}
-			else{
+			else {
 				authorization.setMethodName(nodeName);
 			}
 			// 设置调用方法名称（service层方法）
-			String modelFileName = this.getNodeAttrValue(node,"model-file-name");
-			if(modelFileName != null){
+			String modelFileName = this.getNodeAttrValue(node, "model-file-name");
+			if (modelFileName != null) {
 				authorization.setModelFileName(modelFileName);
 			}
 			// 设置模型名称（表名称）
-			String modelName = this.getNodeAttrValue(node,"model-name");
-			if(modelName != null){
+			String modelName = this.getNodeAttrValue(node, "model-name");
+			if (modelName != null) {
 				authorization.setModelName(modelName);
-				// 解析对应实体bean名称
-				int idx = modelName.indexOf("_");
-				if(idx > -1){
-					String modelNameSuffix = modelName.substring(idx + 1,modelName.length());
-					String firstChar = modelNameSuffix.substring(0,1).toLowerCase();
-					String lastChar = modelNameSuffix.substring(1,modelNameSuffix.length());
-					String entityName = firstChar + lastChar;
-					authorization.setEntityName(entityName);
-				}
+				String entityName = parseTableCode(true,modelName);
+				authorization.setEntityName(entityName);
 			}
 			// 设置模型名称,开发者自定义模板（一旦设置此值，系统不在调用默认的模板）
-			String templateName = this.getNodeAttrValue(node,"template-name");
-			if(templateName != null){
+			String templateName = this.getNodeAttrValue(node, "template-name");
+			if (templateName != null) {
 				authorization.setTemplateName(templateName);
 			}
 			// 树形结构描述关系
@@ -299,36 +293,68 @@ public class AuthorizationService extends BaseAuthorizationService<Authorization
 			authorization.setTreePath(tempCodeRelation);
 			// 设置级别
 			authorization.setTreeLevel(index);
-			if(node.elementIterator().hasNext()){
+			if (node.elementIterator().hasNext()) {
 				authorization.setIsChildNode("0");
 			}
-			else{
+			else {
 				authorization.setIsChildNode("1");
 			}
-			try{
+			try {
 				Long parentIdTemp = 0l;
 				AuthorizationDO authorizationTemp = authorizationDao.getOneByCode(code);
-				if(authorizationTemp != null){
+				if (authorizationTemp != null) {
 					parentIdTemp = authorizationTemp.getId();
 					authorization.setId(authorizationTemp.getId());
 					authorization.setParentId(parentId);
 					authorizationDao.updateById(authorization);
 				}
-				else{
+				else {
 					authorization.setParentId(parentId);
 					int rval = authorizationDao.save(authorization);
-					if(rval > 0){
+					if (rval > 0) {
 						parentIdTemp = authorization.getGeneratedKey();
 					}
 				}
-				this.recursionParser(tempController,tempParentNodeName,parentIdTemp,code,name,tempOrderBy,tempCodeRelation,index + 1,node);
+				this.recursionParser(tempController, tempParentNodeName, parentIdTemp, code, name, tempOrderBy, tempCodeRelation, index + 1, node);
 			}
-			catch(Exception e){
+			catch (Exception e) {
 				e.printStackTrace();
 			}
 			childCount++;
 		}
 		return childCount;
+	}
+
+	/**
+	 * 处理表名称
+	 * @param isPrefix
+	 *        表是否有业务前缀【 true:是 --false:否】
+	 * @param code
+	 * @return
+	 */
+	private String parseTableCode(boolean isPrefix, String code) {
+		StringBuffer sbcode = new StringBuffer();
+		if (code != null && !"".equals(code)) {
+			String codeArr[] = code.trim().split("_");
+			for (int i = 0; i < codeArr.length; i++) {
+				String splitCdoe = codeArr[i];
+				if (splitCdoe == null || "".equals(splitCdoe)) {
+					continue;
+				}
+				if (isPrefix) {
+					// 如果i为0，略掉前缀
+					if (i == 0) {
+						continue;
+					}
+				}
+				// 首字符大写
+				splitCdoe = splitCdoe.substring(0, 1).toUpperCase() + splitCdoe.substring(1, splitCdoe.length());
+				// 字符串叠加
+				sbcode.append(splitCdoe);
+			}
+			return sbcode.toString();
+		}
+		return null;
 	}
 
 	/**
@@ -339,18 +365,18 @@ public class AuthorizationService extends BaseAuthorizationService<Authorization
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	private String getNodeAttrValue(Element node,String name){
+	private String getNodeAttrValue(Element node, String name) {
 		String rval = null;
-		if(node.attributes() != null && node.attributes().size() > 0){
-			for(Iterator subiterator = node.attributeIterator();subiterator.hasNext();){
-				Attribute item = (Attribute)subiterator.next();
+		if (node.attributes() != null && node.attributes().size() > 0) {
+			for (Iterator subiterator = node.attributeIterator(); subiterator.hasNext();) {
+				Attribute item = (Attribute) subiterator.next();
 				String attrName = item.getName();
 				String attrValue = item.getValue();
-				if(attrName != null && attrName.equals(name)){
-					if("true".equals(attrValue.trim())){
+				if (attrName != null && attrName.equals(name)) {
+					if ("true".equals(attrValue.trim())) {
 						attrValue = "1";
 					}
-					else if("false".equals(attrValue.trim())){
+					else if ("false".equals(attrValue.trim())) {
 						attrValue = "0";
 					}
 					rval = attrValue;
@@ -359,13 +385,13 @@ public class AuthorizationService extends BaseAuthorizationService<Authorization
 		}
 		return rval;
 	}
-	
+
 	/**
 	 * 根绝角色id查询权限列表
 	 * @param authorizationDO
 	 * @return
 	 */
-	public List<AuthorizationDO> listAuthByRoleIds(AuthorizationDO authorizationDO){
+	public List<AuthorizationDO> listAuthByRoleIds(AuthorizationDO authorizationDO) {
 		return super.authorizationDao.listAuthByRoleIds(authorizationDO);
 	}
 }
