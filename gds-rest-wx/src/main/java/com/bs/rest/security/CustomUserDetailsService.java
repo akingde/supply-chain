@@ -44,10 +44,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         Collection<SimpleGrantedAuthority> collection = new HashSet<SimpleGrantedAuthority>();
         //查询权限信息
         ResultData<List<AuthorizationDTO>> authResultData = authorizationApi.listAuthByUserId(userId, isAdmin);
+        List<AuthorizationDTO> authorizations = null;
         if (authResultData != null) {
         	String rcode = authResultData.getCode();
         	if (rcode != null && code.equals(ResultCode.RCODE_SUCCESS)) {
-        		List<AuthorizationDTO> authorizations = authResultData.getData();
+        		authorizations = authResultData.getData();
         		for (AuthorizationDTO authorization:authorizations) {
         			Long authCode = authorization.getCode();
         			collection.add(new SimpleGrantedAuthority(String.valueOf(authCode)));
@@ -56,21 +57,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         //设置登录用户信息，如果需要可能自定义增加
         CustomUserDetails customUserDetails = new CustomUserDetails(username,userDTO.getPassword(),collection);
-        customUserDetails.setId(userDTO.getId());
-        customUserDetails.setAccount(userDTO.getAccount());
-        customUserDetails.setBirthday(userDTO.getBirthday());
-        customUserDetails.setEmail(userDTO.getEmail());
-        customUserDetails.setGender(userDTO.getGender());
-        customUserDetails.setIsAdmin(userDTO.getIsAdmin());
-        customUserDetails.setIsPosition(userDTO.getIsPosition());
-        customUserDetails.setMobilePhone(userDTO.getMobilePhone());
-        customUserDetails.setName(userDTO.getName());
-        customUserDetails.setOrgCode(userDTO.getOrgCode());
-        customUserDetails.setOrgId(userDTO.getOrgId());
-        customUserDetails.setOrgIds(userDTO.getOrgIds());
-        customUserDetails.setOfficePhone(userDTO.getOfficePhone());
-        customUserDetails.setUserStatus(userDTO.getUserStatus());
-        customUserDetails.setUserType(userDTO.getUserType());
+        customUserDetails.setUser(userDTO);
+        customUserDetails.setAuthorizations(authorizations);
+        
         return customUserDetails;
     }
 
