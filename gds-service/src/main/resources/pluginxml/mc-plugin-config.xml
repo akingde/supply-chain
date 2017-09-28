@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <mc name="消息中心" code="10" icon="images/menu/menu_sys.png">
 	<msgconfig name="消息配置" code="1001">
 		<provider name="短信提供商" code="100101">
-			<save name="创建" code="10010101" menu-type="top" model-name="MC_ShortMessageProvider"/>
-			<update name="修改" code="10010102" menu-type="shortcut" model-name="MC_ShortMessageProvider"/>
-			<use name="启停" code="10010103" menu-type="shortcut" model-name="MC_ShortMessageProvider"/>
-			<remove name="删除" code="10010104" menu-type="shortcut" model-name="MC_ShortMessageProvider"/>
+			<save name="创建" code="10010101" menu-type="top" model-name="mc_short_message_provider"/>
+			<update name="修改" code="10010102" menu-type="shortcut" model-name="mc_short_message_provider"/>
+			<use name="启停" code="10010103" menu-type="shortcut" model-name="mc_short_message_provider"/>
+			<remove name="删除" code="10010104" menu-type="shortcut" model-name="mc_short_message_provider"/>
 		</provider>
 		<template name="微信模板配置" code="100102">
-			<save name="创建" code="10010201" menu-type="top" model-name="MC_WechatConfig"/>
-			<update name="修改" code="10010202" menu-type="shortcut" model-name="MC_WechatConfig"/>
-			<use name="启停" code="10010203" menu-type="shortcut" model-name="MC_WechatConfig"/>
-			<remove name="删除" code="10010204" menu-type="shortcut" model-name="MC_WechatConfig"/>
+			<save name="创建" code="10010201" menu-type="top" model-name="mc_wechat_config"/>
+			<update name="修改" code="10010202" menu-type="shortcut" model-name="mc_wechat_config"/>
+			<use name="启停" code="10010203" menu-type="shortcut" model-name="mc_wechat_config"/>
+			<remove name="删除" code="10010204" menu-type="shortcut" model-name="mc_wechat_config"/>
 		</template>
 	</msgconfig>
 	<msgsend name="消息发送" code="1002">
-		<file name="选择文件发送" code="100201" menu-type="shortcut" model-name="MC_ShortMessageSend"/>
-		<select name="选择数据发送" code="100202" menu-type="shortcut" model-name="MC_ShortMessageSend">
-			<preview name="发送预览" code="10020201" menu-type="top" model-name="MC_ShortMessageSend"/>
+		<file name="选择文件发送" code="100201" menu-type="shortcut" model-name="mc_short_message_send"/>
+		<select name="选择数据发送" code="100202" menu-type="shortcut" model-name="mc_short_message_send">
+			<preview name="发送预览" code="10020201" menu-type="top" model-name="mc_short_message_send"/>
 		</select>
-		<single name="单条手动发送" code="100203" menu-type="shortcut" model-name="MC_ShortMessageSend"/>
+		<single name="单条手动发送" code="100203" menu-type="shortcut" model-name="mc_short_message_send"/>
 	</msgsend>
 	<msgquery name="消息查询" code="1003">
-		<shortmsgsend name="待发送短信" code="100301" model-name="MC_ShortMessageSend" />
-		<shortmsgsent name="已发送短信" code="100302" model-name="MC_ShortMessageSent" />
-		<wechatmsgsend name="待发送微信" code="100303" model-name="MC_WeChatMessageSend"/>
-		<wechatmsgsent name="已发送微信" code="100304" model-name="MC_WeChatMessageSent"/>
-		<verificationcode name="短信验证码" code="100305" model-name="MC_VerificationCode"/>
+		<shortmsgsend name="待发送短信" code="100301" model-name="mc_short_message_send" />
+		<shortmsgsent name="已发送短信" code="100302" model-name="mc_short_message_sent" />
+		<wechatmsgsend name="待发送微信" code="100303" model-name="mc_wechat_message_send"/>
+		<wechatmsgsent name="已发送微信" code="100304" model-name="mc_wechat_message_sent"/>
+		<verificationcode name="短信验证码" code="100305" model-name="mc_verification_code"/>
 	</msgquery>
 </mc>

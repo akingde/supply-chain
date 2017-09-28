@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <sc name="参数配置" code="2" icon="images/menu/menu_sys.png">
 	<dictionary name="字典配置" code="201">
 		<category name="字典分类" code="20101">
-			<save name="创建" code="2010101" menu-type="top" model-name="SC_DictionaryCategory"/>
-			<update name="修改" code="2010102" menu-type="shortcut" model-name="SC_DictionaryCategory"/>
-			<remove name="删除" code="2010103" menu-type="shortcut" model-name="SC_DictionaryCategory"/>
+			<save name="创建" code="2010101" menu-type="top" model-name="sc_dictionary_category"/>
+			<update name="修改" code="2010102" menu-type="shortcut" model-name="sc_dictionary_category"/>
+			<remove name="删除" code="2010103" menu-type="shortcut" model-name="sc_dictionary_category"/>
 		</category>
 		<item name="字典配置" code="20102">
-			<save name="创建" code="2010201" menu-type="top" model-name="SC_Dictionary"/>
-			<update name="修改" code="2010202" menu-type="shortcut" model-name="SC_Dictionary"/>
-			<remove name="删除" code="2010203" menu-type="shortcut" model-name="SC_Dictionary"/>
+			<save name="创建" code="2010201" menu-type="top" model-name="sc_dictionary"/>
+			<update name="修改" code="2010202" menu-type="shortcut" model-name="sc_dictionary"/>
+			<remove name="删除" code="2010203" menu-type="shortcut" model-name="sc_dictionary"/>
 		</item>
 	</dictionary>
 	<area name="地区管理" code="202">
 		<configlist name="地区配置" code="20201">
-			<save name="创建" code="2020101" menu-type="top" model-name="SC_Area"/>
-			<update name="修改" code="2020102" menu-type="shortcut" model-name="SC_Area"/>
-			<remove name="删除" code="2020103" menu-type="shortcut" model-name="SC_Area"/>
-			<view name="查看" code="2020104" menu-type="shortcut" model-name="SC_Area"/>
+			<save name="创建" code="2020101" menu-type="top" model-name="sc_area"/>
+			<update name="修改" code="2020102" menu-type="shortcut" model-name="sc_area"/>
+			<remove name="删除" code="2020103" menu-type="shortcut" model-name="sc_area"/>
+			<view name="查看" code="2020104" menu-type="shortcut" model-name="sc_area"/>
 		</configlist>
 	</area>
 	<bank name="银行管理" code="203">
 		<configlist name="银行配置" code="20301">
-			<save name="创建" code="2030101" menu-type="top" model-name="TC_Bank"/>
-			<update name="修改" code="2030102" menu-type="shortcut" model-name="TC_Bank"/>
-			<remove name="删除" code="2030103" menu-type="shortcut" model-name="TC_Bank"/>
+			<save name="创建" code="2030101" menu-type="top" model-name="tc_bank"/>
+			<update name="修改" code="2030102" menu-type="shortcut" model-name="tc_bank"/>
+			<remove name="删除" code="2030103" menu-type="shortcut" model-name="tc_bank"/>
 		</configlist>
 	</bank>
 	<payment name="支付管理" code="204">
 		<pcconfig name="支付平台配置" code="20401">
-			<save name="创建" code="2040101" menu-type="top" model-name="SC_PaymentCompany"/>
-			<update name="修改" code="2040102" menu-type="shortcut" model-name="SC_PaymentCompany"/>
-			<remove name="删除" code="2040103" menu-type="shortcut" model-name="SC_PaymentCompany"/>
+			<save name="创建" code="2040101" menu-type="top" model-name="sc_payment_company"/>
+			<update name="修改" code="2040102" menu-type="shortcut" model-name="sc_payment_company"/>
+			<remove name="删除" code="2040103" menu-type="shortcut" model-name="sc_payment_company"/>
 		</pcconfig>
 	</payment>
 </sc>
