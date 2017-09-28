@@ -58,7 +58,7 @@ public class ${entity}Controller extends BaseController{
 
 	public static Logger logger = Logger.getLogger(${entity}Controller.class);
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private I${entity}Service ${entity?uncap_first}Api;
 	
 	@ApiOperation(value = "${table.comment}-数据添加(保存)")
