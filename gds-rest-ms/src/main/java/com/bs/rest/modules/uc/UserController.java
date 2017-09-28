@@ -46,7 +46,7 @@ public class UserController extends BaseController{
 
 	public static Logger logger = Logger.getLogger(UserController.class);
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private IUserService userApi;
 	
 	@ApiOperation(value = "用户信息表-数据添加(保存)")

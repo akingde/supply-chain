@@ -42,7 +42,7 @@ public class RoleAuthRelationController extends BaseController{
 
 	public static Logger logger = Logger.getLogger(RoleAuthRelationController.class);
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private IRoleAuthRelationService roleAuthRelationApi;
 	
 	@ApiOperation(value = "用户角色关系映射表-数据添加(保存)")

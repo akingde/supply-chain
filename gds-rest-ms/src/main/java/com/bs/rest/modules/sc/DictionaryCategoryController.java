@@ -46,7 +46,7 @@ public class DictionaryCategoryController extends BaseController{
 
 	public static Logger logger = Logger.getLogger(DictionaryCategoryController.class);
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private IDictionaryCategoryService dictionaryCategoryApi;
 	
 	@ApiOperation(value = "系统配置-字典分类信息存储表-数据添加(保存)")

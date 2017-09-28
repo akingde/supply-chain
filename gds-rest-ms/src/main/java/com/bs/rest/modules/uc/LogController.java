@@ -46,7 +46,7 @@ public class LogController extends BaseController{
 
 	public static Logger logger = Logger.getLogger(LogController.class);
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private ILogService logApi;
 	
 	@ApiOperation(value = "操作日志存储表-数据添加(保存)")

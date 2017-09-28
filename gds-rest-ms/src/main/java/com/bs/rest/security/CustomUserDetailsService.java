@@ -20,10 +20,10 @@ import com.bs.api.modules.uc.service.IUserService;
 
 public class CustomUserDetailsService implements UserDetailsService {
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private IUserService userApi;
 	
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private IAuthorizationService authorizationApi;
 	
 	@Override

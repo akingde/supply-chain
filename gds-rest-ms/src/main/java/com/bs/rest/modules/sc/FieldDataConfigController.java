@@ -46,7 +46,7 @@ public class FieldDataConfigController extends BaseController{
 
 	public static Logger logger = Logger.getLogger(FieldDataConfigController.class);
 
-	@Reference(version = "1.0.0")
+	@Reference(version = "1.0.0",timeout=50000,retries=5)
 	private IFieldDataConfigService fieldDataConfigApi;
 	
 	@ApiOperation(value = "视图字段数据配置信息存储表-数据添加(保存)")
