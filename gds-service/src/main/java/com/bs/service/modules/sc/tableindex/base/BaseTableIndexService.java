@@ -146,7 +146,7 @@ public abstract class BaseTableIndexService<T extends TableIndexDO> extends Base
 		int page = tableIndexDO.getPage() == 0?1 : tableIndexDO.getPage();
 		int rows = tableIndexDO.getRows() == 0?10 : tableIndexDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<TableIndexDO> list = tableIndexDao.listPaginated( tableIndexDO);
+		List<TableIndexDO> list = tableIndexDao.listPaginated(tableIndexDO);
 		PageInfo<TableIndexDO> pageInfo = new PageInfo<TableIndexDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseTableIndexService<T extends TableIndexDO> extends Base
 	 * @return
 	 */
 	public PageInfo<TableIndexDO> listPaginatedManual(TableIndexDO  tableIndexDO) throws Exception {
-		List<TableIndexDO> list = tableIndexDao.listPaginatedManual( tableIndexDO);
-		Long countRecords = tableIndexDao.countPaginatedManual( tableIndexDO);
 		int page = tableIndexDO.getPage() == 0?1: tableIndexDO.getPage();
 		int rows = tableIndexDO.getRows() == 0?10: tableIndexDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		tableIndexDO.setStart(start);
+		tableIndexDO.setOffset(offset);
+		List<TableIndexDO> list = tableIndexDao.listPaginatedManual(tableIndexDO);
+		Long countRecords = tableIndexDao.countPaginatedManual(tableIndexDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<TableIndexDO> pageInfo = new PageInfo<TableIndexDO>(list);

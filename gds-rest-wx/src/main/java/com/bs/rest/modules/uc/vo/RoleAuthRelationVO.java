@@ -1,8 +1,8 @@
 package com.bs.rest.modules.uc.vo;
 
-import java.io.Serializable;
+import com.bs.rest.core.entity.Entity;
 
-public class RoleAuthRelationVO implements Serializable{
+public class RoleAuthRelationVO extends Entity{
 
 	private static final long serialVersionUID = 1L;
 	/**角色ID-**/

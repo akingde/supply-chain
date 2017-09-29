@@ -146,7 +146,7 @@ public abstract class BaseLogService<T extends LogDO> extends BaseService implem
 		int page = logDO.getPage() == 0?1 : logDO.getPage();
 		int rows = logDO.getRows() == 0?10 : logDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<LogDO> list = logDao.listPaginated( logDO);
+		List<LogDO> list = logDao.listPaginated(logDO);
 		PageInfo<LogDO> pageInfo = new PageInfo<LogDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseLogService<T extends LogDO> extends BaseService implem
 	 * @return
 	 */
 	public PageInfo<LogDO> listPaginatedManual(LogDO  logDO) throws Exception {
-		List<LogDO> list = logDao.listPaginatedManual( logDO);
-		Long countRecords = logDao.countPaginatedManual( logDO);
 		int page = logDO.getPage() == 0?1: logDO.getPage();
 		int rows = logDO.getRows() == 0?10: logDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		logDO.setStart(start);
+		logDO.setOffset(offset);
+		List<LogDO> list = logDao.listPaginatedManual(logDO);
+		Long countRecords = logDao.countPaginatedManual(logDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<LogDO> pageInfo = new PageInfo<LogDO>(list);

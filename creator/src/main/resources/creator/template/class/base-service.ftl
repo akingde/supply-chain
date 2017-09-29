@@ -160,7 +160,7 @@ public abstract class Base${entity}Service<T extends ${entity}DO> extends BaseSe
 		int page = ${entity?uncap_first}DO.getPage() == 0?1 : ${entity?uncap_first}DO.getPage();
 		int rows = ${entity?uncap_first}DO.getRows() == 0?10 : ${entity?uncap_first}DO.getRows();
 		PageHelper.startPage(page, rows);
-		List<${entity}DO> list = ${entity?uncap_first}Dao.listPaginated( ${entity?uncap_first}DO);
+		List<${entity}DO> list = ${entity?uncap_first}Dao.listPaginated(${entity?uncap_first}DO);
 		PageInfo<${entity}DO> pageInfo = new PageInfo<${entity}DO>(list);
 		return pageInfo;
 	}
@@ -171,10 +171,15 @@ public abstract class Base${entity}Service<T extends ${entity}DO> extends BaseSe
 	 * @return
 	 */
 	public PageInfo<${entity}DO> listPaginatedManual(${entity}DO  ${entity?uncap_first}DO) throws Exception {
-		List<${entity}DO> list = ${entity?uncap_first}Dao.listPaginatedManual( ${entity?uncap_first}DO);
-		Long countRecords = ${entity?uncap_first}Dao.countPaginatedManual( ${entity?uncap_first}DO);
 		int page = ${entity?uncap_first}DO.getPage() == 0?1: ${entity?uncap_first}DO.getPage();
 		int rows = ${entity?uncap_first}DO.getRows() == 0?10: ${entity?uncap_first}DO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		${entity?uncap_first}DO.setStart(start);
+		${entity?uncap_first}DO.setOffset(offset);
+		List<${entity}DO> list = ${entity?uncap_first}Dao.listPaginatedManual(${entity?uncap_first}DO);
+		Long countRecords = ${entity?uncap_first}Dao.countPaginatedManual(${entity?uncap_first}DO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<${entity}DO> pageInfo = new PageInfo<${entity}DO>(list);

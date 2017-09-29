@@ -146,7 +146,7 @@ public abstract class BaseDictionaryCategoryService<T extends DictionaryCategory
 		int page = dictionaryCategoryDO.getPage() == 0?1 : dictionaryCategoryDO.getPage();
 		int rows = dictionaryCategoryDO.getRows() == 0?10 : dictionaryCategoryDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<DictionaryCategoryDO> list = dictionaryCategoryDao.listPaginated( dictionaryCategoryDO);
+		List<DictionaryCategoryDO> list = dictionaryCategoryDao.listPaginated(dictionaryCategoryDO);
 		PageInfo<DictionaryCategoryDO> pageInfo = new PageInfo<DictionaryCategoryDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseDictionaryCategoryService<T extends DictionaryCategory
 	 * @return
 	 */
 	public PageInfo<DictionaryCategoryDO> listPaginatedManual(DictionaryCategoryDO  dictionaryCategoryDO) throws Exception {
-		List<DictionaryCategoryDO> list = dictionaryCategoryDao.listPaginatedManual( dictionaryCategoryDO);
-		Long countRecords = dictionaryCategoryDao.countPaginatedManual( dictionaryCategoryDO);
 		int page = dictionaryCategoryDO.getPage() == 0?1: dictionaryCategoryDO.getPage();
 		int rows = dictionaryCategoryDO.getRows() == 0?10: dictionaryCategoryDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		dictionaryCategoryDO.setStart(start);
+		dictionaryCategoryDO.setOffset(offset);
+		List<DictionaryCategoryDO> list = dictionaryCategoryDao.listPaginatedManual(dictionaryCategoryDO);
+		Long countRecords = dictionaryCategoryDao.countPaginatedManual(dictionaryCategoryDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<DictionaryCategoryDO> pageInfo = new PageInfo<DictionaryCategoryDO>(list);

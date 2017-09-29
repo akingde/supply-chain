@@ -22,7 +22,8 @@ public class CreateDatabaseService extends BaseCreateService {
 	private TableDao tableDao;
 	/** 表字段信息操作Dao **/
 	private ColumnDao columnDao;
-	private String specialTableArr[] = { "SC_Table", "SC_TableColumn", "SC_TableIndex", "SC_TableReference" };
+	
+//	private String specialTableArr[] = { "SC_Table", "SC_TableColumn", "SC_TableIndex", "SC_TableReference" };
 
 	public CreateDatabaseService() {
 		tableDao = new TableDao();
@@ -294,11 +295,11 @@ public class CreateDatabaseService extends BaseCreateService {
 		for (PdmTable table : tables) {
 			String tableCode = table.getOriginalCode();
 			// 如果是系统特殊表（不记录表结构的信息表）不进行判断处理
-			for (String specialtableCode : specialTableArr) {
-				if (specialtableCode != null && !specialtableCode.equals(tableCode)) {
-					break;
-				}
-			}
+//			for (String specialtableCode : specialTableArr) {
+//				if (specialtableCode != null && !specialtableCode.equals(tableCode)) {
+//					break;
+//				}
+//			}
 			String tableModificationDate = table.getModificationDate();
 			// 根据objectid 查询表信息,进行数据库表信息的更新
 			PdmTable tableOne = tableDao.selectOne("table.select_one_by_objid", table);
@@ -366,6 +367,7 @@ public class CreateDatabaseService extends BaseCreateService {
 				}
 				// 根据objectid 查询表字段信息,进行数据库表字段信息的更新
 				ArrayList<PdmTableColumn> columns = table.getColumns();
+				int index = 0;
 				for (PdmTableColumn column : columns) {
 					String columnCode = column.getOriginalCode();
 					String columnDataType = column.getDataType();
@@ -384,12 +386,12 @@ public class CreateDatabaseService extends BaseCreateService {
 						String columnModificationDateTemp = columnTemp.getModificationDate();
 						String columnCodeTemp = columnTemp.getCode();
 						String columnDataTypeTemp = column.getDataType();
+						String dtype = columnDataType;
 						// 不相等，表示字段有修改
 						if (!columnModificationDate.equals(columnModificationDateTemp)) {
 							logger.debug("数据库表：" + tableCode + " 结构有修改.");
 							try {
 								boolean isColumn = false ,isDataType = false;
-								String dtype = columnDataType;
 								if (length > 0) {
 									dtype = columnDataType + "(" + length + ")";
 								}
@@ -425,7 +427,13 @@ public class CreateDatabaseService extends BaseCreateService {
 						boolean boo = columnDao.getColumn(tableCode, columnCode);
 						if (!boo) {
 							logger.debug("名称为：" + tableCode + " 的数据库表，新增名称为：" + columnCode + "字段.");
-							String alterTableSql = "ALTER  TABLE " + tableCode + " ADD " + columnCode + " " + columnDataType;
+							if (length > 0) {
+								dtype = columnDataType + "(" + length + ")";
+							}
+							else if (lowValue != null && !lowValue.equals("") && highValue != null && !highValue.equals("")) {
+								dtype = columnDataType + "(" + length + "," + highValue + ")";
+							}
+							String alterTableSql = "ALTER  TABLE " + tableCode + " ADD " + columnCode + " " + dtype;
 							// 是否为空
 							if (column.getMandatory() != null && column.getMandatory() == 1) {
 								alterTableSql += " NOT NULL";
@@ -444,6 +452,16 @@ public class CreateDatabaseService extends BaseCreateService {
 							if (column.getComment() != null && !column.getComment().equals("")) {
 								alterTableSql += " COMMENT '" + column.getComment() + "'";
 							}
+							//查找最近的一个字段信息
+							if ((index-1) >= 0) {
+								PdmTableColumn columnBefore = columns.get(index-1);
+								if (columnBefore != null) {
+									String beforeCode = columnBefore.getOriginalCode();
+									if (beforeCode != null && !beforeCode.equals("")) {
+										alterTableSql += " after " + beforeCode;
+									}
+								}
+							}
 							alterTableSql += ";";
 							// 更新表信息
 							tableDao.alterTable(tableCode, alterTableSql);
@@ -452,6 +470,8 @@ public class CreateDatabaseService extends BaseCreateService {
 							logger.debug("数据库表：" + tableCode + " 结构无修改.");
 						}
 					}
+					//计数器累加
+					index++;
 				}
 			}
 		}

@@ -47,7 +47,7 @@ public class AuthorizationApi extends BaseAuthorizationApi<AuthorizationDTO> imp
 			List<AuthorizationDTO> listDtos = null;
 			//超级管理员获取所有权限 [isAdmin]1:超级管理员 0:普通用户
 			if (isAdmin != null && isAdmin.intValue() == 1) {
-				List<AuthorizationDO> authorizations = super.authorizationService.listAll();
+				List<AuthorizationDO> authorizations = super.authorizationService.listAuths();
 				if (authorizations != null) {
 					listDtos = new ArrayList<AuthorizationDTO>(authorizations.size());
 					//do 转成dto
@@ -98,6 +98,42 @@ public class AuthorizationApi extends BaseAuthorizationApi<AuthorizationDTO> imp
 					resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
 					resultData.setMessage(promptMessage);
 				}
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			resultData.setCode(ResultCode.RCODE_SYSTEM_ERROR);
+			resultData.setMessage(e.getMessage());
+		}
+		return resultData;
+	}
+
+	@Override
+	public ResultData<List<AuthorizationDTO>> listAuths() {
+		ResultData<List<AuthorizationDTO>> resultData = new ResultData<List<AuthorizationDTO>>();
+		try {
+			List<AuthorizationDTO> listDtos = null;
+			//超级管理员获取所有权限 [isAdmin]1:超级管理员 0:普通用户
+			List<AuthorizationDO> authorizations = super.authorizationService.listAuths();
+			if (authorizations != null) {
+				listDtos = new ArrayList<AuthorizationDTO>(authorizations.size());
+				//do 转成dto
+				for (AuthorizationDO authorizationDO:authorizations) {
+					AuthorizationDTO authorizationDTO = new AuthorizationDTO();
+					BeanUtils.copyProperties(authorizationDO, authorizationDTO);
+					listDtos.add(authorizationDTO);
+				}
+				resultData.setData(listDtos);
+				//设置返回码和提示信息
+				String promptMessage = super.getMessage(ResultCode.RCODE_SUCCESS_KEY, null);
+				resultData.setCode(ResultCode.RCODE_SUCCESS);
+				resultData.setMessage(promptMessage);
+			}
+			else {
+				//设置返回码和提示信息
+				String promptMessage = super.getMessage(ResultCode.RCODE_EXECUTE_FAIL_KEY, null);
+				resultData.setCode(ResultCode.RCODE_EXECUTE_FAIL);
+				resultData.setMessage(promptMessage);
 			}
 		}
 		catch (Exception e) {

@@ -122,7 +122,7 @@ public abstract class BaseUserRoleRelationService<T extends UserRoleRelationDO> 
 		int page = userRoleRelationDO.getPage() == 0?1 : userRoleRelationDO.getPage();
 		int rows = userRoleRelationDO.getRows() == 0?10 : userRoleRelationDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<UserRoleRelationDO> list = userRoleRelationDao.listPaginated( userRoleRelationDO);
+		List<UserRoleRelationDO> list = userRoleRelationDao.listPaginated(userRoleRelationDO);
 		PageInfo<UserRoleRelationDO> pageInfo = new PageInfo<UserRoleRelationDO>(list);
 		return pageInfo;
 	}
@@ -133,10 +133,15 @@ public abstract class BaseUserRoleRelationService<T extends UserRoleRelationDO> 
 	 * @return
 	 */
 	public PageInfo<UserRoleRelationDO> listPaginatedManual(UserRoleRelationDO  userRoleRelationDO) throws Exception {
-		List<UserRoleRelationDO> list = userRoleRelationDao.listPaginatedManual( userRoleRelationDO);
-		Long countRecords = userRoleRelationDao.countPaginatedManual( userRoleRelationDO);
 		int page = userRoleRelationDO.getPage() == 0?1: userRoleRelationDO.getPage();
 		int rows = userRoleRelationDO.getRows() == 0?10: userRoleRelationDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		userRoleRelationDO.setStart(start);
+		userRoleRelationDO.setOffset(offset);
+		List<UserRoleRelationDO> list = userRoleRelationDao.listPaginatedManual(userRoleRelationDO);
+		Long countRecords = userRoleRelationDao.countPaginatedManual(userRoleRelationDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<UserRoleRelationDO> pageInfo = new PageInfo<UserRoleRelationDO>(list);

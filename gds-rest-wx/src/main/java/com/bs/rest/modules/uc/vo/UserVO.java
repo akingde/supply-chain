@@ -1,12 +1,12 @@
 package com.bs.rest.modules.uc.vo;
 
-import java.io.Serializable;
+import com.bs.rest.core.entity.Entity;
 import javax.validation.constraints.NotNull;
 
 import com.bs.rest.core.group.Second;
 import com.bs.rest.core.group.Fourth;
 
-public class UserVO implements Serializable{
+public class UserVO extends Entity{
 
 	private static final long serialVersionUID = 1L;
 	/**用户ID-用户随机编号：系统生成**/

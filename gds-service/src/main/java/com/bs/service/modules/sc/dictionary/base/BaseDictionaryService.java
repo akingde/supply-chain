@@ -146,7 +146,7 @@ public abstract class BaseDictionaryService<T extends DictionaryDO> extends Base
 		int page = dictionaryDO.getPage() == 0?1 : dictionaryDO.getPage();
 		int rows = dictionaryDO.getRows() == 0?10 : dictionaryDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<DictionaryDO> list = dictionaryDao.listPaginated( dictionaryDO);
+		List<DictionaryDO> list = dictionaryDao.listPaginated(dictionaryDO);
 		PageInfo<DictionaryDO> pageInfo = new PageInfo<DictionaryDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseDictionaryService<T extends DictionaryDO> extends Base
 	 * @return
 	 */
 	public PageInfo<DictionaryDO> listPaginatedManual(DictionaryDO  dictionaryDO) throws Exception {
-		List<DictionaryDO> list = dictionaryDao.listPaginatedManual( dictionaryDO);
-		Long countRecords = dictionaryDao.countPaginatedManual( dictionaryDO);
 		int page = dictionaryDO.getPage() == 0?1: dictionaryDO.getPage();
 		int rows = dictionaryDO.getRows() == 0?10: dictionaryDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		dictionaryDO.setStart(start);
+		dictionaryDO.setOffset(offset);
+		List<DictionaryDO> list = dictionaryDao.listPaginatedManual(dictionaryDO);
+		Long countRecords = dictionaryDao.countPaginatedManual(dictionaryDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<DictionaryDO> pageInfo = new PageInfo<DictionaryDO>(list);

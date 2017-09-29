@@ -45,6 +45,7 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
     	http.anonymous().disable();
 		http.csrf().disable().authorizeRequests().antMatchers("/oauth/token").permitAll()
+		.and().logout().permitAll()
 		.and().authorizeRequests().anyRequest().authenticated();
     }
 

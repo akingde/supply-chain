@@ -1,6 +1,5 @@
 package com.bs.rest.modules.${module}.vo;
 
-import java.io.Serializable;
 <#assign idIsExist="false"/>
 <#list columns as column>
 <#assign property="result"/>
@@ -9,6 +8,7 @@ import java.io.Serializable;
 	<#assign idIsExist="true"/>
 </#if>
 </#list>
+import com.bs.rest.core.entity.Entity;
 <#if idIsExist == 'true'>
 import javax.validation.constraints.NotNull;
 
@@ -22,7 +22,7 @@ import java.math.BigDecimal;
 </#if>
 </#list>
 
-public class ${entity}VO implements Serializable{
+public class ${entity}VO extends Entity{
 
 	private static final long serialVersionUID = 1L;
 	<#list columns as cols>

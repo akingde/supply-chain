@@ -146,7 +146,7 @@ public abstract class BaseFieldDataConfigService<T extends FieldDataConfigDO> ex
 		int page = fieldDataConfigDO.getPage() == 0?1 : fieldDataConfigDO.getPage();
 		int rows = fieldDataConfigDO.getRows() == 0?10 : fieldDataConfigDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<FieldDataConfigDO> list = fieldDataConfigDao.listPaginated( fieldDataConfigDO);
+		List<FieldDataConfigDO> list = fieldDataConfigDao.listPaginated(fieldDataConfigDO);
 		PageInfo<FieldDataConfigDO> pageInfo = new PageInfo<FieldDataConfigDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseFieldDataConfigService<T extends FieldDataConfigDO> ex
 	 * @return
 	 */
 	public PageInfo<FieldDataConfigDO> listPaginatedManual(FieldDataConfigDO  fieldDataConfigDO) throws Exception {
-		List<FieldDataConfigDO> list = fieldDataConfigDao.listPaginatedManual( fieldDataConfigDO);
-		Long countRecords = fieldDataConfigDao.countPaginatedManual( fieldDataConfigDO);
 		int page = fieldDataConfigDO.getPage() == 0?1: fieldDataConfigDO.getPage();
 		int rows = fieldDataConfigDO.getRows() == 0?10: fieldDataConfigDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		fieldDataConfigDO.setStart(start);
+		fieldDataConfigDO.setOffset(offset);
+		List<FieldDataConfigDO> list = fieldDataConfigDao.listPaginatedManual(fieldDataConfigDO);
+		Long countRecords = fieldDataConfigDao.countPaginatedManual(fieldDataConfigDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<FieldDataConfigDO> pageInfo = new PageInfo<FieldDataConfigDO>(list);

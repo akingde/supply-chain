@@ -146,7 +146,7 @@ public abstract class BaseAuthorizationService<T extends AuthorizationDO> extend
 		int page = authorizationDO.getPage() == 0?1 : authorizationDO.getPage();
 		int rows = authorizationDO.getRows() == 0?10 : authorizationDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<AuthorizationDO> list = authorizationDao.listPaginated( authorizationDO);
+		List<AuthorizationDO> list = authorizationDao.listPaginated(authorizationDO);
 		PageInfo<AuthorizationDO> pageInfo = new PageInfo<AuthorizationDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseAuthorizationService<T extends AuthorizationDO> extend
 	 * @return
 	 */
 	public PageInfo<AuthorizationDO> listPaginatedManual(AuthorizationDO  authorizationDO) throws Exception {
-		List<AuthorizationDO> list = authorizationDao.listPaginatedManual( authorizationDO);
-		Long countRecords = authorizationDao.countPaginatedManual( authorizationDO);
 		int page = authorizationDO.getPage() == 0?1: authorizationDO.getPage();
 		int rows = authorizationDO.getRows() == 0?10: authorizationDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		authorizationDO.setStart(start);
+		authorizationDO.setOffset(offset);
+		List<AuthorizationDO> list = authorizationDao.listPaginatedManual(authorizationDO);
+		Long countRecords = authorizationDao.countPaginatedManual(authorizationDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<AuthorizationDO> pageInfo = new PageInfo<AuthorizationDO>(list);

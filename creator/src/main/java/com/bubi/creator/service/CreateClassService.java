@@ -211,7 +211,9 @@ public class CreateClassService extends BaseCreateService {
 			//生成restful vo
 			this.createRestfulVO(creatorTemplatePath,targetProjectClassPath,table,references,false);
 			// 生成restful api controller
-			this.createRestfulApi(creatorTemplatePath,targetProjectClassPath,table,references,false);
+			this.createRestfulBaseApi(creatorTemplatePath,targetProjectClassPath,table,references);
+			// 生成restful api controller
+			this.createRestfulApi(creatorTemplatePath,targetProjectClassPath,table,references,true);
 			// 生成message文件
 			this.createRestfulMessage(creatorTemplatePath,targetProjectClassPath,table,false);
 
@@ -274,10 +276,10 @@ public class CreateClassService extends BaseCreateService {
 				logger.debug("数据表["+originalCode+"]不进行开发文件的生成.");
 				continue;
 			}
-//			// 生成基类实体bean
-//			this.createServiceBaseEntity(creatorTemplatePath,targetProjectClassPath,table,references,isForce);
+			// 生成基类实体bean
+			this.createServiceBaseDTO(creatorTemplatePath,targetProjectClassPath,table,references);
 			// 生成实体 sub bean
-			this.createServiceDTO(creatorTemplatePath,targetProjectClassPath,table,references,true);
+			this.createServiceDTO(creatorTemplatePath,targetProjectClassPath,table,references,false);
 			// 生成base接口
 			this.createServiceBaseIf(creatorTemplatePath,targetProjectClassPath,table);
 			// 生成base子接口
@@ -375,6 +377,90 @@ public class CreateClassService extends BaseCreateService {
 		}
 	}
 
+	/**
+	 * 生成基类dto
+	 * @param templateAbsolutePath
+	 * @param customAbsolutePath
+	 * @param table
+	 * @param references
+	 * @param isForce
+	 */
+	private void createServiceBaseDTO(String templateAbsolutePath,String customAbsolutePath,
+			PdmTable table,ArrayList<PdmReference> references){
+		if(table != null){
+			// 表名称(名称结构必须为xx_xxxxxx)
+			String tableCode = table.getCode();
+			if(tableCode == null){
+				return;
+			}
+			logger.debug("开始进行" + tableCode + "数据库表的BaseDTO文件生成...");
+			String daoTemplatePath = templateAbsolutePath;
+			try{
+				// 生成实体bean目录
+				// 转换成小写
+				int index = tableCode.indexOf("_");
+				// 截取目录
+				String subsEntityPath = tableCode.substring(0,index);
+				// bean名称
+				String entityName = tableCode.substring(index + 1,tableCode.length());
+				// 生成目录
+				String entityPath = customAbsolutePath + File.separator + MODULES 
+						+ File.separator + subsEntityPath.toLowerCase()
+						+ File.separator + DTO.toLowerCase()
+						+ File.separator + BASE;
+				File entityPathFile = new File(entityPath);
+				if(!entityPathFile.exists()){
+					// 生成目录
+					entityPathFile.mkdirs();
+				}
+				String fileName = entityPath + File.separator + BASE_CLASS_PREFIX + entityName + DTO_CLASS_PREFIX + JAVA;
+				// freemarker 配置对象
+				Configuration config = new Configuration();
+				// 模板文件目录
+				File file = new File(daoTemplatePath);
+				// 加载模板文件
+				config.setDirectoryForTemplateLoading(file);
+				// 设置包装对象
+				config.setObjectWrapper(new DefaultObjectWrapper());
+				// 加载模板文件
+				Template template = config.getTemplate("api-base-dto-entity.ftl",ENCODING);
+				// 输出文件
+				Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName),"UTF-8"));
+				try{
+					// 上文数据存储对象
+					Map<String,Object> model = new HashMap<String,Object>();
+					// 表
+					model.put("table",table);
+					// 设置列对象
+					model.put("columns",table.getColumns());
+					// 表关系
+					model.put("references",references);
+					// 设置列对象
+					model.put("entityPath",entityName.toLowerCase());
+					// 设置业务目录
+					model.put("module",subsEntityPath.toLowerCase());
+					// 实体名称
+					model.put("entity",entityName);
+					// 生成文件
+					template.process(model,out);
+					logger.debug("生成名称为：" + entityName + JAVA + " 的BaseDTO文件.");
+					if(out != null){
+						out.flush();
+						out.close();
+					}
+				}
+				catch(TemplateException e){
+					e.printStackTrace();
+				}
+				logger.debug(tableCode + "数据库表的BaseDTO文件生成完成.");
+			}
+			catch(IOException e1){
+				e1.printStackTrace();
+				logger.debug(tableCode + "数据库表的BaseDTO文件生成失败.");
+			}
+		}
+	}
+	
 	/**
 	 * 生成entity文件
 	 * 
@@ -634,6 +720,90 @@ public class CreateClassService extends BaseCreateService {
 			catch(IOException e1){
 				e1.printStackTrace();
 				logger.debug(tableCode + "数据库表的VO类文件生成失败.");
+			}
+		}
+	}
+
+	/**
+	 * 生成base restful api
+	 * @param templateAbsolutePath
+	 * @param customAbsolutePath
+	 * @param table
+	 * @param references
+	 * @param isForce
+	 */
+	private void createRestfulBaseApi(String templateAbsolutePath,String customAbsolutePath,
+			PdmTable table,ArrayList<PdmReference> references){
+		if(table != null){
+			// 表名称(名称结构必须为xx_xxxxxx)
+			String tableCode = table.getCode();
+			if(tableCode == null){
+				return;
+			}
+			logger.debug("开始进行" + tableCode + "数据库表的BaseController类文件生成...");
+			String daoTemplatePath = templateAbsolutePath;
+			try{
+				// 生成实体bean目录
+				// 转换成小写
+				int index = tableCode.indexOf("_");
+				// 截取目录
+				String subsEntityPath = tableCode.substring(0,index);
+				// bean名称
+				String entityName = tableCode.substring(index + 1,tableCode.length());
+				// 生成目录
+				String entityPath = customAbsolutePath 
+						+ File.separator + MODULES 
+						+ File.separator + subsEntityPath.toLowerCase()
+						+ File.separator + BASE;
+				File entityPathFile = new File(entityPath);
+				if(!entityPathFile.exists()){
+					// 生成目录
+					entityPathFile.mkdirs();
+				}
+				String fileName = entityPath + File.separator + BASE_CLASS_PREFIX + entityName + CONTROLLER_CLASS_PREFIX + JAVA;
+				// freemarker 配置对象
+				Configuration config = new Configuration();
+				// 模板文件目录
+				File file = new File(daoTemplatePath);
+				// 加载模板文件
+				config.setDirectoryForTemplateLoading(file);
+				// 设置包装对象
+				config.setObjectWrapper(new DefaultObjectWrapper());
+				// 加载模板文件
+				Template template = config.getTemplate("restful-base-controller.ftl",ENCODING);
+				// 输出文件
+				Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName),"UTF-8"));
+				try{
+					// 上文数据存储对象
+					Map<String,Object> model = new HashMap<String,Object>();
+					// 表
+					model.put("table",table);
+					// 设置列对象
+					model.put("columns",table.getColumns());
+					// 表关系
+					model.put("references",references);
+					// 设置列对象
+					model.put("entityPath",entityName.toLowerCase());
+					// 设置业务目录
+					model.put("module",subsEntityPath.toLowerCase());
+					// 实体名称
+					model.put("entity",entityName);
+					// 生成文件
+					template.process(model,out);
+					logger.debug("生成名称为：" + entityName + JAVA + " 的BaseController类文件.");
+					if(out != null){
+						out.flush();
+						out.close();
+					}
+				}
+				catch(TemplateException e){
+					e.printStackTrace();
+				}
+				logger.debug(tableCode + "数据库表的BaseController类文件生成完成.");
+			}
+			catch(IOException e1){
+				e1.printStackTrace();
+				logger.debug(tableCode + "数据库表的BaseController类文件生成失败.");
 			}
 		}
 	}

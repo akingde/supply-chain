@@ -146,7 +146,7 @@ public abstract class BaseTableService<T extends TableDO> extends BaseService im
 		int page = tableDO.getPage() == 0?1 : tableDO.getPage();
 		int rows = tableDO.getRows() == 0?10 : tableDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<TableDO> list = tableDao.listPaginated( tableDO);
+		List<TableDO> list = tableDao.listPaginated(tableDO);
 		PageInfo<TableDO> pageInfo = new PageInfo<TableDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseTableService<T extends TableDO> extends BaseService im
 	 * @return
 	 */
 	public PageInfo<TableDO> listPaginatedManual(TableDO  tableDO) throws Exception {
-		List<TableDO> list = tableDao.listPaginatedManual( tableDO);
-		Long countRecords = tableDao.countPaginatedManual( tableDO);
 		int page = tableDO.getPage() == 0?1: tableDO.getPage();
 		int rows = tableDO.getRows() == 0?10: tableDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		tableDO.setStart(start);
+		tableDO.setOffset(offset);
+		List<TableDO> list = tableDao.listPaginatedManual(tableDO);
+		Long countRecords = tableDao.countPaginatedManual(tableDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<TableDO> pageInfo = new PageInfo<TableDO>(list);

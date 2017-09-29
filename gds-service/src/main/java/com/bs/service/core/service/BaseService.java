@@ -85,7 +85,6 @@ public abstract class BaseService{
 	 * @param cls
 	 * @param method
 	 * @param code
-	 * @param replaceMsg []
 	 * @return
 	 */
 	public String getMessage(Class<?> cls,String method,String code,String replaceMsg[]) {

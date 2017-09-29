@@ -51,6 +51,9 @@ public abstract class BaseAuthorizationPO extends Entity {
 	/**视图名称-视图名称**/
 	private String viewName;
 	
+	/**访问路径-**/
+	private String urlPath;
+	
 	/**页面模板名称-只有二级功能指定有效**/
 	private String templateName;
 	
@@ -203,6 +206,14 @@ public abstract class BaseAuthorizationPO extends Entity {
 
 	public void setViewName(String viewName) {
 		this.viewName = viewName;
+	}
+
+	public String getUrlPath() {
+		return urlPath;
+	}
+
+	public void setUrlPath(String urlPath) {
+		this.urlPath = urlPath;
 	}
 
 	public String getTemplateName() {

@@ -1,12 +1,12 @@
 package com.bs.rest.modules.uc.vo;
 
-import java.io.Serializable;
+import com.bs.rest.core.entity.Entity;
 import javax.validation.constraints.NotNull;
 
 import com.bs.rest.core.group.Second;
 import com.bs.rest.core.group.Fourth;
 
-public class OrganizationVO implements Serializable{
+public class OrganizationVO extends Entity{
 
 	private static final long serialVersionUID = 1L;
 	/**机构ID-父机构ID：机构树状结构父节点标识**/

@@ -1,12 +1,12 @@
 package com.bs.rest.modules.mc.vo;
 
-import java.io.Serializable;
+import com.bs.rest.core.entity.Entity;
 import javax.validation.constraints.NotNull;
 
 import com.bs.rest.core.group.Second;
 import com.bs.rest.core.group.Fourth;
 
-public class ShortMessageSendVO implements Serializable{
+public class ShortMessageSendVO extends Entity{
 
 	private static final long serialVersionUID = 1L;
 	/**主键Id-**/

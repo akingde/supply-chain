@@ -146,7 +146,7 @@ public abstract class BaseAreaService<T extends AreaDO> extends BaseService impl
 		int page = areaDO.getPage() == 0?1 : areaDO.getPage();
 		int rows = areaDO.getRows() == 0?10 : areaDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<AreaDO> list = areaDao.listPaginated( areaDO);
+		List<AreaDO> list = areaDao.listPaginated(areaDO);
 		PageInfo<AreaDO> pageInfo = new PageInfo<AreaDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseAreaService<T extends AreaDO> extends BaseService impl
 	 * @return
 	 */
 	public PageInfo<AreaDO> listPaginatedManual(AreaDO  areaDO) throws Exception {
-		List<AreaDO> list = areaDao.listPaginatedManual( areaDO);
-		Long countRecords = areaDao.countPaginatedManual( areaDO);
 		int page = areaDO.getPage() == 0?1: areaDO.getPage();
 		int rows = areaDO.getRows() == 0?10: areaDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		areaDO.setStart(start);
+		areaDO.setOffset(offset);
+		List<AreaDO> list = areaDao.listPaginatedManual(areaDO);
+		Long countRecords = areaDao.countPaginatedManual(areaDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<AreaDO> pageInfo = new PageInfo<AreaDO>(list);

@@ -45,7 +45,7 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
 	 */
 	private void loadAuthorization() {
 		// 查找到所有角色信息
-		ResultData<List<AuthorizationDTO>> resultData = authorizationApi.listAll();
+		ResultData<List<AuthorizationDTO>> resultData = authorizationApi.listAuths();
 		if (resultData != null) {
 			String rcode = resultData.getCode();
 			if (rcode != null && rcode.equals(ResultCode.RCODE_SUCCESS)) {
@@ -55,6 +55,7 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
 				for (AuthorizationDTO authorizationDTO:authorizations) {
 					String entityName = authorizationDTO.getEntityName();
 					String methodName = authorizationDTO.getMethodName();
+					String urlPath = authorizationDTO.getUrlPath();
 					Long authCode = authorizationDTO.getCode();
 					//任何一个为空都不是合法的权限信息
 					if (entityName == null || methodName == null || authCode == null) {
@@ -65,6 +66,10 @@ public class CustomSecurityMetadataSource implements FilterInvocationSecurityMet
 					ConfigAttribute configAttribute = new SecurityConfig(String.valueOf(authCode));
 					//请求的url地址
 					String urlKey = "/" + entityName + "/" + methodName;
+					//如果自定义配置urlpath 则，系统使用自定义的
+					if (urlPath != null && !urlPath.equals("")) {
+						urlKey = urlPath;
+					}
 					//map中是否存在，如果不存在加入到map中
 					ConfigAttribute configAttributeTemp =  configAttributeMap.get(urlKey);
 					if (configAttributeTemp == null) {

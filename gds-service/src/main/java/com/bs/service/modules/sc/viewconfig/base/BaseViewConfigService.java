@@ -146,7 +146,7 @@ public abstract class BaseViewConfigService<T extends ViewConfigDO> extends Base
 		int page = viewConfigDO.getPage() == 0?1 : viewConfigDO.getPage();
 		int rows = viewConfigDO.getRows() == 0?10 : viewConfigDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<ViewConfigDO> list = viewConfigDao.listPaginated( viewConfigDO);
+		List<ViewConfigDO> list = viewConfigDao.listPaginated(viewConfigDO);
 		PageInfo<ViewConfigDO> pageInfo = new PageInfo<ViewConfigDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseViewConfigService<T extends ViewConfigDO> extends Base
 	 * @return
 	 */
 	public PageInfo<ViewConfigDO> listPaginatedManual(ViewConfigDO  viewConfigDO) throws Exception {
-		List<ViewConfigDO> list = viewConfigDao.listPaginatedManual( viewConfigDO);
-		Long countRecords = viewConfigDao.countPaginatedManual( viewConfigDO);
 		int page = viewConfigDO.getPage() == 0?1: viewConfigDO.getPage();
 		int rows = viewConfigDO.getRows() == 0?10: viewConfigDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		viewConfigDO.setStart(start);
+		viewConfigDO.setOffset(offset);
+		List<ViewConfigDO> list = viewConfigDao.listPaginatedManual(viewConfigDO);
+		Long countRecords = viewConfigDao.countPaginatedManual(viewConfigDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<ViewConfigDO> pageInfo = new PageInfo<ViewConfigDO>(list);

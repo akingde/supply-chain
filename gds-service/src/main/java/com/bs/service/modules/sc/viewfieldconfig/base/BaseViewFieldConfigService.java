@@ -146,7 +146,7 @@ public abstract class BaseViewFieldConfigService<T extends ViewFieldConfigDO> ex
 		int page = viewFieldConfigDO.getPage() == 0?1 : viewFieldConfigDO.getPage();
 		int rows = viewFieldConfigDO.getRows() == 0?10 : viewFieldConfigDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<ViewFieldConfigDO> list = viewFieldConfigDao.listPaginated( viewFieldConfigDO);
+		List<ViewFieldConfigDO> list = viewFieldConfigDao.listPaginated(viewFieldConfigDO);
 		PageInfo<ViewFieldConfigDO> pageInfo = new PageInfo<ViewFieldConfigDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseViewFieldConfigService<T extends ViewFieldConfigDO> ex
 	 * @return
 	 */
 	public PageInfo<ViewFieldConfigDO> listPaginatedManual(ViewFieldConfigDO  viewFieldConfigDO) throws Exception {
-		List<ViewFieldConfigDO> list = viewFieldConfigDao.listPaginatedManual( viewFieldConfigDO);
-		Long countRecords = viewFieldConfigDao.countPaginatedManual( viewFieldConfigDO);
 		int page = viewFieldConfigDO.getPage() == 0?1: viewFieldConfigDO.getPage();
 		int rows = viewFieldConfigDO.getRows() == 0?10: viewFieldConfigDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		viewFieldConfigDO.setStart(start);
+		viewFieldConfigDO.setOffset(offset);
+		List<ViewFieldConfigDO> list = viewFieldConfigDao.listPaginatedManual(viewFieldConfigDO);
+		Long countRecords = viewFieldConfigDao.countPaginatedManual(viewFieldConfigDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<ViewFieldConfigDO> pageInfo = new PageInfo<ViewFieldConfigDO>(list);

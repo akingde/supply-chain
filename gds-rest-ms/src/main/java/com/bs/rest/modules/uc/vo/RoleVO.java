@@ -1,12 +1,12 @@
 package com.bs.rest.modules.uc.vo;
 
-import java.io.Serializable;
+import com.bs.rest.core.entity.Entity;
 import javax.validation.constraints.NotNull;
 
 import com.bs.rest.core.group.Second;
 import com.bs.rest.core.group.Fourth;
 
-public class RoleVO implements Serializable{
+public class RoleVO extends Entity{
 
 	private static final long serialVersionUID = 1L;
 	/**角色ID-**/
@@ -14,6 +14,8 @@ public class RoleVO implements Serializable{
 	private Long id;
 	/**角色名称-**/
 	private String name;
+	/**角色代码-**/
+	private String code;
 	/**角色类型-1：平台方角色 2：公寓方角色**/
 	private Integer roleType;
 	/**角色状态-角色状态： 0：禁用 1：开启**/
@@ -42,6 +44,14 @@ public class RoleVO implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public Integer getRoleType() {

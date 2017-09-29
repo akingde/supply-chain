@@ -146,7 +146,7 @@ public abstract class BaseUserService<T extends UserDO> extends BaseService impl
 		int page = userDO.getPage() == 0?1 : userDO.getPage();
 		int rows = userDO.getRows() == 0?10 : userDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<UserDO> list = userDao.listPaginated( userDO);
+		List<UserDO> list = userDao.listPaginated(userDO);
 		PageInfo<UserDO> pageInfo = new PageInfo<UserDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseUserService<T extends UserDO> extends BaseService impl
 	 * @return
 	 */
 	public PageInfo<UserDO> listPaginatedManual(UserDO  userDO) throws Exception {
-		List<UserDO> list = userDao.listPaginatedManual( userDO);
-		Long countRecords = userDao.countPaginatedManual( userDO);
 		int page = userDO.getPage() == 0?1: userDO.getPage();
 		int rows = userDO.getRows() == 0?10: userDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		userDO.setStart(start);
+		userDO.setOffset(offset);
+		List<UserDO> list = userDao.listPaginatedManual(userDO);
+		Long countRecords = userDao.countPaginatedManual(userDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<UserDO> pageInfo = new PageInfo<UserDO>(list);

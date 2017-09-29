@@ -56,6 +56,42 @@
 	<sql id="role_form">
 		from UC_Role _role
 	</sql>
+	
+	<sql id="role_page_form_where">
+		from UC_Role _role,(
+			select id from UC_Role
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _role.id=#{id,jdbcType=BIGINT}</if>
+					<if test="name != null and name != ''">and _role.name=#{name,jdbcType=VARCHAR}</if>
+					<if test="code != null and code != ''">and _role.code=#{code,jdbcType=VARCHAR}</if>
+					<if test="roleType != null and roleType != ''">and _role.role_type=#{roleType,jdbcType=TINYINT}</if>
+					<if test="roleStatus != null and roleStatus != ''">and _role.role_status=#{roleStatus,jdbcType=TINYINT}</if>
+					<if test="version != null and version != ''">and _role.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _role.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _role.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _role.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _role_page where _role.id=_role_page.id
+	</sql>
+	
 	<sql id="role_inner_all">
 	</sql>
 	<sql id="role_left_all">
@@ -83,6 +119,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="role_where_fields">
 		<if test="id != null and id != ''">and _role.id=#{id,jdbcType=BIGINT}</if>
 		<if test="name != null and name != ''">and _role.name=#{name,jdbcType=VARCHAR}</if>
@@ -271,6 +308,35 @@
 	<sql id="userRoleRelation_form">
 		from UC_UserRoleRelation _userRoleRelation
 	</sql>
+	
+	<sql id="userRoleRelation_page_form_where">
+		from UC_UserRoleRelation _userRoleRelation,(
+			select id from UC_UserRoleRelation
+			<where>
+				<trim prefixOverrides="and">
+					<if test="userId != null and userId != ''">and _userRoleRelation.user_id=#{userId,jdbcType=BIGINT}</if>
+					<if test="roleId != null and roleId != ''">and _userRoleRelation.role_id=#{roleId,jdbcType=BIGINT}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _userRoleRelation_page where _userRoleRelation.id=_userRoleRelation_page.id
+	</sql>
+	
 	<sql id="userRoleRelation_inner_all">
 		inner join UC_Role _role on _role.id=_userRoleRelation.role_id
 		inner join UC_User _user on _user.id=_userRoleRelation.user_id
@@ -291,6 +357,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="userRoleRelation_where_fields">
 		<if test="userId != null and userId != ''">and _userRoleRelation.user_id=#{userId,jdbcType=BIGINT}</if>
 		<if test="roleId != null and roleId != ''">and _userRoleRelation.role_id=#{roleId,jdbcType=BIGINT}</if>
@@ -465,6 +532,53 @@
 	<sql id="organization_form">
 		from UC_Organization _organization
 	</sql>
+	
+	<sql id="organization_page_form_where">
+		from UC_Organization _organization,(
+			select id from UC_Organization
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _organization.id=#{id,jdbcType=BIGINT}</if>
+					<if test="parentId != null and parentId != ''">and _organization.parent_id=#{parentId,jdbcType=BIGINT}</if>
+					<if test="parentName != null and parentName != ''">and _organization.parent_name=#{parentName,jdbcType=VARCHAR}</if>
+					<if test="orgType != null and orgType != ''">and _organization.org_type=#{orgType,jdbcType=TINYINT}</if>
+					<if test="code != null and code != ''">and _organization.code=#{code,jdbcType=VARCHAR}</if>
+					<if test="name != null and name != ''">and _organization.name=#{name,jdbcType=VARCHAR}</if>
+					<if test="shortName != null and shortName != ''">and _organization.short_name=#{shortName,jdbcType=VARCHAR}</if>
+					<if test="registerName != null and registerName != ''">and _organization.register_name=#{registerName,jdbcType=VARCHAR}</if>
+					<if test="officePhone != null and officePhone != ''">and _organization.office_phone=#{officePhone,jdbcType=VARCHAR}</if>
+					<if test="fax != null and fax != ''">and _organization.fax=#{fax,jdbcType=VARCHAR}</if>
+					<if test="postCode != null and postCode != ''">and _organization.post_code=#{postCode,jdbcType=VARCHAR}</if>
+					<if test="address != null and address != ''">and _organization.address=#{address,jdbcType=VARCHAR}</if>
+					<if test="treeLevel != null and treeLevel != ''">and _organization.tree_level=#{treeLevel,jdbcType=SMALLINT}</if>
+					<if test="treePath != null and treePath != ''">and _organization.tree_path=#{treePath,jdbcType=VARCHAR}</if>
+					<if test="isChildNode != null and isChildNode != ''">and _organization.is_child_node=#{isChildNode,jdbcType=SMALLINT}</if>
+					<if test="isDelete != null and isDelete != ''">and _organization.is_delete=#{isDelete,jdbcType=SMALLINT}</if>
+					<if test="version != null and version != ''">and _organization.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _organization.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _organization.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _organization.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _organization_page where _organization.id=_organization_page.id
+	</sql>
+	
 	<sql id="organization_inner_all">
 	</sql>
 	<sql id="organization_left_all">
@@ -499,6 +613,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="organization_where_fields">
 		<if test="id != null and id != ''">and _organization.id=#{id,jdbcType=BIGINT}</if>
 		<if test="parentId != null and parentId != ''">and _organization.parent_id=#{parentId,jdbcType=BIGINT}</if>
@@ -807,6 +922,56 @@
 	<sql id="user_form">
 		from UC_User _user
 	</sql>
+	
+	<sql id="user_page_form_where">
+		from UC_User _user,(
+			select id from UC_User
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _user.id=#{id,jdbcType=BIGINT}</if>
+					<if test="orgId != null and orgId != ''">and _user.org_id=#{orgId,jdbcType=BIGINT}</if>
+					<if test="orgIds != null and orgIds != ''">and _user.org_ids=#{orgIds,jdbcType=VARCHAR}</if>
+					<if test="account != null and account != ''">and _user.account=#{account,jdbcType=VARCHAR}</if>
+					<if test="password != null and password != ''">and _user.password=#{password,jdbcType=VARCHAR}</if>
+					<if test="orgName != null and orgName != ''">and _user.org_name=#{orgName,jdbcType=VARCHAR}</if>
+					<if test="orgCode != null and orgCode != ''">and _user.org_code=#{orgCode,jdbcType=VARCHAR}</if>
+					<if test="userType != null and userType != ''">and _user.user_type=#{userType,jdbcType=TINYINT}</if>
+					<if test="isAdmin != null and isAdmin != ''">and _user.is_admin=#{isAdmin,jdbcType=TINYINT}</if>
+					<if test="isPosition != null and isPosition != ''">and _user.is_position=#{isPosition,jdbcType=TINYINT}</if>
+					<if test="name != null and name != ''">and _user.name=#{name,jdbcType=VARCHAR}</if>
+					<if test="mobilePhone != null and mobilePhone != ''">and _user.mobile_phone=#{mobilePhone,jdbcType=VARCHAR}</if>
+					<if test="email != null and email != ''">and _user.email=#{email,jdbcType=VARCHAR}</if>
+					<if test="officePhone != null and officePhone != ''">and _user.office_phone=#{officePhone,jdbcType=VARCHAR}</if>
+					<if test="gender != null and gender != ''">and _user.gender=#{gender,jdbcType=TINYINT}</if>
+					<if test="birthday != null and birthday != ''">and _user.birthday=#{birthday,jdbcType=DATETIME}</if>
+					<if test="head != null and head != ''">and _user.head=#{head,jdbcType=VARCHAR}</if>
+					<if test="signature != null and signature != ''">and _user.signature=#{signature,jdbcType=VARCHAR}</if>
+					<if test="userStatus != null and userStatus != ''">and _user.user_status=#{userStatus,jdbcType=TINYINT}</if>
+					<if test="version != null and version != ''">and _user.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _user.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _user.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _user.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _user_page where _user.id=_user_page.id
+	</sql>
+	
 	<sql id="user_inner_all">
 		inner join UC_Organization _organization on _organization.id=_user.org_id
 	</sql>
@@ -848,6 +1013,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="user_where_fields">
 		<if test="id != null and id != ''">and _user.id=#{id,jdbcType=BIGINT}</if>
 		<if test="orgId != null and orgId != ''">and _user.org_id=#{orgId,jdbcType=BIGINT}</if>
@@ -1135,6 +1301,35 @@
 	<sql id="roleAuthRelation_form">
 		from UC_RoleAuthRelation _roleAuthRelation
 	</sql>
+	
+	<sql id="roleAuthRelation_page_form_where">
+		from UC_RoleAuthRelation _roleAuthRelation,(
+			select id from UC_RoleAuthRelation
+			<where>
+				<trim prefixOverrides="and">
+					<if test="roleId != null and roleId != ''">and _roleAuthRelation.role_id=#{roleId,jdbcType=BIGINT}</if>
+					<if test="authId != null and authId != ''">and _roleAuthRelation.auth_id=#{authId,jdbcType=BIGINT}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _roleAuthRelation_page where _roleAuthRelation.id=_roleAuthRelation_page.id
+	</sql>
+	
 	<sql id="roleAuthRelation_inner_all">
 		inner join UC_Role _role on _role.id=_roleAuthRelation.role_id
 		inner join UC_Authorization _authorization on _authorization.id=_roleAuthRelation.auth_id
@@ -1155,6 +1350,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="roleAuthRelation_where_fields">
 		<if test="roleId != null and roleId != ''">and _roleAuthRelation.role_id=#{roleId,jdbcType=BIGINT}</if>
 		<if test="authId != null and authId != ''">and _roleAuthRelation.auth_id=#{authId,jdbcType=BIGINT}</if>
@@ -1279,6 +1475,7 @@
 		<result property="methodName" column="methodName" javaType="java.lang.String" />
 		<result property="viewType" column="viewType" javaType="java.lang.String" />
 		<result property="viewName" column="viewName" javaType="java.lang.String" />
+		<result property="urlPath" column="urlPath" javaType="java.lang.String" />
 		<result property="templateName" column="templateName" javaType="java.lang.String" />
 		<result property="modelFileName" column="modelFileName" javaType="java.lang.String" />
 		<result property="menuType" column="menuType" javaType="java.lang.String" />
@@ -1327,6 +1524,7 @@
 		_authorization.method_name methodName,
 		_authorization.view_type viewType,
 		_authorization.view_name viewName,
+		_authorization.url_path urlPath,
 		_authorization.template_name templateName,
 		_authorization.model_file_name modelFileName,
 		_authorization.menu_type menuType,
@@ -1342,6 +1540,60 @@
 	<sql id="authorization_form">
 		from UC_Authorization _authorization
 	</sql>
+	
+	<sql id="authorization_page_form_where">
+		from UC_Authorization _authorization,(
+			select id from UC_Authorization
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _authorization.id=#{id,jdbcType=BIGINT}</if>
+					<if test="viewConfigId != null and viewConfigId != ''">and _authorization.view_config_id=#{viewConfigId,jdbcType=BIGINT}</if>
+					<if test="parentId != null and parentId != ''">and _authorization.parent_id=#{parentId,jdbcType=BIGINT}</if>
+					<if test="code != null and code != ''">and _authorization.code=#{code,jdbcType=BIGINT}</if>
+					<if test="parentCode != null and parentCode != ''">and _authorization.parent_code=#{parentCode,jdbcType=BIGINT}</if>
+					<if test="parentName != null and parentName != ''">and _authorization.parent_name=#{parentName,jdbcType=VARCHAR}</if>
+					<if test="treeLevel != null and treeLevel != ''">and _authorization.tree_level=#{treeLevel,jdbcType=TINYINT}</if>
+					<if test="treePath != null and treePath != ''">and _authorization.tree_path=#{treePath,jdbcType=VARCHAR}</if>
+					<if test="name != null and name != ''">and _authorization.name=#{name,jdbcType=VARCHAR}</if>
+					<if test="wildcardPath != null and wildcardPath != ''">and _authorization.wildcard_path=#{wildcardPath,jdbcType=VARCHAR}</if>
+					<if test="modelName != null and modelName != ''">and _authorization.model_name=#{modelName,jdbcType=VARCHAR}</if>
+					<if test="entityName != null and entityName != ''">and _authorization.entity_name=#{entityName,jdbcType=VARCHAR}</if>
+					<if test="methodName != null and methodName != ''">and _authorization.method_name=#{methodName,jdbcType=VARCHAR}</if>
+					<if test="viewType != null and viewType != ''">and _authorization.view_type=#{viewType,jdbcType=VARCHAR}</if>
+					<if test="viewName != null and viewName != ''">and _authorization.view_name=#{viewName,jdbcType=VARCHAR}</if>
+					<if test="urlPath != null and urlPath != ''">and _authorization.url_path=#{urlPath,jdbcType=VARCHAR}</if>
+					<if test="templateName != null and templateName != ''">and _authorization.template_name=#{templateName,jdbcType=VARCHAR}</if>
+					<if test="modelFileName != null and modelFileName != ''">and _authorization.model_file_name=#{modelFileName,jdbcType=VARCHAR}</if>
+					<if test="menuType != null and menuType != ''">and _authorization.menu_type=#{menuType,jdbcType=VARCHAR}</if>
+					<if test="isChildNode != null and isChildNode != ''">and _authorization.is_child_node=#{isChildNode,jdbcType=VARCHAR}</if>
+					<if test="iconPath != null and iconPath != ''">and _authorization.icon_path=#{iconPath,jdbcType=VARCHAR}</if>
+					<if test="authType != null and authType != ''">and _authorization.auth_type=#{authType,jdbcType=TINYINT}</if>
+					<if test="params != null and params != ''">and _authorization.params=#{params,jdbcType=VARCHAR}</if>
+					<if test="version != null and version != ''">and _authorization.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _authorization.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _authorization.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _authorization.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _authorization_page where _authorization.id=_authorization_page.id
+	</sql>
+	
 	<sql id="authorization_inner_all">
 		inner join SC_ViewConfig _viewConfig on _viewConfig.id=_authorization.view_config_id
 	</sql>
@@ -1372,6 +1624,7 @@
 				<if test="methodName != null and methodName != ''">and _authorization.method_name=#{methodName,jdbcType=VARCHAR}</if>
 				<if test="viewType != null and viewType != ''">and _authorization.view_type=#{viewType,jdbcType=VARCHAR}</if>
 				<if test="viewName != null and viewName != ''">and _authorization.view_name=#{viewName,jdbcType=VARCHAR}</if>
+				<if test="urlPath != null and urlPath != ''">and _authorization.url_path=#{urlPath,jdbcType=VARCHAR}</if>
 				<if test="templateName != null and templateName != ''">and _authorization.template_name=#{templateName,jdbcType=VARCHAR}</if>
 				<if test="modelFileName != null and modelFileName != ''">and _authorization.model_file_name=#{modelFileName,jdbcType=VARCHAR}</if>
 				<if test="menuType != null and menuType != ''">and _authorization.menu_type=#{menuType,jdbcType=VARCHAR}</if>
@@ -1386,6 +1639,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="authorization_where_fields">
 		<if test="id != null and id != ''">and _authorization.id=#{id,jdbcType=BIGINT}</if>
 		<if test="viewConfigId != null and viewConfigId != ''">and _authorization.view_config_id=#{viewConfigId,jdbcType=BIGINT}</if>
@@ -1402,6 +1656,7 @@
 		<if test="methodName != null and methodName != ''">and _authorization.method_name=#{methodName,jdbcType=VARCHAR}</if>
 		<if test="viewType != null and viewType != ''">and _authorization.view_type=#{viewType,jdbcType=VARCHAR}</if>
 		<if test="viewName != null and viewName != ''">and _authorization.view_name=#{viewName,jdbcType=VARCHAR}</if>
+		<if test="urlPath != null and urlPath != ''">and _authorization.url_path=#{urlPath,jdbcType=VARCHAR}</if>
 		<if test="templateName != null and templateName != ''">and _authorization.template_name=#{templateName,jdbcType=VARCHAR}</if>
 		<if test="modelFileName != null and modelFileName != ''">and _authorization.model_file_name=#{modelFileName,jdbcType=VARCHAR}</if>
 		<if test="menuType != null and menuType != ''">and _authorization.menu_type=#{menuType,jdbcType=VARCHAR}</if>
@@ -1432,6 +1687,7 @@
 				<if test="methodName != null and methodName != ''">and method_name=#{methodName,jdbcType=VARCHAR}</if>
 				<if test="viewType != null and viewType != ''">and view_type=#{viewType,jdbcType=VARCHAR}</if>
 				<if test="viewName != null and viewName != ''">and view_name=#{viewName,jdbcType=VARCHAR}</if>
+				<if test="urlPath != null and urlPath != ''">and url_path=#{urlPath,jdbcType=VARCHAR}</if>
 				<if test="templateName != null and templateName != ''">and template_name=#{templateName,jdbcType=VARCHAR}</if>
 				<if test="modelFileName != null and modelFileName != ''">and model_file_name=#{modelFileName,jdbcType=VARCHAR}</if>
 				<if test="menuType != null and menuType != ''">and menu_type=#{menuType,jdbcType=VARCHAR}</if>
@@ -1464,6 +1720,7 @@
 				<if test="methodName != null and methodName != ''">and method_name=#{methodName,jdbcType=VARCHAR}</if>
 				<if test="viewType != null and viewType != ''">and view_type=#{viewType,jdbcType=VARCHAR}</if>
 				<if test="viewName != null and viewName != ''">and view_name=#{viewName,jdbcType=VARCHAR}</if>
+				<if test="urlPath != null and urlPath != ''">and url_path=#{urlPath,jdbcType=VARCHAR}</if>
 				<if test="templateName != null and templateName != ''">and template_name=#{templateName,jdbcType=VARCHAR}</if>
 				<if test="modelFileName != null and modelFileName != ''">and model_file_name=#{modelFileName,jdbcType=VARCHAR}</if>
 				<if test="menuType != null and menuType != ''">and menu_type=#{menuType,jdbcType=VARCHAR}</if>
@@ -1553,6 +1810,7 @@
 				<if test="methodName != null and methodName != ''">,method_name=#{methodName,jdbcType=VARCHAR}</if>
 				<if test="viewType != null and viewType != ''">,view_type=#{viewType,jdbcType=VARCHAR}</if>
 				<if test="viewName != null and viewName != ''">,view_name=#{viewName,jdbcType=VARCHAR}</if>
+				<if test="urlPath != null and urlPath != ''">,url_path=#{urlPath,jdbcType=VARCHAR}</if>
 				<if test="templateName != null and templateName != ''">,template_name=#{templateName,jdbcType=VARCHAR}</if>
 				<if test="modelFileName != null and modelFileName != ''">,model_file_name=#{modelFileName,jdbcType=VARCHAR}</if>
 				<if test="menuType != null and menuType != ''">,menu_type=#{menuType,jdbcType=VARCHAR}</if>
@@ -1585,6 +1843,7 @@
 				<if test="methodName != null and methodName != ''">,method_name=NULL</if>
 				<if test="viewType != null and viewType != ''">,view_type=NULL</if>
 				<if test="viewName != null and viewName != ''">,view_name=NULL</if>
+				<if test="urlPath != null and urlPath != ''">,url_path=NULL</if>
 				<if test="templateName != null and templateName != ''">,template_name=NULL</if>
 				<if test="modelFileName != null and modelFileName != ''">,model_file_name=NULL</if>
 				<if test="menuType != null and menuType != ''">,menu_type=NULL</if>
@@ -1617,6 +1876,7 @@
 				<if test="methodName != null and methodName != ''">,method_name</if>
 				<if test="viewType != null and viewType != ''">,view_type</if>
 				<if test="viewName != null and viewName != ''">,view_name</if>
+				<if test="urlPath != null and urlPath != ''">,url_path</if>
 				<if test="templateName != null and templateName != ''">,template_name</if>
 				<if test="modelFileName != null and modelFileName != ''">,model_file_name</if>
 				<if test="menuType != null and menuType != ''">,menu_type</if>
@@ -1646,6 +1906,7 @@
 				<if test="methodName != null and methodName != ''">,#{methodName,jdbcType=VARCHAR}</if>
 				<if test="viewType != null and viewType != ''">,#{viewType,jdbcType=VARCHAR}</if>
 				<if test="viewName != null and viewName != ''">,#{viewName,jdbcType=VARCHAR}</if>
+				<if test="urlPath != null and urlPath != ''">,#{urlPath,jdbcType=VARCHAR}</if>
 				<if test="templateName != null and templateName != ''">,#{templateName,jdbcType=VARCHAR}</if>
 				<if test="modelFileName != null and modelFileName != ''">,#{modelFileName,jdbcType=VARCHAR}</if>
 				<if test="menuType != null and menuType != ''">,#{menuType,jdbcType=VARCHAR}</if>
@@ -1715,6 +1976,46 @@
 	<sql id="log_form">
 		from UC_Log _log
 	</sql>
+	
+	<sql id="log_page_form_where">
+		from UC_Log _log,(
+			select id from UC_Log
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _log.id=#{id,jdbcType=BIGINT}</if>
+					<if test="orgId != null and orgId != ''">and _log.org_id=#{orgId,jdbcType=BIGINT}</if>
+					<if test="orgName != null and orgName != ''">and _log.org_name=#{orgName,jdbcType=VARCHAR}</if>
+					<if test="userId != null and userId != ''">and _log.user_id=#{userId,jdbcType=BIGINT}</if>
+					<if test="userName != null and userName != ''">and _log.user_name=#{userName,jdbcType=VARCHAR}</if>
+					<if test="operateTime != null and operateTime != ''">and _log.operate_time=#{operateTime,jdbcType=DATETIME}</if>
+					<if test="operateType != null and operateType != ''">and _log.operate_type=#{operateType,jdbcType=TINYINT}</if>
+					<if test="content != null and content != ''">and _log.content=#{content,jdbcType=VARCHAR}</if>
+					<if test="accessIp != null and accessIp != ''">and _log.access_ip=#{accessIp,jdbcType=VARCHAR}</if>
+					<if test="version != null and version != ''">and _log.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _log.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _log.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _log.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _log_page where _log.id=_log_page.id
+	</sql>
+	
 	<sql id="log_inner_all">
 	</sql>
 	<sql id="log_left_all">
@@ -1738,6 +2039,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="log_where_fields">
 		<if test="id != null and id != ''">and _log.id=#{id,jdbcType=BIGINT}</if>
 		<if test="orgId != null and orgId != ''">and _log.org_id=#{orgId,jdbcType=BIGINT}</if>
@@ -1971,6 +2273,43 @@
 	<sql id="table_form">
 		from SC_Table _table
 	</sql>
+	
+	<sql id="table_page_form_where">
+		from SC_Table _table,(
+			select id from SC_Table
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _table.id=#{id,jdbcType=BIGINT}</if>
+					<if test="code != null and code != ''">and _table.code=#{code,jdbcType=VARCHAR}</if>
+					<if test="objectId != null and objectId != ''">and _table.object_id=#{objectId,jdbcType=VARCHAR}</if>
+					<if test="name != null and name != ''">and _table.name=#{name,jdbcType=VARCHAR}</if>
+					<if test="creationDate != null and creationDate != ''">and _table.creation_date=#{creationDate,jdbcType=BIGINT}</if>
+					<if test="modificationDate != null and modificationDate != ''">and _table.modification_date=#{modificationDate,jdbcType=BIGINT}</if>
+					<if test="version != null and version != ''">and _table.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _table.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _table.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _table.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _table_page where _table.id=_table_page.id
+	</sql>
+	
 	<sql id="table_inner_all">
 	</sql>
 	<sql id="table_left_all">
@@ -1995,6 +2334,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="table_where_fields">
 		<if test="id != null and id != ''">and _table.id=#{id,jdbcType=BIGINT}</if>
 		<if test="code != null and code != ''">and _table.code=#{code,jdbcType=VARCHAR}</if>
@@ -2217,6 +2557,48 @@
 	<sql id="tableColumn_form">
 		from SC_TableColumn _tableColumn
 	</sql>
+	
+	<sql id="tableColumn_page_form_where">
+		from SC_TableColumn _tableColumn,(
+			select id from SC_TableColumn
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _tableColumn.id=#{id,jdbcType=BIGINT}</if>
+					<if test="tableId != null and tableId != ''">and _tableColumn.table_id=#{tableId,jdbcType=BIGINT}</if>
+					<if test="objectId != null and objectId != ''">and _tableColumn.object_id=#{objectId,jdbcType=VARCHAR}</if>
+					<if test="code != null and code != ''">and _tableColumn.code=#{code,jdbcType=VARCHAR}</if>
+					<if test="name != null and name != ''">and _tableColumn.name=#{name,jdbcType=VARCHAR}</if>
+					<if test="showName != null and showName != ''">and _tableColumn.show_name=#{showName,jdbcType=VARCHAR}</if>
+					<if test="defaultValue != null and defaultValue != ''">and _tableColumn.default_value=#{defaultValue,jdbcType=VARCHAR}</if>
+					<if test="dataType != null and dataType != ''">and _tableColumn.data_type=#{dataType,jdbcType=VARCHAR}</if>
+					<if test="length != null and length != ''">and _tableColumn.length=#{length,jdbcType=SMALLINT}</if>
+					<if test="creationDate != null and creationDate != ''">and _tableColumn.creation_date=#{creationDate,jdbcType=BIGINT}</if>
+					<if test="modificationDate != null and modificationDate != ''">and _tableColumn.modification_date=#{modificationDate,jdbcType=BIGINT}</if>
+					<if test="version != null and version != ''">and _tableColumn.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _tableColumn.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _tableColumn.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _tableColumn.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _tableColumn_page where _tableColumn.id=_tableColumn_page.id
+	</sql>
+	
 	<sql id="tableColumn_inner_all">
 		inner join SC_Table _table on _table.id=_tableColumn.table_id
 	</sql>
@@ -2254,6 +2636,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="tableColumn_where_fields">
 		<if test="id != null and id != ''">and _tableColumn.id=#{id,jdbcType=BIGINT}</if>
 		<if test="tableId != null and tableId != ''">and _tableColumn.table_id=#{tableId,jdbcType=BIGINT}</if>
@@ -2505,6 +2888,46 @@
 	<sql id="tableReference_form">
 		from SC_TableReference _tableReference
 	</sql>
+	
+	<sql id="tableReference_page_form_where">
+		from SC_TableReference _tableReference,(
+			select id from SC_TableReference
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _tableReference.id=#{id,jdbcType=BIGINT}</if>
+					<if test="objectId != null and objectId != ''">and _tableReference.object_id=#{objectId,jdbcType=VARCHAR}</if>
+					<if test="code != null and code != ''">and _tableReference.code=#{code,jdbcType=VARCHAR}</if>
+					<if test="name != null and name != ''">and _tableReference.name=#{name,jdbcType=VARCHAR}</if>
+					<if test="parentTableId != null and parentTableId != ''">and _tableReference.parent_table_id=#{parentTableId,jdbcType=BIGINT}</if>
+					<if test="childTableId != null and childTableId != ''">and _tableReference.child_table_id=#{childTableId,jdbcType=BIGINT}</if>
+					<if test="implType != null and implType != ''">and _tableReference.impl_type=#{implType,jdbcType=VARCHAR}</if>
+					<if test="creationDate != null and creationDate != ''">and _tableReference.creation_date=#{creationDate,jdbcType=BIGINT}</if>
+					<if test="modificationDate != null and modificationDate != ''">and _tableReference.modification_date=#{modificationDate,jdbcType=BIGINT}</if>
+					<if test="version != null and version != ''">and _tableReference.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _tableReference.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _tableReference.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _tableReference.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _tableReference_page where _tableReference.id=_tableReference_page.id
+	</sql>
+	
 	<sql id="tableReference_inner_all">
 	</sql>
 	<sql id="tableReference_left_all">
@@ -2528,6 +2951,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="tableReference_where_fields">
 		<if test="id != null and id != ''">and _tableReference.id=#{id,jdbcType=BIGINT}</if>
 		<if test="objectId != null and objectId != ''">and _tableReference.object_id=#{objectId,jdbcType=VARCHAR}</if>
@@ -2763,6 +3187,44 @@
 	<sql id="tableIndex_form">
 		from SC_TableIndex _tableIndex
 	</sql>
+	
+	<sql id="tableIndex_page_form_where">
+		from SC_TableIndex _tableIndex,(
+			select id from SC_TableIndex
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _tableIndex.id=#{id,jdbcType=BIGINT}</if>
+					<if test="columnId != null and columnId != ''">and _tableIndex.column_id=#{columnId,jdbcType=BIGINT}</if>
+					<if test="objectId != null and objectId != ''">and _tableIndex.object_id=#{objectId,jdbcType=VARCHAR}</if>
+					<if test="code != null and code != ''">and _tableIndex.code=#{code,jdbcType=VARCHAR}</if>
+					<if test="name != null and name != ''">and _tableIndex.name=#{name,jdbcType=VARCHAR}</if>
+					<if test="creationDate != null and creationDate != ''">and _tableIndex.creation_date=#{creationDate,jdbcType=BIGINT}</if>
+					<if test="modificationDate != null and modificationDate != ''">and _tableIndex.modification_date=#{modificationDate,jdbcType=BIGINT}</if>
+					<if test="version != null and version != ''">and _tableIndex.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _tableIndex.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _tableIndex.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _tableIndex.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _tableIndex_page where _tableIndex.id=_tableIndex_page.id
+	</sql>
+	
 	<sql id="tableIndex_inner_all">
 		inner join SC_TableColumn _tableColumn on _tableColumn.id=_tableIndex.column_id
 	</sql>
@@ -2788,6 +3250,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="tableIndex_where_fields">
 		<if test="id != null and id != ''">and _tableIndex.id=#{id,jdbcType=BIGINT}</if>
 		<if test="columnId != null and columnId != ''">and _tableIndex.column_id=#{columnId,jdbcType=BIGINT}</if>
@@ -3013,6 +3476,47 @@
 	<sql id="area_form">
 		from SC_Area _area
 	</sql>
+	
+	<sql id="area_page_form_where">
+		from SC_Area _area,(
+			select id from SC_Area
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _area.id=#{id,jdbcType=BIGINT}</if>
+					<if test="parentCode != null and parentCode != ''">and _area.parent_code=#{parentCode,jdbcType=VARCHAR}</if>
+					<if test="code != null and code != ''">and _area.code=#{code,jdbcType=VARCHAR}</if>
+					<if test="name != null and name != ''">and _area.name=#{name,jdbcType=VARCHAR}</if>
+					<if test="spelling != null and spelling != ''">and _area.spelling=#{spelling,jdbcType=VARCHAR}</if>
+					<if test="treeLevel != null and treeLevel != ''">and _area.tree_level=#{treeLevel,jdbcType=SMALLINT}</if>
+					<if test="treePath != null and treePath != ''">and _area.tree_path=#{treePath,jdbcType=VARCHAR}</if>
+					<if test="isChildNode != null and isChildNode != ''">and _area.is_child_node=#{isChildNode,jdbcType=TINYINT}</if>
+					<if test="areaType != null and areaType != ''">and _area.area_type=#{areaType,jdbcType=TINYINT}</if>
+					<if test="isDelete != null and isDelete != ''">and _area.is_delete=#{isDelete,jdbcType=TINYINT}</if>
+					<if test="version != null and version != ''">and _area.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _area.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _area.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _area.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _area_page where _area.id=_area_page.id
+	</sql>
+	
 	<sql id="area_inner_all">
 	</sql>
 	<sql id="area_left_all">
@@ -3037,6 +3541,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="area_where_fields">
 		<if test="id != null and id != ''">and _area.id=#{id,jdbcType=BIGINT}</if>
 		<if test="parentCode != null and parentCode != ''">and _area.parent_code=#{parentCode,jdbcType=VARCHAR}</if>
@@ -3272,6 +3777,42 @@
 	<sql id="verificationCode_form">
 		from MC_VerificationCode _verificationCode
 	</sql>
+	
+	<sql id="verificationCode_page_form_where">
+		from MC_VerificationCode _verificationCode,(
+			select id from MC_VerificationCode
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _verificationCode.id=#{id,jdbcType=BIGINT}</if>
+					<if test="bussinessCode != null and bussinessCode != ''">and _verificationCode.bussiness_code=#{bussinessCode,jdbcType=VARCHAR}</if>
+					<if test="mobilePhone != null and mobilePhone != ''">and _verificationCode.mobile_phone=#{mobilePhone,jdbcType=VARCHAR}</if>
+					<if test="code != null and code != ''">and _verificationCode.code=#{code,jdbcType=VARCHAR}</if>
+					<if test="expiredTime != null and expiredTime != ''">and _verificationCode.expired_time=#{expiredTime,jdbcType=BIGINT}</if>
+					<if test="version != null and version != ''">and _verificationCode.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _verificationCode.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _verificationCode.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _verificationCode.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _verificationCode_page where _verificationCode.id=_verificationCode_page.id
+	</sql>
+	
 	<sql id="verificationCode_inner_all">
 	</sql>
 	<sql id="verificationCode_left_all">
@@ -3291,6 +3832,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="verificationCode_where_fields">
 		<if test="id != null and id != ''">and _verificationCode.id=#{id,jdbcType=BIGINT}</if>
 		<if test="bussinessCode != null and bussinessCode != ''">and _verificationCode.bussiness_code=#{bussinessCode,jdbcType=VARCHAR}</if>
@@ -3526,6 +4068,59 @@
 	<sql id="shortMessageSend_form">
 		from MC_ShortMessageSend _shortMessageSend
 	</sql>
+	
+	<sql id="shortMessageSend_page_form_where">
+		from MC_ShortMessageSend _shortMessageSend,(
+			select id from MC_ShortMessageSend
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _shortMessageSend.id=#{id,jdbcType=BIGINT}</if>
+					<if test="code != null and code != ''">and _shortMessageSend.code=#{code,jdbcType=VARCHAR}</if>
+					<if test="memberId != null and memberId != ''">and _shortMessageSend.member_id=#{memberId,jdbcType=BIGINT}</if>
+					<if test="mobilePhone != null and mobilePhone != ''">and _shortMessageSend.mobile_phone=#{mobilePhone,jdbcType=VARCHAR}</if>
+					<if test="content != null and content != ''">and _shortMessageSend.content=#{content,jdbcType=VARCHAR}</if>
+					<if test="businessCode != null and businessCode != ''">and _shortMessageSend.business_code=#{businessCode,jdbcType=VARCHAR}</if>
+					<if test="businessDesc != null and businessDesc != ''">and _shortMessageSend.business_desc=#{businessDesc,jdbcType=VARCHAR}</if>
+					<if test="spCode != null and spCode != ''">and _shortMessageSend.sp_code=#{spCode,jdbcType=VARCHAR}</if>
+					<if test="isRetry != null and isRetry != ''">and _shortMessageSend.is_retry=#{isRetry,jdbcType=SMALLINT}</if>
+					<if test="retryCount != null and retryCount != ''">and _shortMessageSend.retry_count=#{retryCount,jdbcType=SMALLINT}</if>
+					<if test="messageSerial != null and messageSerial != ''">and _shortMessageSend.message_serial=#{messageSerial,jdbcType=VARCHAR}</if>
+					<if test="sendStatus != null and sendStatus != ''">and _shortMessageSend.send_status=#{sendStatus,jdbcType=SMALLINT}</if>
+					<if test="statusReport != null and statusReport != ''">and _shortMessageSend.status_report=#{statusReport,jdbcType=SMALLINT}</if>
+					<if test="statements != null and statements != ''">and _shortMessageSend.statements=#{statements,jdbcType=VARCHAR}</if>
+					<if test="messageType != null and messageType != ''">and _shortMessageSend.message_type=#{messageType,jdbcType=SMALLINT}</if>
+					<if test="sendType != null and sendType != ''">and _shortMessageSend.send_type=#{sendType,jdbcType=SMALLINT}</if>
+					<if test="sendBeginHour != null and sendBeginHour != ''">and _shortMessageSend.send_begin_hour=#{sendBeginHour,jdbcType=INT}</if>
+					<if test="sendEndHour != null and sendEndHour != ''">and _shortMessageSend.send_end_hour=#{sendEndHour,jdbcType=INT}</if>
+					<if test="totalCount != null and totalCount != ''">and _shortMessageSend.total_count=#{totalCount,jdbcType=INT}</if>
+					<if test="sendTime != null and sendTime != ''">and _shortMessageSend.send_time=#{sendTime,jdbcType=DATETIME}</if>
+					<if test="timeout != null and timeout != ''">and _shortMessageSend.timeout=#{timeout,jdbcType=BIGINT}</if>
+					<if test="originTime != null and originTime != ''">and _shortMessageSend.origin_time=#{originTime,jdbcType=BIGINT}</if>
+					<if test="version != null and version != ''">and _shortMessageSend.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _shortMessageSend.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _shortMessageSend.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _shortMessageSend.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _shortMessageSend_page where _shortMessageSend.id=_shortMessageSend_page.id
+	</sql>
+	
 	<sql id="shortMessageSend_inner_all">
 		inner join MC_ShortMessageProvider _shortMessageProvider on _shortMessageProvider.code=_shortMessageSend.sp_code
 	</sql>
@@ -3566,6 +4161,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="shortMessageSend_where_fields">
 		<if test="id != null and id != ''">and _shortMessageSend.id=#{id,jdbcType=BIGINT}</if>
 		<if test="code != null and code != ''">and _shortMessageSend.code=#{code,jdbcType=VARCHAR}</if>
@@ -3889,6 +4485,43 @@
 	<sql id="dictionary_form">
 		from SC_Dictionary _dictionary
 	</sql>
+	
+	<sql id="dictionary_page_form_where">
+		from SC_Dictionary _dictionary,(
+			select id from SC_Dictionary
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _dictionary.id=#{id,jdbcType=BIGINT}</if>
+					<if test="categoryId != null and categoryId != ''">and _dictionary.category_id=#{categoryId,jdbcType=BIGINT}</if>
+					<if test="name != null and name != ''">and _dictionary.name=#{name,jdbcType=VARCHAR}</if>
+					<if test="code != null and code != ''">and _dictionary.code=#{code,jdbcType=VARCHAR}</if>
+					<if test="value != null and value != ''">and _dictionary.value=#{value,jdbcType=VARCHAR}</if>
+					<if test="version != null and version != ''">and _dictionary.version=#{version,jdbcType=BIGINT}</if>
+					<if test="isDelete != null and isDelete != ''">and _dictionary.is_delete=#{isDelete,jdbcType=TINYINT}</if>
+					<if test="createTime != null and createTime != ''">and _dictionary.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _dictionary.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _dictionary.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _dictionary_page where _dictionary.id=_dictionary_page.id
+	</sql>
+	
 	<sql id="dictionary_inner_all">
 		inner join SC_DictionaryCategory _dictionaryCategory on _dictionaryCategory.id=_dictionary.category_id
 	</sql>
@@ -3913,6 +4546,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="dictionary_where_fields">
 		<if test="id != null and id != ''">and _dictionary.id=#{id,jdbcType=BIGINT}</if>
 		<if test="categoryId != null and categoryId != ''">and _dictionary.category_id=#{categoryId,jdbcType=BIGINT}</if>
@@ -4154,6 +4788,58 @@
 	<sql id="shortMessageSent_form">
 		from MC_ShortMessageSent _shortMessageSent
 	</sql>
+	
+	<sql id="shortMessageSent_page_form_where">
+		from MC_ShortMessageSent _shortMessageSent,(
+			select id from MC_ShortMessageSent
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _shortMessageSent.id=#{id,jdbcType=BIGINT}</if>
+					<if test="code != null and code != ''">and _shortMessageSent.code=#{code,jdbcType=VARCHAR}</if>
+					<if test="memberId != null and memberId != ''">and _shortMessageSent.member_id=#{memberId,jdbcType=BIGINT}</if>
+					<if test="mobilePhone != null and mobilePhone != ''">and _shortMessageSent.mobile_phone=#{mobilePhone,jdbcType=VARCHAR}</if>
+					<if test="content != null and content != ''">and _shortMessageSent.content=#{content,jdbcType=VARCHAR}</if>
+					<if test="businessCode != null and businessCode != ''">and _shortMessageSent.business_code=#{businessCode,jdbcType=VARCHAR}</if>
+					<if test="spCode != null and spCode != ''">and _shortMessageSent.sp_code=#{spCode,jdbcType=VARCHAR}</if>
+					<if test="isRetry != null and isRetry != ''">and _shortMessageSent.is_retry=#{isRetry,jdbcType=SMALLINT}</if>
+					<if test="retryCount != null and retryCount != ''">and _shortMessageSent.retry_count=#{retryCount,jdbcType=SMALLINT}</if>
+					<if test="messageSn != null and messageSn != ''">and _shortMessageSent.message_sn=#{messageSn,jdbcType=VARCHAR}</if>
+					<if test="sendStatus != null and sendStatus != ''">and _shortMessageSent.send_status=#{sendStatus,jdbcType=SMALLINT}</if>
+					<if test="statusReport != null and statusReport != ''">and _shortMessageSent.status_report=#{statusReport,jdbcType=SMALLINT}</if>
+					<if test="statements != null and statements != ''">and _shortMessageSent.statements=#{statements,jdbcType=VARCHAR}</if>
+					<if test="messageType != null and messageType != ''">and _shortMessageSent.message_type=#{messageType,jdbcType=SMALLINT}</if>
+					<if test="sendType != null and sendType != ''">and _shortMessageSent.send_type=#{sendType,jdbcType=SMALLINT}</if>
+					<if test="sendBeginHour != null and sendBeginHour != ''">and _shortMessageSent.send_begin_hour=#{sendBeginHour,jdbcType=INT}</if>
+					<if test="sendEndHour != null and sendEndHour != ''">and _shortMessageSent.send_end_hour=#{sendEndHour,jdbcType=INT}</if>
+					<if test="totalCount != null and totalCount != ''">and _shortMessageSent.total_count=#{totalCount,jdbcType=INT}</if>
+					<if test="sendTime != null and sendTime != ''">and _shortMessageSent.send_time=#{sendTime,jdbcType=DATETIME}</if>
+					<if test="timeout != null and timeout != ''">and _shortMessageSent.timeout=#{timeout,jdbcType=BIGINT}</if>
+					<if test="originTime != null and originTime != ''">and _shortMessageSent.origin_time=#{originTime,jdbcType=BIGINT}</if>
+					<if test="version != null and version != ''">and _shortMessageSent.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _shortMessageSent.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _shortMessageSent.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _shortMessageSent.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _shortMessageSent_page where _shortMessageSent.id=_shortMessageSent_page.id
+	</sql>
+	
 	<sql id="shortMessageSent_inner_all">
 		inner join MC_ShortMessageProvider _shortMessageProvider on _shortMessageProvider.code=_shortMessageSent.sp_code
 	</sql>
@@ -4193,6 +4879,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="shortMessageSent_where_fields">
 		<if test="id != null and id != ''">and _shortMessageSent.id=#{id,jdbcType=BIGINT}</if>
 		<if test="code != null and code != ''">and _shortMessageSent.code=#{code,jdbcType=VARCHAR}</if>
@@ -4505,6 +5192,41 @@
 	<sql id="dictionaryCategory_form">
 		from SC_DictionaryCategory _dictionaryCategory
 	</sql>
+	
+	<sql id="dictionaryCategory_page_form_where">
+		from SC_DictionaryCategory _dictionaryCategory,(
+			select id from SC_DictionaryCategory
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _dictionaryCategory.id=#{id,jdbcType=BIGINT}</if>
+					<if test="code != null and code != ''">and _dictionaryCategory.code=#{code,jdbcType=VARCHAR}</if>
+					<if test="name != null and name != ''">and _dictionaryCategory.name=#{name,jdbcType=VARCHAR}</if>
+					<if test="isDelete != null and isDelete != ''">and _dictionaryCategory.is_delete=#{isDelete,jdbcType=TINYINT}</if>
+					<if test="version != null and version != ''">and _dictionaryCategory.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _dictionaryCategory.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _dictionaryCategory.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _dictionaryCategory.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _dictionaryCategory_page where _dictionaryCategory.id=_dictionaryCategory_page.id
+	</sql>
+	
 	<sql id="dictionaryCategory_inner_all">
 	</sql>
 	<sql id="dictionaryCategory_left_all">
@@ -4527,6 +5249,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="dictionaryCategory_where_fields">
 		<if test="id != null and id != ''">and _dictionaryCategory.id=#{id,jdbcType=BIGINT}</if>
 		<if test="code != null and code != ''">and _dictionaryCategory.code=#{code,jdbcType=VARCHAR}</if>
@@ -4734,6 +5457,48 @@
 	<sql id="shortMessageProvider_form">
 		from MC_ShortMessageProvider _shortMessageProvider
 	</sql>
+	
+	<sql id="shortMessageProvider_page_form_where">
+		from MC_ShortMessageProvider _shortMessageProvider,(
+			select id from MC_ShortMessageProvider
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _shortMessageProvider.id=#{id,jdbcType=BIGINT}</if>
+					<if test="name != null and name != ''">and _shortMessageProvider.name=#{name,jdbcType=VARCHAR}</if>
+					<if test="code != null and code != ''">and _shortMessageProvider.code=#{code,jdbcType=VARCHAR}</if>
+					<if test="account != null and account != ''">and _shortMessageProvider.account=#{account,jdbcType=VARCHAR}</if>
+					<if test="password != null and password != ''">and _shortMessageProvider.password=#{password,jdbcType=VARCHAR}</if>
+					<if test="tunnelCode != null and tunnelCode != ''">and _shortMessageProvider.tunnel_code=#{tunnelCode,jdbcType=VARCHAR}</if>
+					<if test="sendUrl != null and sendUrl != ''">and _shortMessageProvider.send_url=#{sendUrl,jdbcType=VARCHAR}</if>
+					<if test="fetchPath != null and fetchPath != ''">and _shortMessageProvider.fetch_path=#{fetchPath,jdbcType=VARCHAR}</if>
+					<if test="sign != null and sign != ''">and _shortMessageProvider.sign=#{sign,jdbcType=VARCHAR}</if>
+					<if test="formatType != null and formatType != ''">and _shortMessageProvider.format_type=#{formatType,jdbcType=VARCHAR}</if>
+					<if test="isUse != null and isUse != ''">and _shortMessageProvider.is_use=#{isUse,jdbcType=TINYINT}</if>
+					<if test="version != null and version != ''">and _shortMessageProvider.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _shortMessageProvider.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _shortMessageProvider.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _shortMessageProvider.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _shortMessageProvider_page where _shortMessageProvider.id=_shortMessageProvider_page.id
+	</sql>
+	
 	<sql id="shortMessageProvider_inner_all">
 	</sql>
 	<sql id="shortMessageProvider_left_all">
@@ -4767,6 +5532,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="shortMessageProvider_where_fields">
 		<if test="id != null and id != ''">and _shortMessageProvider.id=#{id,jdbcType=BIGINT}</if>
 		<if test="name != null and name != ''">and _shortMessageProvider.name=#{name,jdbcType=VARCHAR}</if>
@@ -5067,6 +5833,70 @@
 	<sql id="viewConfig_form">
 		from SC_ViewConfig _viewConfig
 	</sql>
+	
+	<sql id="viewConfig_page_form_where">
+		from SC_ViewConfig _viewConfig,(
+			select id from SC_ViewConfig
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _viewConfig.id=#{id,jdbcType=BIGINT}</if>
+					<if test="tableId != null and tableId != ''">and _viewConfig.table_id=#{tableId,jdbcType=BIGINT}</if>
+					<if test="tableIds != null and tableIds != ''">and _viewConfig.table_ids=#{tableIds,jdbcType=VARCHAR}</if>
+					<if test="treeTableId != null and treeTableId != ''">and _viewConfig.tree_table_id=#{treeTableId,jdbcType=BIGINT}</if>
+					<if test="authParentCode != null and authParentCode != ''">and _viewConfig.auth_parent_code=#{authParentCode,jdbcType=BIGINT}</if>
+					<if test="authCode != null and authCode != ''">and _viewConfig.auth_code=#{authCode,jdbcType=BIGINT}</if>
+					<if test="authName != null and authName != ''">and _viewConfig.auth_name=#{authName,jdbcType=VARCHAR}</if>
+					<if test="authParentNames != null and authParentNames != ''">and _viewConfig.auth_parent_names=#{authParentNames,jdbcType=VARCHAR}</if>
+					<if test="authLevel != null and authLevel != ''">and _viewConfig.auth_level=#{authLevel,jdbcType=SMALLINT}</if>
+					<if test="tableCode != null and tableCode != ''">and _viewConfig.table_code=#{tableCode,jdbcType=VARCHAR}</if>
+					<if test="tableName != null and tableName != ''">and _viewConfig.table_name=#{tableName,jdbcType=VARCHAR}</if>
+					<if test="treeTableCode != null and treeTableCode != ''">and _viewConfig.tree_table_code=#{treeTableCode,jdbcType=VARCHAR}</if>
+					<if test="treeTableName != null and treeTableName != ''">and _viewConfig.tree_table_name=#{treeTableName,jdbcType=VARCHAR}</if>
+					<if test="entityName != null and entityName != ''">and _viewConfig.entity_name=#{entityName,jdbcType=VARCHAR}</if>
+					<if test="treeEntityName != null and treeEntityName != ''">and _viewConfig.tree_entity_name=#{treeEntityName,jdbcType=VARCHAR}</if>
+					<if test="methodName != null and methodName != ''">and _viewConfig.method_name=#{methodName,jdbcType=VARCHAR}</if>
+					<if test="viewType != null and viewType != ''">and _viewConfig.view_type=#{viewType,jdbcType=SMALLINT}</if>
+					<if test="viewParentPath != null and viewParentPath != ''">and _viewConfig.view_parent_path=#{viewParentPath,jdbcType=VARCHAR}</if>
+					<if test="viewName != null and viewName != ''">and _viewConfig.view_name=#{viewName,jdbcType=VARCHAR}</if>
+					<if test="viewTemplateName != null and viewTemplateName != ''">and _viewConfig.view_template_name=#{viewTemplateName,jdbcType=VARCHAR}</if>
+					<if test="viewTemplatePath != null and viewTemplatePath != ''">and _viewConfig.view_template_path=#{viewTemplatePath,jdbcType=VARCHAR}</if>
+					<if test="jsTemplateContent != null and jsTemplateContent != ''">and _viewConfig.js_template_content=#{jsTemplateContent,jdbcType=TEXT}</if>
+					<if test="pageTemplateContent != null and pageTemplateContent != ''">and _viewConfig.page_template_content=#{pageTemplateContent,jdbcType=TEXT}</if>
+					<if test="viewGridParam != null and viewGridParam != ''">and _viewConfig.view_grid_param=#{viewGridParam,jdbcType=TEXT}</if>
+					<if test="isShrinktofit != null and isShrinktofit != ''">and _viewConfig.is_shrinktofit=#{isShrinktofit,jdbcType=SMALLINT}</if>
+					<if test="parentViewPosition != null and parentViewPosition != ''">and _viewConfig.parent_view_position=#{parentViewPosition,jdbcType=SMALLINT}</if>
+					<if test="jumpMethodName != null and jumpMethodName != ''">and _viewConfig.jump_method_name=#{jumpMethodName,jdbcType=VARCHAR}</if>
+					<if test="dataMethodName != null and dataMethodName != ''">and _viewConfig.data_method_name=#{dataMethodName,jdbcType=VARCHAR}</if>
+					<if test="isPageBack != null and isPageBack != ''">and _viewConfig.is_page_back=#{isPageBack,jdbcType=SMALLINT}</if>
+					<if test="isConfig != null and isConfig != ''">and _viewConfig.is_config=#{isConfig,jdbcType=SMALLINT}</if>
+					<if test="configTime != null and configTime != ''">and _viewConfig.config_time=#{configTime,jdbcType=DATETIME}</if>
+					<if test="isCenerate != null and isCenerate != ''">and _viewConfig.is_cenerate=#{isCenerate,jdbcType=SMALLINT}</if>
+					<if test="generateTime != null and generateTime != ''">and _viewConfig.generate_time=#{generateTime,jdbcType=DATETIME}</if>
+					<if test="version != null and version != ''">and _viewConfig.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _viewConfig.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _viewConfig.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _viewConfig.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _viewConfig_page where _viewConfig.id=_viewConfig_page.id
+	</sql>
+	
 	<sql id="viewConfig_inner_all">
 	</sql>
 	<sql id="viewConfig_left_all">
@@ -5122,6 +5952,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="viewConfig_where_fields">
 		<if test="id != null and id != ''">and _viewConfig.id=#{id,jdbcType=BIGINT}</if>
 		<if test="tableId != null and tableId != ''">and _viewConfig.table_id=#{tableId,jdbcType=BIGINT}</if>
@@ -5527,6 +6358,45 @@
 	<sql id="fieldDataConfig_form">
 		from SC_FieldDataConfig _fieldDataConfig
 	</sql>
+	
+	<sql id="fieldDataConfig_page_form_where">
+		from SC_FieldDataConfig _fieldDataConfig,(
+			select id from SC_FieldDataConfig
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _fieldDataConfig.id=#{id,jdbcType=BIGINT}</if>
+					<if test="cateId != null and cateId != ''">and _fieldDataConfig.cate_id=#{cateId,jdbcType=BIGINT}</if>
+					<if test="cateCode != null and cateCode != ''">and _fieldDataConfig.cate_code=#{cateCode,jdbcType=VARCHAR}</if>
+					<if test="cateName != null and cateName != ''">and _fieldDataConfig.cate_name=#{cateName,jdbcType=VARCHAR}</if>
+					<if test="dataName != null and dataName != ''">and _fieldDataConfig.data_name=#{dataName,jdbcType=VARCHAR}</if>
+					<if test="dataLabel != null and dataLabel != ''">and _fieldDataConfig.data_label=#{dataLabel,jdbcType=VARCHAR}</if>
+					<if test="dataCode != null and dataCode != ''">and _fieldDataConfig.data_code=#{dataCode,jdbcType=VARCHAR}</if>
+					<if test="dataValue != null and dataValue != ''">and _fieldDataConfig.data_value=#{dataValue,jdbcType=VARCHAR}</if>
+					<if test="version != null and version != ''">and _fieldDataConfig.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _fieldDataConfig.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _fieldDataConfig.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _fieldDataConfig.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _fieldDataConfig_page where _fieldDataConfig.id=_fieldDataConfig_page.id
+	</sql>
+	
 	<sql id="fieldDataConfig_inner_all">
 		inner join SC_FieldDataCategory _fieldDataCategory on _fieldDataCategory.id=_fieldDataConfig.cate_id
 	</sql>
@@ -5553,6 +6423,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="fieldDataConfig_where_fields">
 		<if test="id != null and id != ''">and _fieldDataConfig.id=#{id,jdbcType=BIGINT}</if>
 		<if test="cateId != null and cateId != ''">and _fieldDataConfig.cate_id=#{cateId,jdbcType=BIGINT}</if>
@@ -5842,6 +6713,74 @@
 	<sql id="viewFieldConfig_form">
 		from SC_ViewFieldConfig _viewFieldConfig
 	</sql>
+	
+	<sql id="viewFieldConfig_page_form_where">
+		from SC_ViewFieldConfig _viewFieldConfig,(
+			select id from SC_ViewFieldConfig
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _viewFieldConfig.id=#{id,jdbcType=BIGINT}</if>
+					<if test="viewId != null and viewId != ''">and _viewFieldConfig.view_id=#{viewId,jdbcType=BIGINT}</if>
+					<if test="authId != null and authId != ''">and _viewFieldConfig.auth_id=#{authId,jdbcType=BIGINT}</if>
+					<if test="tableId != null and tableId != ''">and _viewFieldConfig.table_id=#{tableId,jdbcType=BIGINT}</if>
+					<if test="columnId != null and columnId != ''">and _viewFieldConfig.column_id=#{columnId,jdbcType=BIGINT}</if>
+					<if test="dataCategoryId != null and dataCategoryId != ''">and _viewFieldConfig.data_category_id=#{dataCategoryId,jdbcType=BIGINT}</if>
+					<if test="authCode != null and authCode != ''">and _viewFieldConfig.auth_code=#{authCode,jdbcType=BIGINT}</if>
+					<if test="authName != null and authName != ''">and _viewFieldConfig.auth_name=#{authName,jdbcType=VARCHAR}</if>
+					<if test="tableCode != null and tableCode != ''">and _viewFieldConfig.table_code=#{tableCode,jdbcType=VARCHAR}</if>
+					<if test="tableName != null and tableName != ''">and _viewFieldConfig.table_name=#{tableName,jdbcType=VARCHAR}</if>
+					<if test="entityName != null and entityName != ''">and _viewFieldConfig.entity_name=#{entityName,jdbcType=VARCHAR}</if>
+					<if test="fieldIndex != null and fieldIndex != ''">and _viewFieldConfig.field_index=#{fieldIndex,jdbcType=VARCHAR}</if>
+					<if test="fieldCode != null and fieldCode != ''">and _viewFieldConfig.field_code=#{fieldCode,jdbcType=VARCHAR}</if>
+					<if test="fieldName != null and fieldName != ''">and _viewFieldConfig.field_name=#{fieldName,jdbcType=VARCHAR}</if>
+					<if test="fieldLabel != null and fieldLabel != ''">and _viewFieldConfig.field_label=#{fieldLabel,jdbcType=VARCHAR}</if>
+					<if test="fieldType != null and fieldType != ''">and _viewFieldConfig.field_type=#{fieldType,jdbcType=SMALLINT}</if>
+					<if test="fieldShowType != null and fieldShowType != ''">and _viewFieldConfig.field_show_type=#{fieldShowType,jdbcType=SMALLINT}</if>
+					<if test="fieldFrozen != null and fieldFrozen != ''">and _viewFieldConfig.field_frozen=#{fieldFrozen,jdbcType=SMALLINT}</if>
+					<if test="fieldWidth != null and fieldWidth != ''">and _viewFieldConfig.field_width=#{fieldWidth,jdbcType=VARCHAR}</if>
+					<if test="fieldAlign != null and fieldAlign != ''">and _viewFieldConfig.field_align=#{fieldAlign,jdbcType=SMALLINT}</if>
+					<if test="fieldDatefmt != null and fieldDatefmt != ''">and _viewFieldConfig.field_datefmt=#{fieldDatefmt,jdbcType=VARCHAR}</if>
+					<if test="fieldFormatter != null and fieldFormatter != ''">and _viewFieldConfig.field_formatter=#{fieldFormatter,jdbcType=SMALLINT}</if>
+					<if test="fieldFormatterCode != null and fieldFormatterCode != ''">and _viewFieldConfig.field_formatter_code=#{fieldFormatterCode,jdbcType=VARCHAR}</if>
+					<if test="fieldHidden != null and fieldHidden != ''">and _viewFieldConfig.field_hidden=#{fieldHidden,jdbcType=SMALLINT}</if>
+					<if test="fieldKey != null and fieldKey != ''">and _viewFieldConfig.field_key=#{fieldKey,jdbcType=VARCHAR}</if>
+					<if test="fieldSortable != null and fieldSortable != ''">and _viewFieldConfig.field_sortable=#{fieldSortable,jdbcType=SMALLINT}</if>
+					<if test="fieldSort != null and fieldSort != ''">and _viewFieldConfig.field_sort=#{fieldSort,jdbcType=INT}</if>
+					<if test="fieldJson != null and fieldJson != ''">and _viewFieldConfig.field_json=#{fieldJson,jdbcType=TEXT}</if>
+					<if test="isPromptField != null and isPromptField != ''">and _viewFieldConfig.is_prompt_field=#{isPromptField,jdbcType=SMALLINT}</if>
+					<if test="isTreeListField != null and isTreeListField != ''">and _viewFieldConfig.is_tree_list_field=#{isTreeListField,jdbcType=SMALLINT}</if>
+					<if test="searchType != null and searchType != ''">and _viewFieldConfig.search_type=#{searchType,jdbcType=SMALLINT}</if>
+					<if test="searchGroup != null and searchGroup != ''">and _viewFieldConfig.search_group=#{searchGroup,jdbcType=INT}</if>
+					<if test="searchOperator != null and searchOperator != ''">and _viewFieldConfig.search_operator=#{searchOperator,jdbcType=SMALLINT}</if>
+					<if test="searchFieldShowType != null and searchFieldShowType != ''">and _viewFieldConfig.search_field_show_type=#{searchFieldShowType,jdbcType=SMALLINT}</if>
+					<if test="searchRegular != null and searchRegular != ''">and _viewFieldConfig.search_regular=#{searchRegular,jdbcType=VARCHAR}</if>
+					<if test="isAdd != null and isAdd != ''">and _viewFieldConfig.is_add=#{isAdd,jdbcType=SMALLINT}</if>
+					<if test="addTime != null and addTime != ''">and _viewFieldConfig.add_time=#{addTime,jdbcType=DATETIME}</if>
+					<if test="version != null and version != ''">and _viewFieldConfig.version=#{version,jdbcType=BIGINT}</if>
+					<if test="createTime != null and createTime != ''">and _viewFieldConfig.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _viewFieldConfig.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+					<if test="comment != null and comment != ''">and _viewFieldConfig.comment=#{comment,jdbcType=VARCHAR}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _viewFieldConfig_page where _viewFieldConfig.id=_viewFieldConfig_page.id
+	</sql>
+	
 	<sql id="viewFieldConfig_inner_all">
 		inner join SC_ViewConfig _viewConfig on _viewConfig.id=_viewFieldConfig.view_id
 		inner join SC_TableColumn _tableColumn on _tableColumn.id=_viewFieldConfig.column_id
@@ -5905,6 +6844,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="viewFieldConfig_where_fields">
 		<if test="id != null and id != ''">and _viewFieldConfig.id=#{id,jdbcType=BIGINT}</if>
 		<if test="viewId != null and viewId != ''">and _viewFieldConfig.view_id=#{viewId,jdbcType=BIGINT}</if>
@@ -6328,6 +7268,38 @@
 	<sql id="fieldDataCategory_form">
 		from SC_FieldDataCategory _fieldDataCategory
 	</sql>
+	
+	<sql id="fieldDataCategory_page_form_where">
+		from SC_FieldDataCategory _fieldDataCategory,(
+			select id from SC_FieldDataCategory
+			<where>
+				<trim prefixOverrides="and">
+					<if test="id != null and id != ''">and _fieldDataCategory.id=#{id,jdbcType=BIGINT}</if>
+					<if test="cateName != null and cateName != ''">and _fieldDataCategory.cate_name=#{cateName,jdbcType=VARCHAR}</if>
+					<if test="cateCode != null and cateCode != ''">and _fieldDataCategory.cate_code=#{cateCode,jdbcType=VARCHAR}</if>
+					<if test="createTime != null and createTime != ''">and _fieldDataCategory.create_time=#{createTime,jdbcType=DATETIME}</if>
+					<if test="modifyTime != null and modifyTime != ''">and _fieldDataCategory.modify_time=#{modifyTime,jdbcType=DATETIME}</if>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		${item} desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		${item} asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit ${start},${offset}
+		) _fieldDataCategory_page where _fieldDataCategory.id=_fieldDataCategory_page.id
+	</sql>
+	
 	<sql id="fieldDataCategory_inner_all">
 	</sql>
 	<sql id="fieldDataCategory_left_all">
@@ -6351,6 +7323,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="fieldDataCategory_where_fields">
 		<if test="id != null and id != ''">and _fieldDataCategory.id=#{id,jdbcType=BIGINT}</if>
 		<if test="cateName != null and cateName != ''">and _fieldDataCategory.cate_name=#{cateName,jdbcType=VARCHAR}</if>
@@ -6574,11 +7547,7 @@
 	<select id="listPaginatedManual" resultMap="dictionaryCategory" parameterMap="dictionaryCategory" useCache="true">
 		<include refid="dictionaryCategory_select"/>
 		<include refid="dictionaryCategory_select_fields"/>
-		<include refid="dictionaryCategory_form"/>
-		<include refid="dictionaryCategory_where"/>
-		<include refid="dictionaryCategory_order"/>
-		<include refid="dictionaryCategory_group"/>
-		<include refid="dictionaryCategory_limit"/>
+		<include refid="dictionaryCategory_page_form_where"/>
 	</select>
 	
 	<select id="countPaginatedManual" resultType="long" parameterMap="dictionaryCategory">

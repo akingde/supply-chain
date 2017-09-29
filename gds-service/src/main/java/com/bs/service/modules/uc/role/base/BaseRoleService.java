@@ -146,7 +146,7 @@ public abstract class BaseRoleService<T extends RoleDO> extends BaseService impl
 		int page = roleDO.getPage() == 0?1 : roleDO.getPage();
 		int rows = roleDO.getRows() == 0?10 : roleDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<RoleDO> list = roleDao.listPaginated( roleDO);
+		List<RoleDO> list = roleDao.listPaginated(roleDO);
 		PageInfo<RoleDO> pageInfo = new PageInfo<RoleDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseRoleService<T extends RoleDO> extends BaseService impl
 	 * @return
 	 */
 	public PageInfo<RoleDO> listPaginatedManual(RoleDO  roleDO) throws Exception {
-		List<RoleDO> list = roleDao.listPaginatedManual( roleDO);
-		Long countRecords = roleDao.countPaginatedManual( roleDO);
 		int page = roleDO.getPage() == 0?1: roleDO.getPage();
 		int rows = roleDO.getRows() == 0?10: roleDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		roleDO.setStart(start);
+		roleDO.setOffset(offset);
+		List<RoleDO> list = roleDao.listPaginatedManual(roleDO);
+		Long countRecords = roleDao.countPaginatedManual(roleDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<RoleDO> pageInfo = new PageInfo<RoleDO>(list);

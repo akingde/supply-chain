@@ -24,11 +24,17 @@
 			<resetpwd name="重置密码" code="1010305" menu-type="shortcut" model-name="uc_user" />
 			<org name="管辖机构" code="1010306" menu-type="shortcut" model-name="uc_user" />
 			<remove name="删除" code="1010307" menu-type="shortcut" model-name="uc_user"/>
+			<current name="登录用户信息" code="1010308" url-path="/user/current" menu-type="shortcut" model-name="uc_user"/>
+			<logout name="用户退出" code="1010309" menu-type="shortcut" model-name="uc_user"/>
 		</user>
 		<log name="操作日志" code="10104">
 			<remove name="删除" code="1010401" menu-type="shortcut" model-name="uc_Log"/>
 		</log>
 		<password name="修改密码" code="10105" model-name="uc_user"/>
+		<authorization name="权限管理" code="10106">
+			<paginate name="分页列表" code="1010601" menu-type="shortcut" model-name="uc_authorization"/>
+			<auths name="权限明细" code="1010602" menu-type="shortcut" model-name="uc_authorization"/>
+		</authorization>
 	</system>
 	<account name="账户管理" code="102">
 		<orgfund name="资金管理" code="10201">

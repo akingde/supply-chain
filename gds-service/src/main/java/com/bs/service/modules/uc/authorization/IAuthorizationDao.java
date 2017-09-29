@@ -9,6 +9,13 @@ import com.bs.service.modules.uc.authorization.base.BaseAuthorizationDao;
 @Mapper
 public interface IAuthorizationDao extends BaseAuthorizationDao{
 
+	
+	/**
+	 * 查询所有权限信息，无缓存
+	 * @return
+	 */
+	public List<AuthorizationDO> listAuths();
+	
 	/**
 	 * 根据权限code查询权限信息
 	 * @param authorizationDO

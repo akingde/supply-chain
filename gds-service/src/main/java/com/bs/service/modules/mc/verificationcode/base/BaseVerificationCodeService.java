@@ -146,7 +146,7 @@ public abstract class BaseVerificationCodeService<T extends VerificationCodeDO> 
 		int page = verificationCodeDO.getPage() == 0?1 : verificationCodeDO.getPage();
 		int rows = verificationCodeDO.getRows() == 0?10 : verificationCodeDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<VerificationCodeDO> list = verificationCodeDao.listPaginated( verificationCodeDO);
+		List<VerificationCodeDO> list = verificationCodeDao.listPaginated(verificationCodeDO);
 		PageInfo<VerificationCodeDO> pageInfo = new PageInfo<VerificationCodeDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseVerificationCodeService<T extends VerificationCodeDO> 
 	 * @return
 	 */
 	public PageInfo<VerificationCodeDO> listPaginatedManual(VerificationCodeDO  verificationCodeDO) throws Exception {
-		List<VerificationCodeDO> list = verificationCodeDao.listPaginatedManual( verificationCodeDO);
-		Long countRecords = verificationCodeDao.countPaginatedManual( verificationCodeDO);
 		int page = verificationCodeDO.getPage() == 0?1: verificationCodeDO.getPage();
 		int rows = verificationCodeDO.getRows() == 0?10: verificationCodeDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		verificationCodeDO.setStart(start);
+		verificationCodeDO.setOffset(offset);
+		List<VerificationCodeDO> list = verificationCodeDao.listPaginatedManual(verificationCodeDO);
+		Long countRecords = verificationCodeDao.countPaginatedManual(verificationCodeDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<VerificationCodeDO> pageInfo = new PageInfo<VerificationCodeDO>(list);

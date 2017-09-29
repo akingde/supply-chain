@@ -57,6 +57,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         //设置登录用户信息，如果需要可能自定义增加
         CustomUserDetails customUserDetails = new CustomUserDetails(username,userDTO.getPassword(),collection);
+        userDTO.setPassword(null);
         customUserDetails.setUser(userDTO);
         customUserDetails.setAuthorizations(authorizations);
         

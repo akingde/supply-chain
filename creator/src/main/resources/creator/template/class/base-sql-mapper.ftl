@@ -95,6 +95,36 @@
 	<sql id="${entityName?uncap_first}_form">
 		from ${table.code} _${entityName?uncap_first}
 	</sql>
+	
+	<sql id="${entityName?uncap_first}_page_form_where">
+		from ${table.code} _${entityName?uncap_first},(
+			select id from ${table.code}
+			<where>
+				<trim prefixOverrides="and">
+				<#list table.columns as column >
+					<if test="${column.code?uncap_first} != null and ${column.code?uncap_first} != ''">and _${entityName?uncap_first}.${column.originalCode}=<#noparse>#{</#noparse>${column.code?uncap_first},jdbcType=${column.dataType?upper_case}<#noparse>}</#noparse></if>
+				</#list>
+				</trim>
+			</where>
+			<if test="dorder != null or aorder != null">
+			order by
+			<trim prefixOverrides=",">
+				<if test="dorder != null">
+				<foreach collection="dorder" index="index" item="item" separator=","> 
+            		<#noparse>${item}</#noparse> desc
+        		</foreach>
+        		</if>  
+        		<if test="aorder != null">
+				<foreach collection="aorder" index="index" item="item" separator=","> 
+            		<#noparse>${item}</#noparse> asc
+        		</foreach>
+        		</if>  
+			</trim>
+			</if>  
+			limit <#noparse>${start}</#noparse>,<#noparse>${offset}</#noparse>
+		) _${entityName?uncap_first}_page where _${entityName?uncap_first}.id=_${entityName?uncap_first}_page.id
+	</sql>
+	
 	<sql id="${entityName?uncap_first}_inner_all">
 	<#list references as reference>
 	<#if table.code == reference.childTable.code>
@@ -156,6 +186,7 @@
 			</trim>
 		</where>
 	</sql>
+	
 	<sql id="${entityName?uncap_first}_where_fields">
 	<#list table.columns as column >
 		<if test="${column.code?uncap_first} != null and ${column.code?uncap_first} != ''">and _${entityName?uncap_first}.${column.originalCode}=<#noparse>#{</#noparse>${column.code?uncap_first},jdbcType=${column.dataType?upper_case}<#noparse>}</#noparse></if>
@@ -407,11 +438,7 @@
 	<select id="listPaginatedManual" resultMap="${tableAliasCode}" parameterMap="${tableAliasCode}" useCache="true">
 		<include refid="${tableAliasCode}_select"/>
 		<include refid="${tableAliasCode}_select_fields"/>
-		<include refid="${tableAliasCode}_form"/>
-		<include refid="${tableAliasCode}_where"/>
-		<include refid="${tableAliasCode}_order"/>
-		<include refid="${tableAliasCode}_group"/>
-		<include refid="${tableAliasCode}_limit"/>
+		<include refid="${tableAliasCode}_page_form_where"/>
 	</select>
 	
 	<select id="countPaginatedManual" resultType="long" parameterMap="${tableAliasCode}">

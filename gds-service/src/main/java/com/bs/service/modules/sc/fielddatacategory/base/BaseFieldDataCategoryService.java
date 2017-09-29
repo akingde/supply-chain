@@ -146,7 +146,7 @@ public abstract class BaseFieldDataCategoryService<T extends FieldDataCategoryDO
 		int page = fieldDataCategoryDO.getPage() == 0?1 : fieldDataCategoryDO.getPage();
 		int rows = fieldDataCategoryDO.getRows() == 0?10 : fieldDataCategoryDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<FieldDataCategoryDO> list = fieldDataCategoryDao.listPaginated( fieldDataCategoryDO);
+		List<FieldDataCategoryDO> list = fieldDataCategoryDao.listPaginated(fieldDataCategoryDO);
 		PageInfo<FieldDataCategoryDO> pageInfo = new PageInfo<FieldDataCategoryDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseFieldDataCategoryService<T extends FieldDataCategoryDO
 	 * @return
 	 */
 	public PageInfo<FieldDataCategoryDO> listPaginatedManual(FieldDataCategoryDO  fieldDataCategoryDO) throws Exception {
-		List<FieldDataCategoryDO> list = fieldDataCategoryDao.listPaginatedManual( fieldDataCategoryDO);
-		Long countRecords = fieldDataCategoryDao.countPaginatedManual( fieldDataCategoryDO);
 		int page = fieldDataCategoryDO.getPage() == 0?1: fieldDataCategoryDO.getPage();
 		int rows = fieldDataCategoryDO.getRows() == 0?10: fieldDataCategoryDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		fieldDataCategoryDO.setStart(start);
+		fieldDataCategoryDO.setOffset(offset);
+		List<FieldDataCategoryDO> list = fieldDataCategoryDao.listPaginatedManual(fieldDataCategoryDO);
+		Long countRecords = fieldDataCategoryDao.countPaginatedManual(fieldDataCategoryDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<FieldDataCategoryDO> pageInfo = new PageInfo<FieldDataCategoryDO>(list);

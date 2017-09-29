@@ -206,6 +206,12 @@
 	</select>		
 	-->
 	
+	<select id="listAuths" resultMap="authorization" useCache="false">
+		<include refid="authorization_select"/>
+		<include refid="authorization_select_fields"/>
+		<include refid="authorization_form"/>
+	</select>
+	
 	<select id="getOneByCode" resultMap="authorization" parameterType="java.lang.String" useCache="true">
 		<include refid="authorization_select"/>
 		<include refid="authorization_select_fields"/>
@@ -213,7 +219,7 @@
 		where _authorization.code=#{code,jdbcType=BIGINT}
 	</select>
 	
-	<select id="listAuthByRoleIds" resultMap="authorization" parameterMap="authorization" useCache="true">
+	<select id="listAuthByRoleIds" resultMap="authorization" parameterMap="authorization" useCache="false">
 		<include refid="authorization_select"/>
 		<include refid="authorization_select_fields"/>
 		<include refid="authorization_form"/>

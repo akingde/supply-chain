@@ -1,12 +1,12 @@
 package com.bs.rest.modules.uc.vo;
 
-import java.io.Serializable;
+import com.bs.rest.core.entity.Entity;
 import javax.validation.constraints.NotNull;
 
 import com.bs.rest.core.group.Second;
 import com.bs.rest.core.group.Fourth;
 
-public class AuthorizationVO implements Serializable{
+public class AuthorizationVO extends Entity{
 
 	private static final long serialVersionUID = 1L;
 	/**权限ID-**/
@@ -28,6 +28,8 @@ public class AuthorizationVO implements Serializable{
 	private String treePath;
 	/**权限名称-权限名称，用2-6个汉字进行规整描述，以方便在页面显示。**/
 	private String name;
+	/**通配符路径-树形结构描述关系**/
+	private String wildcardPath;
 	/**模型名称-**/
 	private String modelName;
 	/**实体bean名称-**/
@@ -132,6 +134,14 @@ public class AuthorizationVO implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getWildcardPath() {
+		return wildcardPath;
+	}
+
+	public void setWildcardPath(String wildcardPath) {
+		this.wildcardPath = wildcardPath;
 	}
 
 	public String getModelName() {

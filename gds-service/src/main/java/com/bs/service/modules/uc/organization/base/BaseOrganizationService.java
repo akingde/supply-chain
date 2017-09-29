@@ -146,7 +146,7 @@ public abstract class BaseOrganizationService<T extends OrganizationDO> extends 
 		int page = organizationDO.getPage() == 0?1 : organizationDO.getPage();
 		int rows = organizationDO.getRows() == 0?10 : organizationDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<OrganizationDO> list = organizationDao.listPaginated( organizationDO);
+		List<OrganizationDO> list = organizationDao.listPaginated(organizationDO);
 		PageInfo<OrganizationDO> pageInfo = new PageInfo<OrganizationDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseOrganizationService<T extends OrganizationDO> extends 
 	 * @return
 	 */
 	public PageInfo<OrganizationDO> listPaginatedManual(OrganizationDO  organizationDO) throws Exception {
-		List<OrganizationDO> list = organizationDao.listPaginatedManual( organizationDO);
-		Long countRecords = organizationDao.countPaginatedManual( organizationDO);
 		int page = organizationDO.getPage() == 0?1: organizationDO.getPage();
 		int rows = organizationDO.getRows() == 0?10: organizationDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		organizationDO.setStart(start);
+		organizationDO.setOffset(offset);
+		List<OrganizationDO> list = organizationDao.listPaginatedManual(organizationDO);
+		Long countRecords = organizationDao.countPaginatedManual(organizationDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<OrganizationDO> pageInfo = new PageInfo<OrganizationDO>(list);

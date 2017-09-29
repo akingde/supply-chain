@@ -1,12 +1,12 @@
 package com.bs.rest.modules.sc.vo;
 
-import java.io.Serializable;
+import com.bs.rest.core.entity.Entity;
 import javax.validation.constraints.NotNull;
 
 import com.bs.rest.core.group.Second;
 import com.bs.rest.core.group.Fourth;
 
-public class TableColumnVO implements Serializable{
+public class TableColumnVO extends Entity{
 
 	private static final long serialVersionUID = 1L;
 	/**主键ID-操作日志主键ID：操作日志记录表主键。**/

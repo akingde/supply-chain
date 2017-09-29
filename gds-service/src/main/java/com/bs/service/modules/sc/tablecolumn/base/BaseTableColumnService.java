@@ -146,7 +146,7 @@ public abstract class BaseTableColumnService<T extends TableColumnDO> extends Ba
 		int page = tableColumnDO.getPage() == 0?1 : tableColumnDO.getPage();
 		int rows = tableColumnDO.getRows() == 0?10 : tableColumnDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<TableColumnDO> list = tableColumnDao.listPaginated( tableColumnDO);
+		List<TableColumnDO> list = tableColumnDao.listPaginated(tableColumnDO);
 		PageInfo<TableColumnDO> pageInfo = new PageInfo<TableColumnDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseTableColumnService<T extends TableColumnDO> extends Ba
 	 * @return
 	 */
 	public PageInfo<TableColumnDO> listPaginatedManual(TableColumnDO  tableColumnDO) throws Exception {
-		List<TableColumnDO> list = tableColumnDao.listPaginatedManual( tableColumnDO);
-		Long countRecords = tableColumnDao.countPaginatedManual( tableColumnDO);
 		int page = tableColumnDO.getPage() == 0?1: tableColumnDO.getPage();
 		int rows = tableColumnDO.getRows() == 0?10: tableColumnDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		tableColumnDO.setStart(start);
+		tableColumnDO.setOffset(offset);
+		List<TableColumnDO> list = tableColumnDao.listPaginatedManual(tableColumnDO);
+		Long countRecords = tableColumnDao.countPaginatedManual(tableColumnDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<TableColumnDO> pageInfo = new PageInfo<TableColumnDO>(list);

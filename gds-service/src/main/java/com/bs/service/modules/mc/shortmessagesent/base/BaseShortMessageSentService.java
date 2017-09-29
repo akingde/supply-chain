@@ -146,7 +146,7 @@ public abstract class BaseShortMessageSentService<T extends ShortMessageSentDO> 
 		int page = shortMessageSentDO.getPage() == 0?1 : shortMessageSentDO.getPage();
 		int rows = shortMessageSentDO.getRows() == 0?10 : shortMessageSentDO.getRows();
 		PageHelper.startPage(page, rows);
-		List<ShortMessageSentDO> list = shortMessageSentDao.listPaginated( shortMessageSentDO);
+		List<ShortMessageSentDO> list = shortMessageSentDao.listPaginated(shortMessageSentDO);
 		PageInfo<ShortMessageSentDO> pageInfo = new PageInfo<ShortMessageSentDO>(list);
 		return pageInfo;
 	}
@@ -157,10 +157,15 @@ public abstract class BaseShortMessageSentService<T extends ShortMessageSentDO> 
 	 * @return
 	 */
 	public PageInfo<ShortMessageSentDO> listPaginatedManual(ShortMessageSentDO  shortMessageSentDO) throws Exception {
-		List<ShortMessageSentDO> list = shortMessageSentDao.listPaginatedManual( shortMessageSentDO);
-		Long countRecords = shortMessageSentDao.countPaginatedManual( shortMessageSentDO);
 		int page = shortMessageSentDO.getPage() == 0?1: shortMessageSentDO.getPage();
 		int rows = shortMessageSentDO.getRows() == 0?10: shortMessageSentDO.getRows();
+		//计算手动分页参数
+		int start = (page - 1) * rows;
+		int offset = rows;
+		shortMessageSentDO.setStart(start);
+		shortMessageSentDO.setOffset(offset);
+		List<ShortMessageSentDO> list = shortMessageSentDao.listPaginatedManual(shortMessageSentDO);
+		Long countRecords = shortMessageSentDao.countPaginatedManual(shortMessageSentDO);
 		long record = countRecords == null?0:countRecords;
 		int pageTotal = (int) Math.ceil(record / (double) rows);
 		PageInfo<ShortMessageSentDO> pageInfo = new PageInfo<ShortMessageSentDO>(list);

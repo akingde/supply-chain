@@ -144,6 +144,11 @@ public class AuthorizationService extends BaseAuthorizationService<Authorization
 				if (wildcardPath != null && !wildcardPath.equals("")) {
 					authorization.setWildcardPath(wildcardPath);
 				}
+				// 访问路径
+				String urlPath = this.getNodeAttrValue(node, "url-path");
+				if (urlPath != null && !urlPath.equals("")) {
+					authorization.setUrlPath(urlPath);
+				}
 				// 设置调用方法名称（service层方法）
 				String modelFileName = this.getNodeAttrValue(node, "model-file-name");
 				if (modelFileName != null) {
@@ -393,5 +398,14 @@ public class AuthorizationService extends BaseAuthorizationService<Authorization
 	 */
 	public List<AuthorizationDO> listAuthByRoleIds(AuthorizationDO authorizationDO) {
 		return super.authorizationDao.listAuthByRoleIds(authorizationDO);
+	}
+	
+	/**
+	 * 查询所有权限，无缓存
+	 * @param authorizationDO
+	 * @return
+	 */
+	public List<AuthorizationDO> listAuths() {
+		return super.authorizationDao.listAuths();
 	}
 }

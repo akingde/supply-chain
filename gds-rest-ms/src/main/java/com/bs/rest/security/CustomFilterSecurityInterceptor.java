@@ -33,6 +33,7 @@ public class CustomFilterSecurityInterceptor extends AbstractSecurityInterceptor
 	private static final AntPathRequestMatcher configurationRequestMatcher = new AntPathRequestMatcher("/configuration/**");
 	private static final AntPathRequestMatcher imagesRequestMatcher = new AntPathRequestMatcher("/images/**");
 	private static final AntPathRequestMatcher v2docRequestMatcher = new AntPathRequestMatcher("/v2/**");
+	private static final AntPathRequestMatcher logoutRequestMatcher = new AntPathRequestMatcher("/**/logout");
 	
 	@Autowired
 	private CustomSecurityMetadataSource securityMetadataSource;
@@ -74,8 +75,9 @@ public class CustomFilterSecurityInterceptor extends AbstractSecurityInterceptor
 		boolean isConfig = configurationRequestMatcher.matches(fi.getHttpRequest());
 		boolean isImage = imagesRequestMatcher.matches(fi.getHttpRequest());
 		boolean isV2doc = v2docRequestMatcher.matches(fi.getHttpRequest());
+		boolean isLogout = logoutRequestMatcher.matches(fi.getHttpRequest());
 		InterceptorStatusToken token = null;
-		if (!isIndex && !isOauth && !isSwagger && !isSwaggerRes && !isFavicon && !isWebjars && !isConfig && !isImage && !isV2doc) {
+		if (!isIndex && !isOauth && !isSwagger && !isSwaggerRes && !isFavicon && !isWebjars && !isConfig && !isImage && !isV2doc && !isLogout) {
 			 token = super.beforeInvocation(fi);
 		}
 		try {
